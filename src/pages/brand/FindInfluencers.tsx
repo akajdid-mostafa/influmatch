@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { Search, Filter, Star, Users, MessageSquare, Instagram, Youtube, GitBranch as BrandTiktok } from 'lucide-react';
+import { Search, Star, Users, MessageSquare, Instagram, Youtube, GitBranch as BrandTiktok } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { InfluencerProfile } from '../../types';
 
 const FindInfluencers = () => {
-  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [influencers, setInfluencers] = useState<InfluencerProfile[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -124,7 +122,7 @@ const FindInfluencers = () => {
                             );
     
     const matchesFollowers = !minFollowers ||
-                            Object.values(influencer.followers || {}).some(count => count >= parseInt(minFollowers));
+                            Object.values(influencer.followers || {}).some(count => (count as number) >= parseInt(minFollowers));
     
     return matchesSearch && matchesNiches && matchesPlatforms && matchesFollowers;
   });
@@ -252,7 +250,7 @@ const FindInfluencers = () => {
                 <span>
                   {Object.entries(influencer.followers || {}).map(([platform, count]) => (
                     <span key={platform} className="mr-2">
-                      {platform}: {(count / 1000).toFixed(1)}K
+                      {platform}: {((count as number) / 1000).toFixed(1)}K
                     </span>
                   ))}
                 </span>

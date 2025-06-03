@@ -179,7 +179,7 @@ const Conversation = () => {
               {otherParticipant?.name}
             </p>
             <p className="text-xs text-gray-500">
-              {otherParticipant?.role.charAt(0).toUpperCase() + otherParticipant?.role.slice(1)}
+              {otherParticipant?.role ? otherParticipant.role.charAt(0).toUpperCase() + otherParticipant.role.slice(1) : ''}
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User, AuthContextType } from '../types';
+import { User, AuthContextType, UserRole } from '../types';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -34,10 +34,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // Mock API call - replace with actual API call
       if (email && password) {
         // Demo users for testing
-        const users = {
-          'brand@example.com': { id: 1, name: 'Acme Brand', email, role: 'brand' },
-          'influencer@example.com': { id: 2, name: 'Jane Influencer', email, role: 'influencer' },
-          'admin@example.com': { id: 3, name: 'Admin User', email, role: 'admin' }
+        const users: Record<string, User> = {
+          'brand@example.com': { id: 1, name: 'Acme Brand', email, role: 'brand' as UserRole },
+          'influencer@example.com': { id: 2, name: 'Jane Influencer', email, role: 'influencer' as UserRole },
+          'admin@example.com': { id: 3, name: 'Admin User', email, role: 'admin' as UserRole }
         };
 
         const user = users[email as keyof typeof users];

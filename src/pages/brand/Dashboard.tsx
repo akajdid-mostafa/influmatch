@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+// import { useAuth } from '../../contexts/AuthContext';
 import { PlusCircle, TrendingUp, Users, DollarSign, BarChart2 } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { BrandStats, Campaign, InfluencerProfile } from '../../types';
 
 const BrandDashboard = () => {
-  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<BrandStats | null>(null);
   const [activeCampaigns, setActiveCampaigns] = useState<Campaign[]>([]);

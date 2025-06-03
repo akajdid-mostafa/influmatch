@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+// import { useAuth } from '../../contexts/AuthContext';
 import { Search, Filter, CheckCircle, XCircle, MessageSquare } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { CampaignApplication } from '../../types';
 
 const CampaignRequests = () => {
-  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState<CampaignApplication[]>([]);
   const [searchTerm, setSearchTerm] = useState('');

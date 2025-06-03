@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+// import { useAuth } from '../../contexts/AuthContext';
 import { Instagram, Youtube, GitBranch as BrandTiktok, Globe, Upload, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
@@ -8,7 +8,6 @@ import { InfluencerProfile } from '../../types';
 
 const EditProfile = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [profile, setProfile] = useState<InfluencerProfile | null>(null);
