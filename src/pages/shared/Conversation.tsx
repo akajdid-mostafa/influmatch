@@ -186,6 +186,7 @@ const Conversation = () => {
       </div>
       
       {/* Messages */}
+      {/* Messages */}
       <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
         <div className="space-y-4">
           {messages.map((message) => {
