@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { PlusCircle, TrendingUp, Users, DollarSign, BarChart2 } from 'lucide-react';
+import { PlusCircle, TrendingUp, Users, DollarSign, BarChart2, Star, ArrowUp } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { BrandStats, Campaign, InfluencerProfile } from '../../types';
 
@@ -144,97 +144,117 @@ const BrandDashboard = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 page-transition">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Brand Dashboard</h1>
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
+          <p className="text-gray-600 mt-1">Manage your campaigns and discover new influencers</p>
+        </div>
         <Link
           to="/brand/create-campaign"
-          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+          className="btn-gradient inline-flex items-center"
         >
-          <PlusCircle className="mr-2 h-4 w-4" />
+          <PlusCircle className="mr-2 h-5 w-5" />
           New Campaign
         </Link>
       </div>
       
       {/* Stats Cards */}
       {stats && (
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="bg-white overflow-hidden shadow rounded-lg">
-            <div className="p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <BarChart2 className="h-6 w-6 text-gray-400" />
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="stats-card">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
+                  <BarChart2 className="h-6 w-6 text-white" />
                 </div>
-                <div className="ml-5 w-0 flex-1">
-                  <dl>
-                    <dt className="text-sm font-medium text-gray-500 truncate">
-                      Campaigns Launched
-                    </dt>
-                    <dd>
-                      <div className="text-lg font-medium text-gray-900">{stats.campaignsLaunched}</div>
-                    </dd>
-                  </dl>
-                </div>
+              </div>
+              <div className="ml-4 w-0 flex-1">
+                <dl>
+                  <dt className="text-sm font-medium text-gray-500 truncate">
+                    Campaigns Launched
+                  </dt>
+                  <dd className="flex items-center">
+                    <div className="text-2xl font-bold text-gray-900">{stats.campaignsLaunched}</div>
+                    <div className="ml-2 flex items-center text-sm text-green-600">
+                      <ArrowUp className="h-4 w-4" />
+                      <span>12%</span>
+                    </div>
+                  </dd>
+                </dl>
               </div>
             </div>
           </div>
           
-          <div className="bg-white overflow-hidden shadow rounded-lg">
-            <div className="p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <Users className="h-6 w-6 text-gray-400" />
+          <div className="stats-card">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center">
+                  <Users className="h-6 w-6 text-white" />
                 </div>
-                <div className="ml-5 w-0 flex-1">
-                  <dl>
-                    <dt className="text-sm font-medium text-gray-500 truncate">
-                      Collaborations
-                    </dt>
-                    <dd>
-                      <div className="text-lg font-medium text-gray-900">{stats.influencersCollaborated}</div>
-                    </dd>
-                  </dl>
-                </div>
+              </div>
+              <div className="ml-4 w-0 flex-1">
+                <dl>
+                  <dt className="text-sm font-medium text-gray-500 truncate">
+                    Collaborations
+                  </dt>
+                  <dd className="flex items-center">
+                    <div className="text-2xl font-bold text-gray-900">{stats.influencersCollaborated}</div>
+                    <div className="ml-2 flex items-center text-sm text-green-600">
+                      <ArrowUp className="h-4 w-4" />
+                      <span>8%</span>
+                    </div>
+                  </dd>
+                </dl>
               </div>
             </div>
           </div>
           
-          <div className="bg-white overflow-hidden shadow rounded-lg">
-            <div className="p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <DollarSign className="h-6 w-6 text-gray-400" />
+          <div className="stats-card">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center">
+                  <DollarSign className="h-6 w-6 text-white" />
                 </div>
-                <div className="ml-5 w-0 flex-1">
-                  <dl>
-                    <dt className="text-sm font-medium text-gray-500 truncate">
-                      Total Spent
-                    </dt>
-                    <dd>
-                      <div className="text-lg font-medium text-gray-900">${stats.totalSpent.toLocaleString()}</div>
-                    </dd>
-                  </dl>
-                </div>
+              </div>
+              <div className="ml-4 w-0 flex-1">
+                <dl>
+                  <dt className="text-sm font-medium text-gray-500 truncate">
+                    Total Spent
+                  </dt>
+                  <dd className="flex items-center">
+                    <div className="text-2xl font-bold text-gray-900">${stats.totalSpent.toLocaleString()}</div>
+                    <div className="ml-2 flex items-center text-sm text-green-600">
+                      <ArrowUp className="h-4 w-4" />
+                      <span>15%</span>
+                    </div>
+                  </dd>
+                </dl>
               </div>
             </div>
           </div>
           
-          <div className="bg-white overflow-hidden shadow rounded-lg">
-            <div className="p-5">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <TrendingUp className="h-6 w-6 text-gray-400" />
+          <div className="stats-card">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 flex items-center justify-center">
+                  <TrendingUp className="h-6 w-6 text-white" />
                 </div>
-                <div className="ml-5 w-0 flex-1">
-                  <dl>
-                    <dt className="text-sm font-medium text-gray-500 truncate">
-                      ROI Multiplier
-                    </dt>
-                    <dd>
-                      <div className="text-lg font-medium text-gray-900">{stats.roi}x</div>
-                    </dd>
-                  </dl>
-                </div>
+              </div>
+              <div className="ml-4 w-0 flex-1">
+                <dl>
+                  <dt className="text-sm font-medium text-gray-500 truncate">
+                    ROI Multiplier
+                  </dt>
+                  <dd className="flex items-center">
+                    <div className="text-2xl font-bold text-gray-900">{stats.roi}x</div>
+                    <div className="ml-2 flex items-center text-sm text-green-600">
+                      <ArrowUp className="h-4 w-4" />
+                      <span>5%</span>
+                    </div>
+                  </dd>
+                </dl>
               </div>
             </div>
           </div>
@@ -242,121 +262,145 @@ const BrandDashboard = () => {
       )}
       
       {/* Active Campaigns */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-md">
-        <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
-            Active Campaigns
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">
-            Your current running campaigns
-          </p>
-        </div>
-        <ul className="divide-y divide-gray-200">
-          {activeCampaigns.length === 0 ? (
-            <li className="px-4 py-6 sm:px-6">
-              <p className="text-center text-gray-500">
-                No active campaigns. <Link to="/brand/create-campaign" className="text-purple-600 hover:text-purple-800">Create one now</Link>
+      <div className="card-modern">
+        <div className="px-6 py-5 border-b border-gray-100">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">
+                Active Campaigns
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Your current running campaigns
               </p>
-            </li>
+            </div>
+            <Link
+              to="/brand/campaigns"
+              className="text-sm font-medium text-gradient hover:opacity-80"
+            >
+              View all
+            </Link>
+          </div>
+        </div>
+        <div className="divide-y divide-gray-100">
+          {activeCampaigns.length === 0 ? (
+            <div className="px-6 py-8 text-center">
+              <p className="text-gray-500">
+                No active campaigns. <Link to="/brand/create-campaign" className="text-gradient hover:opacity-80">Create one now</Link>
+              </p>
+            </div>
           ) : (
             activeCampaigns.map((campaign) => (
-              <li key={campaign.id} className="px-4 py-4 sm:px-6 hover:bg-gray-50">
+              <div key={campaign.id} className="px-6 py-4 hover:bg-gray-50 transition-colors">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="text-md font-medium text-purple-600">{campaign.title}</h4>
-                    <p className="text-sm text-gray-500 mt-1">{campaign.description}</p>
-                    <div className="mt-2 sm:flex sm:justify-start">
-                      <p className="flex items-center text-sm text-gray-500">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          {campaign.status === 'open' ? 'Open' : 'In Progress'}
-                        </span>
-                        <span className="ml-2">
-                          Budget: ${campaign.budget.min} - ${campaign.budget.max}
-                        </span>
-                      </p>
+                  <div className="flex-1">
+                    <h4 className="text-lg font-semibold text-gradient">{campaign.title}</h4>
+                    <p className="text-sm text-gray-600 mt-1">{campaign.description}</p>
+                    <div className="mt-3 flex items-center space-x-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                        campaign.status === 'open' 
+                          ? 'bg-green-100 text-green-800' 
+                          : 'bg-blue-100 text-blue-800'
+                      }`}>
+                        {campaign.status === 'open' ? 'Open for Applications' : 'In Progress'}
+                      </span>
+                      <span className="text-sm text-gray-500">
+                        Budget: ${campaign.budget.min} - ${campaign.budget.max}
+                      </span>
+                      <span className="text-sm text-gray-500">
+                        {campaign.requirements.platforms.join(', ')}
+                      </span>
                     </div>
                   </div>
                   <div>
                     <Link
                       to={`/brand/campaigns#${campaign.id}`}
-                      className="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                      className="btn-secondary"
                     >
                       View Details
                     </Link>
                   </div>
                 </div>
-              </li>
+              </div>
             ))
           )}
-        </ul>
-        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-          <Link
-            to="/brand/campaigns"
-            className="text-sm font-medium text-purple-600 hover:text-purple-500"
-          >
-            View all campaigns
-          </Link>
         </div>
       </div>
       
       {/* Recommended Influencers */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-md">
-        <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
-            Recommended Influencers
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">
-            Influencers that match your brand's niche and audience
-          </p>
+      <div className="card-modern">
+        <div className="px-6 py-5 border-b border-gray-100">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">
+                Recommended Influencers
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Influencers that match your brand's niche and audience
+              </p>
+            </div>
+            <Link
+              to="/brand/find-influencers"
+              className="text-sm font-medium text-gradient hover:opacity-80"
+            >
+              Discover more
+            </Link>
+          </div>
         </div>
-        <ul className="divide-y divide-gray-200">
-          {recommendedInfluencers.map((influencer) => (
-            <li key={influencer.id} className="px-4 py-4 sm:px-6 hover:bg-gray-50">
-              <div className="flex items-center">
-                <div className="flex-shrink-0 h-12 w-12">
-                  {influencer.profileImage ? (
-                    <img
-                      className="h-12 w-12 rounded-full object-cover"
-                      src={influencer.profileImage}
-                      alt={influencer.name}
-                    />
-                  ) : (
-                    <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
-                      <Users className="h-6 w-6 text-gray-400" />
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {recommendedInfluencers.map((influencer) => (
+              <div key={influencer.id} className="card-modern p-6">
+                <div className="flex items-center">
+                  <div className="avatar-story">
+                    <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center overflow-hidden">
+                      {influencer.profileImage ? (
+                        <img
+                          className="w-full h-full object-cover"
+                          src={influencer.profileImage}
+                          alt={influencer.name}
+                        />
+                      ) : (
+                        <Users className="h-8 w-8 text-gray-400" />
+                      )}
                     </div>
-                  )}
-                </div>
-                <div className="ml-4 flex-1">
-                  <div className="text-sm font-medium text-purple-600">{influencer.name}</div>
-                  <div className="text-sm text-gray-500">{influencer.bio}</div>
-                  <div className="mt-1 flex items-center text-sm text-gray-500">
-                    <span className="truncate">
-                      {influencer.followers?.instagram && `${(influencer.followers.instagram / 1000).toFixed(1)}K followers`}
-                    </span>
-                    <span className="ml-2 flex-shrink-0 inline-block px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 rounded-full">
-                      {influencer.engagementRate}% engagement
-                    </span>
+                  </div>
+                  <div className="ml-4 flex-1">
+                    <h4 className="text-lg font-semibold text-gray-900">{influencer.name}</h4>
+                    <p className="text-sm text-gray-600">{influencer.bio}</p>
                   </div>
                 </div>
-                <div>
-                  <button
-                    type="button"
-                    className="inline-flex items-center px-3 py-1 border border-purple-600 text-sm leading-4 font-medium rounded-md text-purple-700 bg-white hover:bg-purple-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                  >
+                
+                <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
+                  <div className="flex items-center">
+                    <Users className="h-4 w-4 mr-1" />
+                    <span>
+                      {Object.values(influencer.followers || {}).reduce((a, b) => a + b, 0).toLocaleString()} followers
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <Star className="h-4 w-4 mr-1 text-yellow-400" />
+                    <span>{influencer.averageRating}</span>
+                  </div>
+                </div>
+                
+                <div className="mt-4 flex items-center justify-between">
+                  <div className="flex space-x-2">
+                    {influencer.niche?.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <button className="btn-primary text-sm px-4 py-2">
                     Contact
                   </button>
                 </div>
               </div>
-            </li>
-          ))}
-        </ul>
-        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-          <Link
-            to="/brand/find-influencers"
-            className="text-sm font-medium text-purple-600 hover:text-purple-500"
-          >
-            Find more influencers
-          </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>

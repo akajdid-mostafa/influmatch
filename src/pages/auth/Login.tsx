@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { ShoppingBag } from 'lucide-react';
+import { Sparkles, Eye, EyeOff } from 'lucide-react';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user, login } = useAuth();
 
@@ -42,57 +43,74 @@ const Login = () => {
     }
   };
 
+  const demoAccounts = [
+    { email: 'brand@example.com', role: 'Brand', gradient: 'from-purple-600 to-blue-600' },
+    { email: 'influencer@example.com', role: 'Influencer', gradient: 'from-pink-600 to-red-600' },
+    { email: 'admin@example.com', role: 'Admin', gradient: 'from-indigo-600 to-purple-600' }
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 opacity-20 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-20 blur-3xl"></div>
+      </div>
+
+      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <div className="flex justify-center">
-          <ShoppingBag className="text-purple-600" size={40} />
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg">
+            <Sparkles className="text-white" size={32} />
+          </div>
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign in to InfluMatch
+          Welcome back to <span className="text-gradient">InfluMatch</span>
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Connect with the perfect brands and influencers
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
+        <div className="form-modern">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <div className="mt-1">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                />
-              </div>
+            <div className="floating-label">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input-modern"
+                placeholder=" "
+              />
+              <label htmlFor="email">Email address</label>
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <div className="mt-1">
+            <div className="floating-label">
+              <div className="relative">
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+                  className="input-modern pr-12"
+                  placeholder=" "
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
               </div>
+              <label htmlFor="password">Password</label>
             </div>
 
             <div className="flex items-center justify-between">
@@ -109,7 +127,7 @@ const Login = () => {
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-purple-600 hover:text-purple-500">
+                <a href="#" className="font-medium text-gradient hover:opacity-80">
                   Forgot your password?
                 </a>
               </div>
@@ -119,7 +137,7 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:bg-purple-400 disabled:cursor-not-allowed"
+                className="btn-gradient w-full"
               >
                 {isSubmitting ? <LoadingSpinner size="sm" color="white" /> : 'Sign in'}
               </button>
@@ -132,54 +150,31 @@ const Login = () => {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">For demo purposes</span>
+                <span className="px-2 bg-white text-gray-500">Try demo accounts</span>
               </div>
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-3">
-              <div>
+              {demoAccounts.map((account) => (
                 <button
+                  key={account.email}
                   type="button"
                   onClick={() => {
-                    setEmail('brand@example.com');
+                    setEmail(account.email);
                     setPassword('password');
                   }}
-                  className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  className={`w-full inline-flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm bg-gradient-to-r ${account.gradient} text-white font-medium hover:opacity-90 transition-opacity`}
                 >
-                  <span>Login as Brand</span>
+                  <span>Login as {account.role}</span>
                 </button>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEmail('influencer@example.com');
-                    setPassword('password');
-                  }}
-                  className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                >
-                  <span>Login as Influencer</span>
-                </button>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEmail('admin@example.com');
-                    setPassword('password');
-                  }}
-                  className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                >
-                  <span>Login as Admin</span>
-                </button>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-purple-600 hover:text-purple-500">
+              <Link to="/register" className="font-medium text-gradient hover:opacity-80">
                 Register now
               </Link>
             </p>

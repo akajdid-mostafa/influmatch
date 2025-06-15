@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useNotifications } from '../../contexts/NotificationContext';
-import { Check, Bell, Info, AlertCircle, CheckCircle } from 'lucide-react';
+import { Check, Bell, Info, AlertCircle, CheckCircle, X } from 'lucide-react';
 
 interface NotificationDropdownProps {
   onClose: () => void;
@@ -51,18 +51,28 @@ const NotificationDropdown = ({ onClose }: NotificationDropdownProps) => {
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg overflow-hidden z-50">
-      <div className="py-2 px-4 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-        <h3 className="text-sm font-medium text-gray-700">Notifications</h3>
-        <button 
-          onClick={markAllAsRead}
-          className="text-xs text-purple-600 hover:text-purple-800 flex items-center"
-        >
-          <Check size={14} className="mr-1" />
-          Mark all as read
-        </button>
+    <div className="absolute right-0 mt-2 w-80 dropdown-modern overflow-hidden z-50">
+      {/* Header */}
+      <div className="py-3 px-4 bg-gradient-to-r from-purple-50 to-pink-50 border-b border-gray-100 flex items-center justify-between">
+        <h3 className="text-sm font-semibold text-gray-900">Notifications</h3>
+        <div className="flex items-center space-x-2">
+          <button 
+            onClick={markAllAsRead}
+            className="text-xs text-gradient hover:opacity-80 flex items-center"
+          >
+            <Check size={14} className="mr-1" />
+            Mark all read
+          </button>
+          <button
+            onClick={onClose}
+            className="p-1 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600"
+          >
+            <X size={16} />
+          </button>
+        </div>
       </div>
       
+      {/* Notifications List */}
       <div className="max-h-96 overflow-y-auto">
         {notifications.length === 0 ? (
           <div className="py-8 px-4 text-center text-gray-500">
@@ -74,8 +84,8 @@ const NotificationDropdown = ({ onClose }: NotificationDropdownProps) => {
             {notifications.map((notification) => (
               <div
                 key={notification.id}
-                className={`px-4 py-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors ${
-                  !notification.read ? 'bg-purple-50' : ''
+                className={`px-4 py-3 border-b border-gray-50 hover:bg-gray-50 cursor-pointer transition-colors ${
+                  !notification.read ? 'bg-purple-50/50' : ''
                 }`}
                 onClick={() => handleNotificationClick(notification)}
               >
@@ -92,7 +102,7 @@ const NotificationDropdown = ({ onClose }: NotificationDropdownProps) => {
                   </div>
                   {!notification.read && (
                     <div className="flex-shrink-0 mt-1">
-                      <div className="h-2 w-2 rounded-full bg-purple-600"></div>
+                      <div className="h-2 w-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600"></div>
                     </div>
                   )}
                 </div>
@@ -100,15 +110,6 @@ const NotificationDropdown = ({ onClose }: NotificationDropdownProps) => {
             ))}
           </div>
         )}
-      </div>
-      
-      <div className="py-2 px-4 bg-gray-50 border-t border-gray-200 text-center">
-        <button 
-          onClick={onClose}
-          className="text-xs text-gray-600 hover:text-gray-800"
-        >
-          Close
-        </button>
       </div>
     </div>
   );

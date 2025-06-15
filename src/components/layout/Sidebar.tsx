@@ -5,7 +5,7 @@ import {
   Home, Users, BarChart3, MessageSquare, 
   Settings, Search, PlusCircle, FileText,
   Bell, LogOut, ChevronLeft, ChevronRight,
-  UserCircle, ShoppingBag, Briefcase
+  UserCircle, ShoppingBag, Briefcase, Sparkles
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -52,62 +52,64 @@ const Sidebar = () => {
 
   return (
     <aside 
-      className={`bg-white border-r border-gray-200 h-screen flex flex-col transition-all duration-300 ${
+      className={`sidebar-modern h-screen flex flex-col transition-all duration-300 ${
         collapsed ? 'w-16' : 'w-64'
       }`}
     >
-      <div className="p-4 flex items-center justify-between border-b border-gray-200">
+      {/* Header */}
+      <div className="p-4 flex items-center justify-between border-b border-gray-100">
         {!collapsed && (
           <div className="flex items-center">
-            <ShoppingBag className="text-purple-600" size={24} />
-            <span className="ml-2 font-bold text-xl">Influ<span className="text-purple-600">Match</span></span>
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
+              <Sparkles className="text-white" size={20} />
+            </div>
+            <span className="ml-3 font-bold text-xl">
+              Influ<span className="text-gradient">Match</span>
+            </span>
           </div>
         )}
-        {collapsed && <ShoppingBag className="text-purple-600 mx-auto" size={24} />}
+        {collapsed && (
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center mx-auto">
+            <Sparkles className="text-white" size={20} />
+          </div>
+        )}
         <button 
           onClick={() => setCollapsed(!collapsed)}
-          className="p-1 rounded-full hover:bg-gray-100 text-gray-500"
+          className="p-2 rounded-xl hover:bg-gray-100 text-gray-500 transition-colors"
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
         </button>
       </div>
       
+      {/* Navigation */}
       <div className="flex-1 overflow-y-auto py-6 px-3">
-        <nav className="space-y-1">
+        <nav className="space-y-2">
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `flex items-center px-3 py-2 rounded-md transition-colors ${
-                  isActive
-                    ? 'bg-purple-50 text-purple-600'
-                    : 'text-gray-700 hover:bg-gray-100'
-                } ${collapsed ? 'justify-center' : ''}`
+                `nav-item ${isActive ? 'active' : ''} ${collapsed ? 'justify-center' : ''}`
               }
             >
               <span className="flex items-center justify-center">{link.icon}</span>
-              {!collapsed && <span className="ml-3">{link.label}</span>}
+              {!collapsed && <span className="ml-3 font-medium">{link.label}</span>}
             </NavLink>
           ))}
           
           {commonLinks.length > 0 && (
             <>
-              <div className={`my-4 border-t border-gray-200 ${collapsed ? 'mx-2' : ''}`}></div>
+              <div className={`my-6 border-t border-gray-200 ${collapsed ? 'mx-2' : ''}`}></div>
               {commonLinks.map((link) => (
                 <NavLink
                   key={link.to}
                   to={link.to}
                   className={({ isActive }) =>
-                    `flex items-center px-3 py-2 rounded-md transition-colors ${
-                      isActive
-                        ? 'bg-purple-50 text-purple-600'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    } ${collapsed ? 'justify-center' : ''}`
+                    `nav-item ${isActive ? 'active' : ''} ${collapsed ? 'justify-center' : ''}`
                   }
                 >
                   <span className="flex items-center justify-center">{link.icon}</span>
-                  {!collapsed && <span className="ml-3">{link.label}</span>}
+                  {!collapsed && <span className="ml-3 font-medium">{link.label}</span>}
                 </NavLink>
               ))}
             </>
@@ -115,15 +117,38 @@ const Sidebar = () => {
         </nav>
       </div>
       
-      <div className={`p-4 border-t border-gray-200 ${collapsed ? 'flex justify-center' : ''}`}>
+      {/* User Profile & Logout */}
+      <div className={`p-4 border-t border-gray-100 ${collapsed ? 'flex justify-center' : ''}`}>
+        {!collapsed && (
+          <div className="flex items-center mb-4 p-3 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50">
+            <div className="avatar-story">
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                {user.profileImage ? (
+                  <img 
+                    src={user.profileImage} 
+                    alt={user.name} 
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                ) : (
+                  <UserCircle size={24} className="text-gray-600" />
+                )}
+              </div>
+            </div>
+            <div className="ml-3 flex-1 min-w-0">
+              <p className="text-sm font-semibold text-gray-900 truncate">{user.name}</p>
+              <p className="text-xs text-gray-500 capitalize">{user.role}</p>
+            </div>
+          </div>
+        )}
+        
         <button
           onClick={logout}
-          className={`flex items-center text-gray-700 hover:text-purple-600 transition-colors ${
-            collapsed ? 'justify-center w-full' : ''
+          className={`flex items-center text-gray-700 hover:text-red-600 transition-colors p-2 rounded-xl hover:bg-red-50 ${
+            collapsed ? 'justify-center w-full' : 'w-full'
           }`}
         >
           <LogOut size={20} />
-          {!collapsed && <span className="ml-2">Logout</span>}
+          {!collapsed && <span className="ml-3 font-medium">Logout</span>}
         </button>
       </div>
     </aside>
