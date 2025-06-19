@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { PlusCircle, TrendingUp, Users, DollarSign, BarChart2, Star, ArrowUp } from 'lucide-react';
+import { PlusCircle, TrendingUp, Users, DollarSign, BarChart2, Star, ArrowUp, Zap, Target, Award } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { BrandStats, Campaign, InfluencerProfile } from '../../types';
 
@@ -144,177 +144,203 @@ const BrandDashboard = () => {
   }
 
   return (
-    <div className="space-y-8 page-transition">
-      {/* Header */}
+    <div className="space-y-10 page-transition">
+      {/* Enhanced Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
-          <p className="text-gray-600 mt-1">Manage your campaigns and discover new influencers</p>
+          <h1 className="text-4xl font-bold text-gray-900 text-shadow">
+            Dashboard <span className="text-gradient">Overview</span>
+          </h1>
+          <p className="text-gray-600 mt-2 text-lg">Manage your campaigns and discover new influencers</p>
+          <div className="flex items-center mt-4 space-x-4">
+            <div className="flex items-center text-green-600">
+              <div className="w-3 h-3 rounded-full bg-green-400 mr-2 animate-pulse"></div>
+              <span className="text-sm font-medium">All systems operational</span>
+            </div>
+            <div className="text-gray-400">•</div>
+            <span className="text-sm text-gray-500">Last updated: {new Date().toLocaleTimeString()}</span>
+          </div>
         </div>
         <Link
           to="/brand/create-campaign"
-          className="btn-gradient inline-flex items-center"
+          className="btn-gradient inline-flex items-center shadow-lg hover:shadow-xl"
         >
-          <PlusCircle className="mr-2 h-5 w-5" />
+          <PlusCircle className="mr-3 h-6 w-6" />
           New Campaign
         </Link>
       </div>
       
-      {/* Stats Cards */}
+      {/* Enhanced Stats Cards */}
       {stats && (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="stats-card">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
-                  <BarChart2 className="h-6 w-6 text-white" />
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="stats-card group">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <BarChart2 className="h-8 w-8 text-white" />
                 </div>
-              </div>
-              <div className="ml-4 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
+                <div className="ml-6">
+                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
                     Campaigns Launched
-                  </dt>
-                  <dd className="flex items-center">
-                    <div className="text-2xl font-bold text-gray-900">{stats.campaignsLaunched}</div>
-                    <div className="ml-2 flex items-center text-sm text-green-600">
+                  </p>
+                  <div className="flex items-center mt-2">
+                    <div className="text-3xl font-bold text-gray-900">{stats.campaignsLaunched}</div>
+                    <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                       <ArrowUp className="h-4 w-4" />
-                      <span>12%</span>
+                      <span className="font-semibold">12%</span>
                     </div>
-                  </dd>
-                </dl>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           
-          <div className="stats-card">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center">
-                  <Users className="h-6 w-6 text-white" />
+          <div className="stats-card group">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Users className="h-8 w-8 text-white" />
                 </div>
-              </div>
-              <div className="ml-4 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
+                <div className="ml-6">
+                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
                     Collaborations
-                  </dt>
-                  <dd className="flex items-center">
-                    <div className="text-2xl font-bold text-gray-900">{stats.influencersCollaborated}</div>
-                    <div className="ml-2 flex items-center text-sm text-green-600">
+                  </p>
+                  <div className="flex items-center mt-2">
+                    <div className="text-3xl font-bold text-gray-900">{stats.influencersCollaborated}</div>
+                    <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                       <ArrowUp className="h-4 w-4" />
-                      <span>8%</span>
+                      <span className="font-semibold">8%</span>
                     </div>
-                  </dd>
-                </dl>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           
-          <div className="stats-card">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center">
-                  <DollarSign className="h-6 w-6 text-white" />
+          <div className="stats-card group">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <DollarSign className="h-8 w-8 text-white" />
                 </div>
-              </div>
-              <div className="ml-4 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
+                <div className="ml-6">
+                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
                     Total Spent
-                  </dt>
-                  <dd className="flex items-center">
-                    <div className="text-2xl font-bold text-gray-900">${stats.totalSpent.toLocaleString()}</div>
-                    <div className="ml-2 flex items-center text-sm text-green-600">
+                  </p>
+                  <div className="flex items-center mt-2">
+                    <div className="text-3xl font-bold text-gray-900">${stats.totalSpent.toLocaleString()}</div>
+                    <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                       <ArrowUp className="h-4 w-4" />
-                      <span>15%</span>
+                      <span className="font-semibold">15%</span>
                     </div>
-                  </dd>
-                </dl>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           
-          <div className="stats-card">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 flex items-center justify-center">
-                  <TrendingUp className="h-6 w-6 text-white" />
+          <div className="stats-card group">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-pink-500 to-pink-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <TrendingUp className="h-8 w-8 text-white" />
                 </div>
-              </div>
-              <div className="ml-4 w-0 flex-1">
-                <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
+                <div className="ml-6">
+                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
                     ROI Multiplier
-                  </dt>
-                  <dd className="flex items-center">
-                    <div className="text-2xl font-bold text-gray-900">{stats.roi}x</div>
-                    <div className="ml-2 flex items-center text-sm text-green-600">
+                  </p>
+                  <div className="flex items-center mt-2">
+                    <div className="text-3xl font-bold text-gray-900">{stats.roi}x</div>
+                    <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                       <ArrowUp className="h-4 w-4" />
-                      <span>5%</span>
+                      <span className="font-semibold">5%</span>
                     </div>
-                  </dd>
-                </dl>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
       
-      {/* Active Campaigns */}
+      {/* Enhanced Active Campaigns */}
       <div className="card-modern">
-        <div className="px-6 py-5 border-b border-gray-100">
+        <div className="px-8 py-6 border-b border-gray-100/50">
           <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">
-                Active Campaigns
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                Your current running campaigns
-              </p>
+            <div className="flex items-center">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 flex items-center justify-center shadow-lg mr-4">
+                <Target className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">
+                  Active Campaigns
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  Your current running campaigns
+                </p>
+              </div>
             </div>
             <Link
               to="/brand/campaigns"
-              className="text-sm font-medium text-gradient hover:opacity-80"
+              className="text-sm font-semibold text-gradient hover:opacity-80 transition-opacity px-4 py-2 rounded-xl hover:bg-purple-50"
             >
-              View all
+              View all →
             </Link>
           </div>
         </div>
-        <div className="divide-y divide-gray-100">
+        <div className="divide-y divide-gray-100/50">
           {activeCampaigns.length === 0 ? (
-            <div className="px-6 py-8 text-center">
-              <p className="text-gray-500">
-                No active campaigns. <Link to="/brand/create-campaign" className="text-gradient hover:opacity-80">Create one now</Link>
+            <div className="px-8 py-12 text-center">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-gray-400 to-gray-500 flex items-center justify-center mx-auto mb-4">
+                <Target className="h-8 w-8 text-white" />
+              </div>
+              <p className="text-gray-500 text-lg">
+                No active campaigns. <Link to="/brand/create-campaign" className="text-gradient hover:opacity-80 font-semibold">Create one now</Link>
               </p>
             </div>
           ) : (
-            activeCampaigns.map((campaign) => (
-              <div key={campaign.id} className="px-6 py-4 hover:bg-gray-50 transition-colors">
+            activeCampaigns.map((campaign, index) => (
+              <div key={campaign.id} className="px-8 py-6 hover:bg-gradient-to-r hover:from-purple-50/50 hover:to-pink-50/50 transition-all duration-300 group" style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-gradient">{campaign.title}</h4>
-                    <p className="text-sm text-gray-600 mt-1">{campaign.description}</p>
-                    <div className="mt-3 flex items-center space-x-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        campaign.status === 'open' 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-blue-100 text-blue-800'
-                      }`}>
-                        {campaign.status === 'open' ? 'Open for Applications' : 'In Progress'}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        Budget: ${campaign.budget.min} - ${campaign.budget.max}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {campaign.requirements.platforms.join(', ')}
-                      </span>
+                    <div className="flex items-center mb-3">
+                      <h4 className="text-xl font-bold text-gradient group-hover:scale-105 transition-transform duration-300">{campaign.title}</h4>
+                      <div className="ml-4">
+                        <span className={`px-4 py-2 rounded-full text-xs font-bold shadow-lg ${
+                          campaign.status === 'open' 
+                            ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white' 
+                            : 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
+                        }`}>
+                          {campaign.status === 'open' ? '🚀 Open for Applications' : '⚡ In Progress'}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 mb-4 text-lg">{campaign.description}</p>
+                    <div className="flex flex-wrap items-center gap-6">
+                      <div className="flex items-center text-gray-500">
+                        <DollarSign className="h-5 w-5 mr-2 text-green-500" />
+                        <span className="font-semibold">${campaign.budget.min} - ${campaign.budget.max}</span>
+                      </div>
+                      <div className="flex items-center text-gray-500">
+                        <Users className="h-5 w-5 mr-2 text-purple-500" />
+                        <span className="font-semibold">{campaign.requirements.platforms.join(', ')}</span>
+                      </div>
+                      <div className="flex space-x-2">
+                        {campaign.requirements.niches.map((niche) => (
+                          <span
+                            key={niche}
+                            className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800"
+                          >
+                            #{niche}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   <div>
                     <Link
                       to={`/brand/campaigns#${campaign.id}`}
-                      className="btn-secondary"
+                      className="btn-secondary group-hover:scale-105 transition-transform duration-300"
                     >
                       View Details
                     </Link>
@@ -326,33 +352,38 @@ const BrandDashboard = () => {
         </div>
       </div>
       
-      {/* Recommended Influencers */}
+      {/* Enhanced Recommended Influencers */}
       <div className="card-modern">
-        <div className="px-6 py-5 border-b border-gray-100">
+        <div className="px-8 py-6 border-b border-gray-100/50">
           <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">
-                Recommended Influencers
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                Influencers that match your brand's niche and audience
-              </p>
+            <div className="flex items-center">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-yellow-500 to-orange-600 flex items-center justify-center shadow-lg mr-4">
+                <Award className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">
+                  Recommended Influencers
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  Influencers that match your brand's niche and audience
+                </p>
+              </div>
             </div>
             <Link
               to="/brand/find-influencers"
-              className="text-sm font-medium text-gradient hover:opacity-80"
+              className="text-sm font-semibold text-gradient hover:opacity-80 transition-opacity px-4 py-2 rounded-xl hover:bg-purple-50"
             >
-              Discover more
+              Discover more →
             </Link>
           </div>
         </div>
-        <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {recommendedInfluencers.map((influencer) => (
-              <div key={influencer.id} className="card-modern p-6">
-                <div className="flex items-center">
+        <div className="p-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {recommendedInfluencers.map((influencer, index) => (
+              <div key={influencer.id} className="card-modern p-8 group" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="flex items-center mb-6">
                   <div className="avatar-story">
-                    <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center overflow-hidden">
+                    <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-lg">
                       {influencer.profileImage ? (
                         <img
                           className="w-full h-full object-cover"
@@ -360,41 +391,47 @@ const BrandDashboard = () => {
                           alt={influencer.name}
                         />
                       ) : (
-                        <Users className="h-8 w-8 text-gray-400" />
+                        <Users className="h-10 w-10 text-gray-400" />
                       )}
                     </div>
                   </div>
-                  <div className="ml-4 flex-1">
-                    <h4 className="text-lg font-semibold text-gray-900">{influencer.name}</h4>
-                    <p className="text-sm text-gray-600">{influencer.bio}</p>
+                  <div className="ml-6 flex-1">
+                    <h4 className="text-xl font-bold text-gray-900 group-hover:text-purple-700 transition-colors">{influencer.name}</h4>
+                    <p className="text-sm text-gray-600 mt-1">{influencer.bio}</p>
+                    <div className="flex items-center mt-2">
+                      <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                      <span className="text-sm font-semibold text-gray-700">{influencer.averageRating}</span>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
-                  <div className="flex items-center">
-                    <Users className="h-4 w-4 mr-1" />
-                    <span>
-                      {Object.values(influencer.followers || {}).reduce((a, b) => a + b, 0).toLocaleString()} followers
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <Star className="h-4 w-4 mr-1 text-yellow-400" />
-                    <span>{influencer.averageRating}</span>
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center text-gray-500">
+                      <Users className="h-4 w-4 mr-2" />
+                      <span className="font-semibold">
+                        {Object.values(influencer.followers || {}).reduce((a, b) => a + b, 0).toLocaleString()} followers
+                      </span>
+                    </div>
+                    <div className="flex items-center text-gray-500">
+                      <TrendingUp className="h-4 w-4 mr-2 text-green-500" />
+                      <span className="font-semibold">{influencer.engagementRate}% engagement</span>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="mt-4 flex items-center justify-between">
+                <div className="flex items-center justify-between">
                   <div className="flex space-x-2">
                     {influencer.niche?.slice(0, 2).map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
+                        className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800"
                       >
-                        {tag}
+                        #{tag}
                       </span>
                     ))}
                   </div>
-                  <button className="btn-primary text-sm px-4 py-2">
+                  <button className="btn-primary text-sm px-6 py-3 group-hover:scale-105 transition-transform duration-300">
                     Contact
                   </button>
                 </div>
