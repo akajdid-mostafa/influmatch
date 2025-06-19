@@ -103,7 +103,7 @@
   /* Enhanced navigation */
   .nav-item {
     @apply relative flex items-center px-4 py-3 mx-2 rounded-xl;
-    @apply transition-all duration-300 group;
+    @apply transition-all duration-300;
   }
   
   .nav-item:hover {
