@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Search, MessageSquare, User } from 'lucide-react';
+import { Search, MessageSquare, User, Sparkles } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { Conversation } from '../../types';
 
@@ -163,18 +163,33 @@ const Messages = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Messages</h1>
+    <div className="max-w-5xl mx-auto space-y-8 page-transition">
+      {/* Enhanced Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="flex items-center mb-4">
+            <div className="w-16 h-16 rounded-3xl bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-2xl mr-6 float-animation">
+              <MessageSquare className="text-white" size={32} />
+            </div>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 text-shadow">
+                <span className="text-gradient">Messages</span>
+              </h1>
+              <p className="text-gray-600 mt-2 text-lg">Connect and collaborate with your partners</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div className="bg-white rounded-lg shadow">
-        <div className="border-b border-gray-200 px-4 py-4">
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-gray-400" />
+      <div className="card-modern">
+        <div className="px-8 py-6 border-b border-gray-100/50">
+          <div className="search-modern">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="h-6 w-6 text-gray-400" />
             </div>
             <input
               type="text"
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+              className="w-full pl-14 pr-4 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
               placeholder="Search conversations..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -182,18 +197,23 @@ const Messages = () => {
           </div>
         </div>
 
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-gray-100/50">
           {sortedConversations.length === 0 ? (
-            <div className="py-12 text-center">
-              <MessageSquare className="mx-auto h-12 w-12 text-gray-300" />
-              <p className="mt-2 text-gray-500">
+            <div className="py-16 text-center">
+              <div className="w-20 h-20 rounded-3xl bg-gradient-to-r from-gray-400 to-gray-500 flex items-center justify-center mx-auto mb-6">
+                <MessageSquare className="h-10 w-10 text-white" />
+              </div>
+              <p className="text-gray-500 text-xl font-semibold">
                 {searchTerm
                   ? 'No conversations found matching your search.'
                   : 'No conversations yet.'}
               </p>
+              <p className="text-gray-400 mt-2">
+                Start connecting with brands and influencers to begin collaborating!
+              </p>
             </div>
           ) : (
-            sortedConversations.map((conversation) => {
+            sortedConversations.map((conversation, index) => {
               // Find the other participant (not the current user)
               const otherParticipant = conversation.participants.find(
                 (p) => p.id !== user?.id
@@ -203,42 +223,54 @@ const Messages = () => {
                 <Link
                   key={conversation.id}
                   to={`/messages/${conversation.id}`}
-                  className="block hover:bg-gray-50"
+                  className="block hover:bg-gradient-to-r hover:from-purple-50/50 hover:to-pink-50/50 transition-all duration-300 group"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="px-4 py-4 sm:px-6 flex items-center">
+                  <div className="px-8 py-6 flex items-center">
                     <div className="min-w-0 flex-1 flex items-center">
                       <div className="flex-shrink-0">
-                        <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
-                          <User className="h-6 w-6 text-gray-500" />
+                        <div className="avatar-story">
+                          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg overflow-hidden">
+                            <User className="h-8 w-8 text-gray-500" />
+                          </div>
                         </div>
                       </div>
-                      <div className="min-w-0 flex-1 px-4">
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm font-medium text-purple-600 truncate">
+                      <div className="min-w-0 flex-1 px-6">
+                        <div className="flex items-center justify-between mb-2">
+                          <p className="text-lg font-bold text-gradient group-hover:scale-105 transition-transform duration-300">
                             {otherParticipant?.name}
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-sm text-gray-500 font-medium">
                             {conversation.lastMessage &&
                               formatTimestamp(
                                 conversation.lastMessage.timestamp
                               )}
                           </p>
                         </div>
-                        <div className="mt-1 flex justify-between">
+                        <div className="flex justify-between items-center">
                           <p
-                            className={`text-sm ${
+                            className={`text-lg leading-relaxed ${
                               conversation.unreadCount > 0
                                 ? 'font-semibold text-gray-900'
-                                : 'text-gray-500'
+                                : 'text-gray-600'
                             } truncate`}
                           >
                             {conversation.lastMessage?.content}
                           </p>
                           {conversation.unreadCount > 0 && (
-                            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                            <span className="ml-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg animate-pulse">
                               {conversation.unreadCount}
                             </span>
                           )}
+                        </div>
+                        <div className="mt-2">
+                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            otherParticipant?.role === 'brand'
+                              ? 'bg-gradient-to-r from-purple-100 to-indigo-100 text-purple-800'
+                              : 'bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800'
+                          }`}>
+                            {otherParticipant?.role === 'brand' ? '🏢 Brand' : '⭐ Creator'}
+                          </span>
                         </div>
                       </div>
                     </div>

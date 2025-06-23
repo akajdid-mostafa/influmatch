@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Calendar, DollarSign, Users, Target, FileText, Globe, Instagram, Youtube, GitBranch as TikTok } from 'lucide-react';
+import { Calendar, DollarSign, Users, Target, FileText, Globe, Instagram, Youtube, GitBranch as TikTok, Sparkles, Zap, Star, Award } from 'lucide-react';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
@@ -194,101 +194,153 @@ const CreateCampaign = () => {
     }
   };
 
+  const stepIcons = [
+    { icon: Sparkles, gradient: 'from-blue-500 to-purple-600' },
+    { icon: DollarSign, gradient: 'from-green-500 to-teal-600' },
+    { icon: Target, gradient: 'from-orange-500 to-red-600' },
+    { icon: Award, gradient: 'from-pink-500 to-rose-600' }
+  ];
+
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Create Campaign</h1>
-        <p className="mt-2 text-sm text-gray-600">
+    <div className="max-w-5xl mx-auto space-y-8 page-transition">
+      {/* Enhanced Header */}
+      <div className="text-center">
+        <div className="flex justify-center mb-6">
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-2xl float-animation">
+            <Zap className="text-white" size={40} />
+          </div>
+        </div>
+        <h1 className="text-4xl font-bold text-gray-900 text-shadow">
+          Create Your <span className="text-gradient">Campaign</span>
+        </h1>
+        <p className="mt-4 text-lg text-gray-600">
           Set up your influencer marketing campaign in a few simple steps
         </p>
+        <div className="mt-4 flex justify-center space-x-2">
+          <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></div>
+          <div className="w-2 h-2 rounded-full bg-pink-400 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+          <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+        </div>
       </div>
       
-      {/* Progress Steps */}
-      <div className="mb-8">
+      {/* Enhanced Progress Steps */}
+      <div className="card-modern p-8">
         <div className="flex items-center justify-between relative">
-          <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-gray-200 -z-10"></div>
-          {[1, 2, 3, 4].map((number) => (
-            <div
-              key={number}
-              className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${
-                step >= number
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-white border-2 border-gray-300 text-gray-500'
-              }`}
-            >
-              {number}
-            </div>
-          ))}
+          <div className="absolute left-0 right-0 top-1/2 h-1 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 -z-10 rounded-full"></div>
+          {[1, 2, 3, 4].map((number, index) => {
+            const StepIcon = stepIcons[index].icon;
+            return (
+              <div
+                key={number}
+                className={`relative flex flex-col items-center transition-all duration-500 ${
+                  step >= number ? 'scale-110' : 'scale-100'
+                }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div
+                  className={`w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold shadow-lg transition-all duration-500 ${
+                    step >= number
+                      ? `bg-gradient-to-r ${stepIcons[index].gradient} shadow-xl`
+                      : 'bg-gray-300'
+                  }`}
+                >
+                  <StepIcon size={24} />
+                </div>
+                <span className={`mt-3 text-sm font-semibold transition-colors duration-300 ${
+                  step >= number ? 'text-gradient' : 'text-gray-500'
+                }`}>
+                  Step {number}
+                </span>
+              </div>
+            );
+          })}
         </div>
-        <div className="flex justify-between mt-2 text-sm">
-          <span className={step >= 1 ? 'text-purple-600' : 'text-gray-500'}>Campaign Details</span>
-          <span className={step >= 2 ? 'text-purple-600' : 'text-gray-500'}>Budget & Timeline</span>
-          <span className={step >= 3 ? 'text-purple-600' : 'text-gray-500'}>Requirements</span>
-          <span className={step >= 4 ? 'text-purple-600' : 'text-gray-500'}>Guidelines</span>
+        <div className="flex justify-between mt-4 text-sm">
+          <span className={`font-medium transition-colors ${step >= 1 ? 'text-gradient' : 'text-gray-500'}`}>Campaign Details</span>
+          <span className={`font-medium transition-colors ${step >= 2 ? 'text-gradient' : 'text-gray-500'}`}>Budget & Timeline</span>
+          <span className={`font-medium transition-colors ${step >= 3 ? 'text-gradient' : 'text-gray-500'}`}>Requirements</span>
+          <span className={`font-medium transition-colors ${step >= 4 ? 'text-gradient' : 'text-gray-500'}`}>Guidelines</span>
         </div>
       </div>
       
-      <div className="bg-white shadow-sm rounded-lg">
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+      <div className="card-modern">
+        <form onSubmit={handleSubmit} className="p-10 space-y-8">
           {/* Step 1: Campaign Details */}
           {step === 1 && (
-            <div className="space-y-6">
-              <div>
-                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                  Campaign Title <span className="text-red-500">*</span>
-                </label>
+            <div className="space-y-8 page-transition">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Campaign Details</h2>
+                <p className="text-gray-600">Tell us about your campaign vision and goals</p>
+              </div>
+
+              <div className="floating-label">
                 <input
                   type="text"
                   id="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
-                  placeholder="e.g., Summer Collection Launch"
+                  className="input-modern"
+                  placeholder=" "
                 />
+                <label htmlFor="title">Campaign Title <span className="text-red-500">*</span></label>
               </div>
               
-              <div>
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                  Campaign Description <span className="text-red-500">*</span>
-                </label>
+              <div className="floating-label">
                 <textarea
                   id="description"
                   rows={4}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
-                  placeholder="Describe your campaign goals and expectations..."
+                  className="input-modern resize-none"
+                  placeholder=" "
                 />
+                <label htmlFor="description">Campaign Description <span className="text-red-500">*</span></label>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-lg font-semibold text-gray-900 mb-6">
                   Campaign Objectives <span className="text-red-500">*</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
-                    'Brand Awareness',
-                    'Product Launch',
-                    'Sales Generation',
-                    'Community Engagement',
-                    'Content Creation',
-                    'Lead Generation'
+                    { name: 'Brand Awareness', icon: '🎯', gradient: 'from-blue-500 to-purple-600' },
+                    { name: 'Product Launch', icon: '🚀', gradient: 'from-green-500 to-teal-600' },
+                    { name: 'Sales Generation', icon: '💰', gradient: 'from-yellow-500 to-orange-600' },
+                    { name: 'Community Engagement', icon: '❤️', gradient: 'from-pink-500 to-red-600' },
+                    { name: 'Content Creation', icon: '📸', gradient: 'from-purple-500 to-indigo-600' },
+                    { name: 'Lead Generation', icon: '📈', gradient: 'from-teal-500 to-cyan-600' }
                   ].map((objective) => (
                     <label
-                      key={objective}
-                      className={`flex items-center p-4 border rounded-lg cursor-pointer transition-colors ${
-                        objectives.includes(objective)
-                          ? 'border-purple-500 bg-purple-50'
-                          : 'border-gray-200 hover:bg-gray-50'
+                      key={objective.name}
+                      className={`group relative flex items-center p-6 border-2 rounded-2xl cursor-pointer transition-all duration-300 hover:scale-105 ${
+                        objectives.includes(objective.name)
+                          ? 'border-transparent bg-gradient-to-r from-purple-50 to-pink-50 shadow-lg'
+                          : 'border-gray-200 hover:border-purple-300 hover:bg-gray-50'
                       }`}
                     >
                       <input
                         type="checkbox"
-                        checked={objectives.includes(objective)}
-                        onChange={() => handleObjectiveToggle(objective)}
-                        className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                        checked={objectives.includes(objective.name)}
+                        onChange={() => handleObjectiveToggle(objective.name)}
+                        className="sr-only"
                       />
-                      <span className="ml-3 text-sm">{objective}</span>
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mr-4 transition-all duration-300 ${
+                        objectives.includes(objective.name)
+                          ? `bg-gradient-to-r ${objective.gradient} shadow-lg`
+                          : 'bg-gray-100 group-hover:bg-gray-200'
+                      }`}>
+                        {objective.icon}
+                      </div>
+                      <span className={`font-semibold transition-colors ${
+                        objectives.includes(objective.name) ? 'text-gradient' : 'text-gray-700 group-hover:text-gray-900'
+                      }`}>
+                        {objective.name}
+                      </span>
+                      {objectives.includes(objective.name) && (
+                        <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center">
+                          <Star size={14} className="text-white" />
+                        </div>
+                      )}
                     </label>
                   ))}
                 </div>
@@ -298,100 +350,86 @@ const CreateCampaign = () => {
           
           {/* Step 2: Budget and Timeline */}
           {step === 2 && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="budgetMin" className="block text-sm font-medium text-gray-700">
-                    Minimum Budget <span className="text-red-500">*</span>
-                  </label>
-                  <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <DollarSign className="h-5 w-5 text-gray-400" />
+            <div className="space-y-8 page-transition">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Budget & Timeline</h2>
+                <p className="text-gray-600">Set your investment and campaign duration</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div className="floating-label">
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <DollarSign className="h-6 w-6 text-green-500" />
                     </div>
                     <input
                       type="number"
                       id="budgetMin"
                       value={budgetMin}
                       onChange={(e) => setBudgetMin(e.target.value)}
-                      className="block w-full pl-10 pr-12 sm:text-sm border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"
-                      placeholder="0"
+                      className="input-modern pl-14"
+                      placeholder=" "
                       min="0"
                     />
-                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                      <span className="text-gray-500 sm:text-sm">USD</span>
-                    </div>
                   </div>
+                  <label htmlFor="budgetMin">Minimum Budget <span className="text-red-500">*</span></label>
                 </div>
                 
-                <div>
-                  <label htmlFor="budgetMax" className="block text-sm font-medium text-gray-700">
-                    Maximum Budget <span className="text-red-500">*</span>
-                  </label>
-                  <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <DollarSign className="h-5 w-5 text-gray-400" />
+                <div className="floating-label">
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <DollarSign className="h-6 w-6 text-green-500" />
                     </div>
                     <input
                       type="number"
                       id="budgetMax"
                       value={budgetMax}
                       onChange={(e) => setBudgetMax(e.target.value)}
-                      className="block w-full pl-10 pr-12 sm:text-sm border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"
-                      placeholder="0"
+                      className="input-modern pl-14"
+                      placeholder=" "
                       min="0"
                     />
-                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                      <span className="text-gray-500 sm:text-sm">USD</span>
-                    </div>
                   </div>
+                  <label htmlFor="budgetMax">Maximum Budget <span className="text-red-500">*</span></label>
                 </div>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
-                    Start Date <span className="text-red-500">*</span>
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="date"
-                      id="startDate"
-                      value={startDate}
-                      onChange={(e) => setStartDate(e.target.value)}
-                      className="block w-full sm:text-sm border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
-                    End Date <span className="text-red-500">*</span>
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="date"
-                      id="endDate"
-                      value={endDate}
-                      onChange={(e) => setEndDate(e.target.value)}
-                      className="block w-full sm:text-sm border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"
-                    />
-                  </div>
-                </div>
-              </div>
-              
-              <div>
-                <label htmlFor="submissionDeadline" className="block text-sm font-medium text-gray-700">
-                  Content Submission Deadline
-                </label>
-                <div className="mt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div className="floating-label">
                   <input
                     type="date"
-                    id="submissionDeadline"
-                    value={submissionDeadline}
-                    onChange={(e) => setSubmissionDeadline(e.target.value)}
-                    className="block w-full sm:text-sm border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"
+                    id="startDate"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="input-modern"
+                    placeholder=" "
                   />
+                  <label htmlFor="startDate">Start Date <span className="text-red-500">*</span></label>
                 </div>
+                
+                <div className="floating-label">
+                  <input
+                    type="date"
+                    id="endDate"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    className="input-modern"
+                    placeholder=" "
+                  />
+                  <label htmlFor="endDate">End Date <span className="text-red-500">*</span></label>
+                </div>
+              </div>
+              
+              <div className="floating-label">
+                <input
+                  type="date"
+                  id="submissionDeadline"
+                  value={submissionDeadline}
+                  onChange={(e) => setSubmissionDeadline(e.target.value)}
+                  className="input-modern"
+                  placeholder=" "
+                />
+                <label htmlFor="submissionDeadline">Content Submission Deadline</label>
                 <p className="mt-2 text-sm text-gray-500">
                   Optional. If not specified, content will be due by the end date.
                 </p>
@@ -401,96 +439,121 @@ const CreateCampaign = () => {
           
           {/* Step 3: Requirements */}
           {step === 3 && (
-            <div className="space-y-6">
+            <div className="space-y-8 page-transition">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Requirements</h2>
+                <p className="text-gray-600">Define your ideal influencer criteria</p>
+              </div>
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-lg font-semibold text-gray-900 mb-6">
                   Content Niches <span className="text-red-500">*</span>
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                  {niches.map((niche) => (
+                  {niches.map((niche, index) => (
                     <label
                       key={niche}
-                      className={`flex items-center p-3 border rounded-lg cursor-pointer transition-colors ${
+                      className={`group flex items-center p-4 border-2 rounded-2xl cursor-pointer transition-all duration-300 hover:scale-105 ${
                         selectedNiches.includes(niche)
-                          ? 'border-purple-500 bg-purple-50'
-                          : 'border-gray-200 hover:bg-gray-50'
+                          ? 'border-transparent bg-gradient-to-r from-purple-50 to-pink-50 shadow-lg'
+                          : 'border-gray-200 hover:border-purple-300 hover:bg-gray-50'
                       }`}
+                      style={{ animationDelay: `${index * 0.05}s` }}
                     >
                       <input
                         type="checkbox"
                         checked={selectedNiches.includes(niche)}
                         onChange={() => handleNicheToggle(niche)}
-                        className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                        className="sr-only"
                       />
-                      <span className="ml-3 text-sm">{niche}</span>
+                      <span className={`font-semibold text-center w-full transition-colors ${
+                        selectedNiches.includes(niche) ? 'text-gradient' : 'text-gray-700 group-hover:text-gray-900'
+                      }`}>
+                        {niche}
+                      </span>
+                      {selectedNiches.includes(niche) && (
+                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center">
+                          <Star size={12} className="text-white" />
+                        </div>
+                      )}
                     </label>
                   ))}
                 </div>
               </div>
               
-              <div>
-                <label htmlFor="minFollowers" className="block text-sm font-medium text-gray-700">
-                  Minimum Followers <span className="text-red-500">*</span>
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Users className="h-5 w-5 text-gray-400" />
+              <div className="floating-label">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <Users className="h-6 w-6 text-purple-500" />
                   </div>
                   <input
                     type="number"
                     id="minFollowers"
                     value={minFollowers}
                     onChange={(e) => setMinFollowers(e.target.value)}
-                    className="block w-full pl-10 sm:text-sm border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"
-                    placeholder="e.g., 10000"
+                    className="input-modern pl-14"
+                    placeholder=" "
                     min="0"
                   />
                 </div>
+                <label htmlFor="minFollowers">Minimum Followers <span className="text-red-500">*</span></label>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-lg font-semibold text-gray-900 mb-6">
                   Platforms <span className="text-red-500">*</span>
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {platforms.map((platform) => (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                  {platforms.map((platform, index) => (
                     <label
                       key={platform.id}
-                      className={`flex items-center p-4 border rounded-lg cursor-pointer transition-colors ${
+                      className={`group flex items-center p-6 border-2 rounded-2xl cursor-pointer transition-all duration-300 hover:scale-105 ${
                         selectedPlatforms.includes(platform.id)
-                          ? 'border-purple-500 bg-purple-50'
-                          : 'border-gray-200 hover:bg-gray-50'
+                          ? 'border-transparent bg-gradient-to-r from-purple-50 to-pink-50 shadow-lg'
+                          : 'border-gray-200 hover:border-purple-300 hover:bg-gray-50'
                       }`}
+                      style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       <input
                         type="checkbox"
                         checked={selectedPlatforms.includes(platform.id)}
                         onChange={() => handlePlatformToggle(platform.id)}
-                        className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                        className="sr-only"
                       />
-                      <span className="ml-3 flex items-center">
-                        <platform.icon className="h-5 w-5 mr-2" />
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mr-4 transition-all duration-300 ${
+                        selectedPlatforms.includes(platform.id)
+                          ? 'bg-gradient-to-r from-purple-500 to-pink-600 shadow-lg'
+                          : 'bg-gray-100 group-hover:bg-gray-200'
+                      }`}>
+                        <platform.icon className={`h-6 w-6 ${
+                          selectedPlatforms.includes(platform.id) ? 'text-white' : 'text-gray-600'
+                        }`} />
+                      </div>
+                      <span className={`font-semibold transition-colors ${
+                        selectedPlatforms.includes(platform.id) ? 'text-gradient' : 'text-gray-700 group-hover:text-gray-900'
+                      }`}>
                         {platform.name}
                       </span>
+                      {selectedPlatforms.includes(platform.id) && (
+                        <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center">
+                          <Star size={14} className="text-white" />
+                        </div>
+                      )}
                     </label>
                   ))}
                 </div>
               </div>
               
-              <div>
-                <label htmlFor="locations" className="block text-sm font-medium text-gray-700">
-                  Target Locations
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    id="locations"
-                    value={locations.join(', ')}
-                    onChange={(e) => setLocations(e.target.value.split(',').map(l => l.trim()))}
-                    className="block w-full sm:text-sm border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"
-                    placeholder="e.g., United States, Canada, United Kingdom"
-                  />
-                </div>
+              <div className="floating-label">
+                <input
+                  type="text"
+                  id="locations"
+                  value={locations.join(', ')}
+                  onChange={(e) => setLocations(e.target.value.split(',').map(l => l.trim()))}
+                  className="input-modern"
+                  placeholder=" "
+                />
+                <label htmlFor="locations">Target Locations</label>
                 <p className="mt-2 text-sm text-gray-500">
                   Optional. Leave empty to target influencers worldwide.
                 </p>
@@ -500,100 +563,109 @@ const CreateCampaign = () => {
           
           {/* Step 4: Content Guidelines */}
           {step === 4 && (
-            <div className="space-y-6">
-              <div>
-                <label htmlFor="contentGuidelines" className="block text-sm font-medium text-gray-700">
-                  Content Guidelines <span className="text-red-500">*</span>
-                </label>
+            <div className="space-y-8 page-transition">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Content Guidelines</h2>
+                <p className="text-gray-600">Define your content expectations and brand guidelines</p>
+              </div>
+
+              <div className="floating-label">
                 <textarea
                   id="contentGuidelines"
                   rows={4}
                   value={contentGuidelines}
                   onChange={(e) => setContentGuidelines(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
-                  placeholder="Describe what type of content you're looking for..."
+                  className="input-modern resize-none"
+                  placeholder=" "
                 />
+                <label htmlFor="contentGuidelines">Content Guidelines <span className="text-red-500">*</span></label>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-lg font-semibold text-gray-900 mb-6">
                   Do's <span className="text-red-500">*</span>
                 </label>
-                {dosList.map((item, index) => (
-                  <div key={index} className="flex mb-2">
-                    <input
-                      type="text"
-                      value={item}
-                      onChange={(e) => handleDoListChange(index, e.target.value)}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
-                      placeholder={`Do #${index + 1}`}
-                    />
-                    {dosList.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeDoItem(index)}
-                        className="ml-2 text-red-600 hover:text-red-800"
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={addDoItem}
-                  className="mt-2 text-sm text-purple-600 hover:text-purple-800"
-                >
-                  + Add another do
-                </button>
+                <div className="space-y-4">
+                  {dosList.map((item, index) => (
+                    <div key={index} className="flex items-center space-x-4">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center text-white font-bold text-sm">
+                        {index + 1}
+                      </div>
+                      <input
+                        type="text"
+                        value={item}
+                        onChange={(e) => handleDoListChange(index, e.target.value)}
+                        className="flex-1 input-modern"
+                        placeholder={`Do #${index + 1}`}
+                      />
+                      {dosList.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeDoItem(index)}
+                          className="px-4 py-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-xl transition-colors font-semibold"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={addDoItem}
+                    className="btn-secondary"
+                  >
+                    + Add another do
+                  </button>
+                </div>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-lg font-semibold text-gray-900 mb-6">
                   Don'ts <span className="text-red-500">*</span>
                 </label>
-                {dontsList.map((item, index) => (
-                  <div key={index} className="flex mb-2">
-                    <input
-                      type="text"
-                      value={item}
-                      onChange={(e) => handleDontListChange(index, e.target.value)}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
-                      placeholder={`Don't #${index + 1}`}
-                    />
-                    {dontsList.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeDontItem(index)}
-                        className="ml-2 text-red-600 hover:text-red-800"
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={addDontItem}
-                  className="mt-2 text-sm text-purple-600 hover:text-purple-800"
-                >
-                  + Add another don't
-                </button>
+                <div className="space-y-4">
+                  {dontsList.map((item, index) => (
+                    <div key={index} className="flex items-center space-x-4">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-red-500 to-pink-600 flex items-center justify-center text-white font-bold text-sm">
+                        {index + 1}
+                      </div>
+                      <input
+                        type="text"
+                        value={item}
+                        onChange={(e) => handleDontListChange(index, e.target.value)}
+                        className="flex-1 input-modern"
+                        placeholder={`Don't #${index + 1}`}
+                      />
+                      {dontsList.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeDontItem(index)}
+                          className="px-4 py-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-xl transition-colors font-semibold"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={addDontItem}
+                    className="btn-secondary"
+                  >
+                    + Add another don't
+                  </button>
+                </div>
               </div>
               
-              <div>
-                <label htmlFor="references" className="block text-sm font-medium text-gray-700">
-                  Reference Content
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    value={references.join(', ')}
-                    onChange={(e) => setReferences(e.target.value.split(',').map(r => r.trim()))}
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm"
-                    placeholder="Add links to example content you like..."
-                  />
-                </div>
+              <div className="floating-label">
+                <input
+                  type="text"
+                  value={references.join(', ')}
+                  onChange={(e) => setReferences(e.target.value.split(',').map(r => r.trim()))}
+                  className="input-modern"
+                  placeholder=" "
+                />
+                <label htmlFor="references">Reference Content</label>
                 <p className="mt-2 text-sm text-gray-500">
                   Optional. Add links to content that can serve as inspiration.
                 </p>
@@ -601,15 +673,15 @@ const CreateCampaign = () => {
             </div>
           )}
           
-          {/* Navigation Buttons */}
-          <div className="flex justify-between pt-6">
+          {/* Enhanced Navigation Buttons */}
+          <div className="flex justify-between pt-8 border-t border-gray-100">
             {step > 1 && (
               <button
                 type="button"
                 onClick={handleBack}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                className="btn-secondary"
               >
-                Back
+                ← Back
               </button>
             )}
             
@@ -617,17 +689,17 @@ const CreateCampaign = () => {
               <button
                 type="button"
                 onClick={handleNext}
-                className="ml-auto inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                className="btn-primary ml-auto"
               >
-                Next
+                Next →
               </button>
             ) : (
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="ml-auto inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:bg-purple-400 disabled:cursor-not-allowed"
+                className="btn-primary ml-auto"
               >
-                {isSubmitting ? <LoadingSpinner size="sm" color="white" /> : 'Create Campaign'}
+                {isSubmitting ? <LoadingSpinner size="sm" color="white" /> : '🚀 Create Campaign'}
               </button>
             )}
           </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { Search, Filter, Star, Users, MessageSquare, Instagram, Youtube, GitBranch as BrandTiktok } from 'lucide-react';
+import { Search, Filter, Star, Users, MessageSquare, Instagram, Youtube, GitBranch as BrandTiktok, Sparkles, Target, Award } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { InfluencerProfile } from '../../types';
 
@@ -138,43 +138,55 @@ const FindInfluencers = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 page-transition">
+      {/* Enhanced Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Find Influencers</h1>
+        <div>
+          <div className="flex items-center mb-4">
+            <div className="w-16 h-16 rounded-3xl bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-2xl mr-6 float-animation">
+              <Target className="text-white" size={32} />
+            </div>
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 text-shadow">
+                Find <span className="text-gradient">Influencers</span>
+              </h1>
+              <p className="text-gray-600 mt-2 text-lg">Discover the perfect creators for your brand</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Filters */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <div className="space-y-4">
+      {/* Enhanced Filters */}
+      <div className="card-modern p-8">
+        <div className="space-y-8">
           {/* Search */}
-          <div>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
-              </div>
-              <input
-                type="text"
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                placeholder="Search influencers..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+          <div className="search-modern">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="h-6 w-6 text-gray-400" />
             </div>
+            <input
+              type="text"
+              className="w-full pl-14 pr-4 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
+              placeholder="Search influencers..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
 
           {/* Niches */}
           <div>
-            <h3 className="text-sm font-medium text-gray-700 mb-2">Content Niches</h3>
-            <div className="flex flex-wrap gap-2">
-              {niches.map((niche) => (
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Content Niches</h3>
+            <div className="flex flex-wrap gap-3">
+              {niches.map((niche, index) => (
                 <button
                   key={niche}
                   onClick={() => handleNicheToggle(niche)}
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  className={`px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 hover:scale-105 ${
                     selectedNiches.includes(niche)
-                      ? 'bg-purple-100 text-purple-800'
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg'
                       : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
                   }`}
+                  style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   {niche}
                 </button>
@@ -184,19 +196,20 @@ const FindInfluencers = () => {
 
           {/* Platforms */}
           <div>
-            <h3 className="text-sm font-medium text-gray-700 mb-2">Platforms</h3>
-            <div className="flex flex-wrap gap-2">
-              {platforms.map((platform) => (
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Platforms</h3>
+            <div className="flex flex-wrap gap-4">
+              {platforms.map((platform, index) => (
                 <button
                   key={platform.id}
                   onClick={() => handlePlatformToggle(platform.id)}
-                  className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                  className={`inline-flex items-center px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 hover:scale-105 ${
                     selectedPlatforms.includes(platform.id)
-                      ? 'bg-purple-100 text-purple-800'
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg'
                       : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
                   }`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <platform.icon className="h-4 w-4 mr-1" />
+                  <platform.icon className="h-5 w-5 mr-2" />
                   {platform.name}
                 </button>
               ))}
@@ -205,85 +218,113 @@ const FindInfluencers = () => {
 
           {/* Minimum Followers */}
           <div>
-            <label htmlFor="minFollowers" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="minFollowers" className="block text-lg font-bold text-gray-900 mb-4">
               Minimum Followers
             </label>
-            <div className="mt-1">
-              <input
-                type="number"
-                id="minFollowers"
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                placeholder="e.g., 10000"
-                value={minFollowers}
-                onChange={(e) => setMinFollowers(e.target.value)}
-              />
-            </div>
+            <input
+              type="number"
+              id="minFollowers"
+              className="w-full px-6 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
+              placeholder="e.g., 10000"
+              value={minFollowers}
+              onChange={(e) => setMinFollowers(e.target.value)}
+            />
           </div>
         </div>
       </div>
 
-      {/* Influencers Grid */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {filteredInfluencers.map((influencer) => (
-          <div
-            key={influencer.id}
-            className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow"
-          >
-            <div className="relative h-48">
-              {influencer.profileImage ? (
-                <img
-                  src={influencer.profileImage}
-                  alt={influencer.name}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  <Users className="h-12 w-12 text-gray-400" />
-                </div>
-              )}
+      {/* Enhanced Influencers Grid */}
+      <div className="card-modern">
+        <div className="px-8 py-6 border-b border-gray-100/50">
+          <div className="flex items-center">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-yellow-500 to-orange-600 flex items-center justify-center shadow-lg mr-4">
+              <Award className="h-6 w-6 text-white" />
             </div>
-            
-            <div className="p-6">
-              <h3 className="text-lg font-medium text-gray-900">{influencer.name}</h3>
-              <p className="mt-1 text-sm text-gray-500">{influencer.bio}</p>
-              
-              <div className="mt-4 flex items-center text-sm text-gray-500">
-                <Users className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400" />
-                <span>
-                  {Object.entries(influencer.followers || {}).map(([platform, count]) => (
-                    <span key={platform} className="mr-2">
-                      {platform}: {(count / 1000).toFixed(1)}K
-                    </span>
-                  ))}
-                </span>
-              </div>
-              
-              <div className="mt-2 flex items-center text-sm text-gray-500">
-                <Star className="flex-shrink-0 mr-1.5 h-4 w-4 text-yellow-400" />
-                <span>{influencer.averageRating} rating</span>
-              </div>
-              
-              <div className="mt-4 flex justify-between items-center">
-                <div className="flex space-x-2">
-                  {influencer.niche?.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <button
-                  className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                >
-                  <MessageSquare className="h-4 w-4 mr-1" />
-                  Contact
-                </button>
-              </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900">
+                Discover Creators
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                {filteredInfluencers.length} influencer{filteredInfluencers.length !== 1 ? 's' : ''} found
+              </p>
             </div>
           </div>
-        ))}
+        </div>
+        <div className="p-8">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredInfluencers.map((influencer, index) => (
+              <div
+                key={influencer.id}
+                className="card-modern p-8 group"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="flex items-center mb-6">
+                  <div className="avatar-story">
+                    <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-lg">
+                      {influencer.profileImage ? (
+                        <img
+                          className="w-full h-full object-cover"
+                          src={influencer.profileImage}
+                          alt={influencer.name}
+                        />
+                      ) : (
+                        <Users className="h-10 w-10 text-gray-400" />
+                      )}
+                    </div>
+                  </div>
+                  <div className="ml-6 flex-1">
+                    <h4 className="text-xl font-bold text-gray-900 group-hover:text-purple-700 transition-colors">{influencer.name}</h4>
+                    <p className="text-sm text-gray-600 mt-1">{influencer.bio}</p>
+                    <div className="flex items-center mt-2">
+                      <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                      <span className="text-sm font-semibold text-gray-700">{influencer.averageRating}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center text-purple-600">
+                      <Users className="h-4 w-4 mr-2" />
+                      <span className="font-bold">
+                        {Object.values(influencer.followers || {}).reduce((a, b) => a + b, 0).toLocaleString()} followers
+                      </span>
+                    </div>
+                    <div className="flex items-center text-green-600">
+                      <span className="font-bold">{influencer.engagementRate}% engagement</span>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    {Object.entries(influencer.followers || {}).map(([platform, count]) => (
+                      <div key={platform} className="bg-gray-50 p-2 rounded-xl text-center">
+                        <p className="font-bold text-gray-900">{(count / 1000).toFixed(1)}K</p>
+                        <p className="text-gray-500 capitalize">{platform}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex space-x-2">
+                    {influencer.niche?.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                  <button className="btn-primary text-sm px-6 py-3 group-hover:scale-105 transition-transform duration-300">
+                    <MessageSquare className="h-4 w-4 mr-2" />
+                    Contact
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
