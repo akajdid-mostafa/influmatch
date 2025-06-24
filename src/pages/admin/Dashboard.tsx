@@ -5,6 +5,7 @@ import {
   Sparkles, Zap, Star, Award, Activity, BarChart3
 } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import { LineChart, BarChart, DonutChart } from '../../components/ui/Chart';
 import { SystemStats } from '../../types';
 
 const AdminDashboard = () => {
@@ -91,6 +92,35 @@ const AdminDashboard = () => {
       minute: '2-digit',
     }).format(date);
   };
+
+  // Chart data
+  const userGrowthData = [
+    { label: 'Jan', value: 650 },
+    { label: 'Feb', value: 720 },
+    { label: 'Mar', value: 780 },
+    { label: 'Apr', value: 820 },
+    { label: 'May', value: 843 },
+  ];
+
+  const campaignsByStatusData = [
+    { label: 'Active', value: 73, color: 'bg-gradient-to-r from-green-500 to-emerald-600' },
+    { label: 'Completed', value: 116, color: 'bg-gradient-to-r from-blue-500 to-indigo-600' },
+    { label: 'Pending', value: 25, color: 'bg-gradient-to-r from-yellow-500 to-orange-600' },
+  ];
+
+  const userDistributionData = [
+    { label: 'Influencers', value: 582 },
+    { label: 'Brands', value: 256 },
+    { label: 'Admins', value: 5 },
+  ];
+
+  const revenueData = [
+    { label: 'Jan', value: 32000 },
+    { label: 'Feb', value: 38000 },
+    { label: 'Mar', value: 42000 },
+    { label: 'Apr', value: 45000 },
+    { label: 'May', value: 48500 },
+  ];
 
   return (
     <div className="space-y-10 page-transition">
@@ -247,6 +277,39 @@ const AdminDashboard = () => {
           </div>
         </div>
       )}
+
+      {/* Charts Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <LineChart
+          data={userGrowthData}
+          title="User Growth"
+          subtitle="Total registered users over time"
+          showTrend={true}
+          trendValue={5.4}
+        />
+        
+        <BarChart
+          data={campaignsByStatusData}
+          title="Campaigns by Status"
+          subtitle="Current campaign distribution"
+        />
+        
+        <DonutChart
+          data={userDistributionData}
+          title="User Distribution"
+          subtitle="Breakdown by user type"
+          centerValue="843"
+          centerLabel="Total Users"
+        />
+        
+        <LineChart
+          data={revenueData}
+          title="Platform Revenue"
+          subtitle="Monthly revenue growth"
+          showTrend={true}
+          trendValue={12.3}
+        />
+      </div>
       
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         {/* Enhanced Recent Users */}

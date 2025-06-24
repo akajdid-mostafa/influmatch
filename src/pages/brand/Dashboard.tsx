@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { PlusCircle, TrendingUp, Users, DollarSign, BarChart2, Star, ArrowUp, Zap, Target, Award } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import { LineChart, BarChart, DonutChart } from '../../components/ui/Chart';
 import { BrandStats, Campaign, InfluencerProfile } from '../../types';
 
 const BrandDashboard = () => {
@@ -143,6 +144,36 @@ const BrandDashboard = () => {
     );
   }
 
+  // Chart data
+  const campaignPerformanceData = [
+    { label: 'Jan', value: 2.1 },
+    { label: 'Feb', value: 2.3 },
+    { label: 'Mar', value: 2.0 },
+    { label: 'Apr', value: 2.6 },
+    { label: 'May', value: 2.4 },
+  ];
+
+  const spendingData = [
+    { label: 'Jan', value: 8500 },
+    { label: 'Feb', value: 9200 },
+    { label: 'Mar', value: 10800 },
+    { label: 'Apr', value: 11200 },
+    { label: 'May', value: 12500 },
+  ];
+
+  const campaignsByNicheData = [
+    { label: 'Fashion', value: 3, color: 'bg-gradient-to-r from-pink-500 to-rose-600' },
+    { label: 'Tech', value: 2, color: 'bg-gradient-to-r from-blue-500 to-indigo-600' },
+    { label: 'Lifestyle', value: 2, color: 'bg-gradient-to-r from-purple-500 to-violet-600' },
+    { label: 'Beauty', value: 1, color: 'bg-gradient-to-r from-green-500 to-emerald-600' },
+  ];
+
+  const platformDistributionData = [
+    { label: 'Instagram', value: 45 },
+    { label: 'TikTok', value: 30 },
+    { label: 'YouTube', value: 25 },
+  ];
+
   return (
     <div className="space-y-10 page-transition">
       {/* Enhanced Header */}
@@ -262,6 +293,39 @@ const BrandDashboard = () => {
           </div>
         </div>
       )}
+
+      {/* Charts Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <LineChart
+          data={campaignPerformanceData}
+          title="Campaign ROI Performance"
+          subtitle="Return on investment over time"
+          showTrend={true}
+          trendValue={5.2}
+        />
+        
+        <LineChart
+          data={spendingData}
+          title="Monthly Spending"
+          subtitle="Campaign budget allocation"
+          showTrend={true}
+          trendValue={15.3}
+        />
+        
+        <BarChart
+          data={campaignsByNicheData}
+          title="Campaigns by Niche"
+          subtitle="Distribution across content categories"
+        />
+        
+        <DonutChart
+          data={platformDistributionData}
+          title="Platform Distribution"
+          subtitle="Campaign reach by platform"
+          centerValue="100%"
+          centerLabel="Coverage"
+        />
+      </div>
       
       {/* Enhanced Active Campaigns */}
       <div className="card-modern">
