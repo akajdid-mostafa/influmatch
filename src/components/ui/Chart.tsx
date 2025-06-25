@@ -182,12 +182,12 @@ export const DonutChart: React.FC<DonutChartProps> = ({
   let cumulativePercentage = 0;
 
   const colors = [
-    'from-purple-500 to-purple-600',
-    'from-pink-500 to-pink-600',
-    'from-blue-500 to-blue-600',
-    'from-green-500 to-green-600',
-    'from-yellow-500 to-yellow-600',
-    'from-red-500 to-red-600',
+    '#8B5CF6',
+    '#EC4899',
+    '#3B82F6',
+    '#10B981',
+    '#F59E0B',
+    '#EF4444',
   ];
 
   return (
@@ -221,7 +221,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
                   cy="21"
                   r="15.915"
                   fill="transparent"
-                  stroke={`url(#gradient-${index})`}
+                  stroke={colors[index % colors.length]}
                   strokeWidth="3"
                   strokeDasharray={strokeDasharray}
                   strokeDashoffset={strokeDashoffset}
@@ -230,16 +230,6 @@ export const DonutChart: React.FC<DonutChartProps> = ({
                 />
               );
             })}
-            
-            {/* Gradient definitions */}
-            <defs>
-              {colors.map((color, index) => (
-                <linearGradient key={index} id={`gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor={color.split(' ')[0].replace('from-', '#')} />
-                  <stop offset="100%" stopColor={color.split(' ')[2].replace('to-', '#')} />
-                </linearGradient>
-              ))}
-            </defs>
           </svg>
           
           {centerValue && (
@@ -253,7 +243,10 @@ export const DonutChart: React.FC<DonutChartProps> = ({
         <div className="flex-1 space-y-3">
           {data.map((item, index) => (
             <div key={index} className="flex items-center space-x-3">
-              <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${colors[index % colors.length]}`} />
+              <div 
+                className="w-3 h-3 rounded-full" 
+                style={{ backgroundColor: colors[index % colors.length] }}
+              />
               <span className="text-sm font-medium text-gray-700 flex-1">{item.label}</span>
               <span className="text-sm font-bold text-gray-900">
                 {((item.value / total) * 100).toFixed(1)}%
