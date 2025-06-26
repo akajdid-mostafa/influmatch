@@ -121,7 +121,8 @@ const BrandDashboard = () => {
             },
             engagementRate: 4.3, // Estimated based on typical engagement
             averageRating: 4.6
-          }
+          },
+          
         ];
         
         setStats(mockStats);
