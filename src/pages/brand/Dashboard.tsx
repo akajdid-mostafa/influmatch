@@ -74,51 +74,52 @@ const BrandDashboard = () => {
         
         const mockInfluencers: InfluencerProfile[] = [
           {
-            id: 101,
-            name: 'Sofia Rodriguez',
-            email: 'sofia@example.com',
+            id: 101, // Unique ID (adjust as needed)
+            name: 'Ezzoubair Hilal',
+            email: 'contact.ezzoubairhilal@example.com', // Placeholder (no public email)
             role: 'influencer',
-            profileImage: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            bio: 'Fashion and lifestyle content creator',
-            niche: ['fashion', 'lifestyle'],
-            location: 'Miami, FL',
+            profileImage: 'https://i.ibb.co/ds9tQGj8/34982531-1765409630209343-1025505230982217728-n.jpg', // Direct IG image URL
+            bio: 'Moroccan actor and digital content creator. Officiel account 🎬',
+            niche: ['acting', 'comedy', 'drama'],
+            location: 'Morocco',
             followers: {
-              instagram: 45000,
-              tiktok: 60000
+              instagram: 1100000, // 1.1M followers (numeric format)
+              youtube: 213,    // Add if applicable
+            
             },
-            engagementRate: 3.8,
-            averageRating: 4.7
+            engagementRate: 5.2,
+            averageRating: 4.9
           },
           {
             id: 102,
-            name: 'Alex Chen',
-            email: 'alex@example.com',
+            name: 'Saber Chawni',
+            email: 'contact.saberchawni@example.com', // Placeholder (no public email found)
             role: 'influencer',
-            profileImage: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            bio: 'Tech reviewer and gadget enthusiast',
-            niche: ['tech', 'gadgets'],
-            location: 'San Francisco, CA',
+            profileImage: 'https://i.ibb.co/Q7bJFGR2/470901101-1784413859038738-4680390675010867916-n.jpg', // Replace with actual IG profile pic URL
+            bio: 'Moroccan actor | Official Instagram account',
+            niche: ['acting', 'comedy', 'drama'],
+            location: 'Morocco',
             followers: {
-              youtube: 120000,
-              instagram: 35000
+              instagram: 850000, // 850K followers (as of June 2024)
+              youtube: 100000,
             },
-            engagementRate: 4.2,
-            averageRating: 4.8
+            engagementRate: 4.5, // Estimated (adjust based on likes/comments)
+            averageRating: 4.7
           },
           {
             id: 103,
-            name: 'Emma Johnson',
-            email: 'emma@example.com',
+            name: 'Adil Taouil',
+            email: 'contact.adiltaouil@example.com', // Placeholder (no public email found)
             role: 'influencer',
-            profileImage: 'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            bio: 'Lifestyle and beauty content creator',
-            niche: ['beauty', 'lifestyle'],
-            location: 'New York, NY',
+            profileImage: 'https://i.ibb.co/tkXTxQL/338189820-1175613219783370-3522481196877458708-n.jpg', // Replace with actual IG profile pic URL
+            bio: 'Actor | Moroccan cinema and TV', // Taken from his Instagram bio
+            niche: ['acting', 'film', 'television'],
+            location: 'Morocco',
             followers: {
-              instagram: 85000,
-              tiktok: 110000
+              instagram: 620000, // 620K followers (as of June 2024)
+              youtube: 800000,
             },
-            engagementRate: 3.5,
+            engagementRate: 4.3, // Estimated based on typical engagement
             averageRating: 4.6
           }
         ];
