@@ -27,7 +27,7 @@ const CampaignRequests = () => {
             },
             influencer: {
               id: 2,
-              name: 'Jane Influencer',
+              name: 'Ezzoubair Hilal',
               email: 'influencer@example.com',
               role: 'influencer'
             },
@@ -44,7 +44,7 @@ const CampaignRequests = () => {
             },
             influencer: {
               id: 2,
-              name: 'Jane Influencer',
+              name: 'Ezzoubair Hilal',
               email: 'influencer@example.com',
               role: 'influencer'
             },
@@ -61,7 +61,7 @@ const CampaignRequests = () => {
             },
             influencer: {
               id: 2,
-              name: 'Jane Influencer',
+              name: 'Ezzoubair Hilal',
               email: 'influencer@example.com',
               role: 'influencer'
             },

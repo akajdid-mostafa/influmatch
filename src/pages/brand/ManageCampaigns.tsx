@@ -23,7 +23,7 @@ const ManageCampaigns = () => {
             id: '1',
             title: 'Summer Collection Launch',
             description: 'Promote our new summer collection with creative posts',
-            brand: { id: 1, name: 'Acme Brand', email: 'brand@example.com', role: 'brand' },
+            brand: { id: 1, name: 'Samsung Brand', email: 'brand@example.com', role: 'brand' },
             budget: { min: 500, max: 1500, currency: 'USD' },
             requirements: {
               niches: ['fashion', 'lifestyle'],
@@ -42,7 +42,7 @@ const ManageCampaigns = () => {
             id: '2',
             title: 'Tech Product Review',
             description: 'Looking for tech influencers to review our new gadget',
-            brand: { id: 1, name: 'Acme Brand', email: 'brand@example.com', role: 'brand' },
+            brand: { id: 1, name: 'SAmsung Brand', email: 'brand@example.com', role: 'brand' },
             budget: { min: 800, max: 2000, currency: 'USD' },
             requirements: {
               niches: ['tech', 'gadgets'],
@@ -61,7 +61,7 @@ const ManageCampaigns = () => {
             id: '3',
             title: 'Fitness App Promotion',
             description: 'Showcase our fitness app features through workout videos',
-            brand: { id: 1, name: 'Acme Brand', email: 'brand@example.com', role: 'brand' },
+            brand: { id: 1, name: 'Samsung Brand', email: 'brand@example.com', role: 'brand' },
             budget: { min: 300, max: 1000, currency: 'USD' },
             requirements: {
               niches: ['fitness', 'health'],

@@ -21,17 +21,17 @@ const UserManagement = () => {
         const mockUsers: UserType[] = [
           {
             id: 1,
-            name: 'Acme Brand',
+            name: 'Samsung Brand',
             email: 'brand@example.com',
             role: 'brand',
             profileImage: 'https://images.pexels.com/photos/5412270/pexels-photo-5412270.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
           },
           {
             id: 2,
-            name: 'Jane Influencer',
+            name: 'Ezzoubair Hilal',
             email: 'influencer@example.com',
             role: 'influencer',
-            profileImage: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            profileImage: 'https://i.ibb.co/ds9tQGj8/34982531-1765409630209343-1025505230982217728-n.jpg'
           },
           {
             id: 3,

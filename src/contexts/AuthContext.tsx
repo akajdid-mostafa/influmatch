@@ -35,8 +35,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (email && password) {
         // Demo users for testing
         const users = {
-          'brand@example.com': { id: 1, name: 'Acme Brand', email, role: 'brand' },
-          'influencer@example.com': { id: 2, name: 'Jane Influencer', email, role: 'influencer' },
+          'brand@example.com': { id: 1, name: 'SAmsung Brand', email, role: 'brand' },
+          'influencer@example.com': { id: 2, name: 'Ezzoubair Hilal', email, role: 'influencer' },
           'admin@example.com': { id: 3, name: 'Admin User', email, role: 'admin' }
         };
 

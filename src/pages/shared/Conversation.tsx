@@ -35,8 +35,8 @@ const Conversation = () => {
         const mockConversation: ConversationType = {
           id: conversationId || '1',
           participants: [
-            { id: 1, name: 'Acme Brand', email: 'brand@example.com', role: 'brand' },
-            { id: 2, name: 'Jane Influencer', email: 'influencer@example.com', role: 'influencer' }
+            { id: 1, name: 'Samsung Brand', email: 'brand@example.com', role: 'brand' },
+            { id: 2, name: 'Ezzoubair Hilal', email: 'influencer@example.com', role: 'influencer' }
           ],
           unreadCount: 0,
           updatedAt: new Date().toISOString()
@@ -48,7 +48,7 @@ const Conversation = () => {
             id: '1',
             conversationId: conversationId || '1',
             senderId: 1,
-            content: 'Hi Jane, we would love to work with you on our summer campaign!',
+            content: 'Hi Hilal, we would love to work with you on our summer campaign!',
             timestamp: new Date(Date.now() - 3600000 * 24).toISOString(), // 1 day ago
             read: true
           },

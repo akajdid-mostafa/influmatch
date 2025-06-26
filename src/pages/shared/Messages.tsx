@@ -25,13 +25,13 @@ const Messages = () => {
             participants: [
               {
                 id: 1,
-                name: 'Acme Brand',
+                name: 'Samsung Brand',
                 email: 'brand@example.com',
                 role: 'brand',
               },
               {
                 id: 2,
-                name: 'Jane Influencer',
+                name: 'Ezzoubair Hilal',
                 email: 'influencer@example.com',
                 role: 'influencer',
               },
@@ -41,7 +41,7 @@ const Messages = () => {
               conversationId: '1',
               senderId: 1,
               content:
-                'Hi Jane, we would love to work with you on our summer campaign!',
+                'Hi Hilal, we would love to work with you on our summer campaign!',
               timestamp: new Date(Date.now() - 3600000).toISOString(), // 1 hour ago
               read: false,
             },
@@ -53,7 +53,7 @@ const Messages = () => {
             participants: [
               {
                 id: 1,
-                name: 'Acme Brand',
+                name: 'Samsung Brand',
                 email: 'brand@example.com',
                 role: 'brand',
               },
@@ -87,7 +87,7 @@ const Messages = () => {
               },
               {
                 id: 2,
-                name: 'Jane Influencer',
+                name: 'Ezzoubair Hilal',
                 email: 'influencer@example.com',
                 role: 'influencer',
               },

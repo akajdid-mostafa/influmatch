@@ -36,7 +36,7 @@ const BrandDashboard = () => {
             id: '1',
             title: 'Summer Collection Launch',
             description: 'Promote our new summer collection with creative posts',
-            brand: { id: 1, name: 'Acme Brand', email: 'brand@example.com', role: 'brand' },
+            brand: { id: 1, name: 'Samsung', email: 'brand@example.com', role: 'brand' },
             budget: { min: 500, max: 1500, currency: 'USD' },
             requirements: {
               niches: ['fashion', 'lifestyle'],
@@ -55,7 +55,7 @@ const BrandDashboard = () => {
             id: '2',
             title: 'Product Review Campaign',
             description: 'Honest reviews of our new tech gadget',
-            brand: { id: 1, name: 'Acme Brand', email: 'brand@example.com', role: 'brand' },
+            brand: { id: 1, name: 'Samsung Brand', email: 'brand@example.com', role: 'brand' },
             budget: { min: 300, max: 800, currency: 'USD' },
             requirements: {
               niches: ['tech', 'gadgets'],

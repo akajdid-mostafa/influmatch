@@ -41,10 +41,10 @@ const EditProfile = () => {
         // Mock profile data
         const mockProfile: InfluencerProfile = {
           id: 2,
-          name: 'Jane Influencer',
+          name: 'Ezzoubair Hilal',
           email: 'influencer@example.com',
           role: 'influencer',
-          profileImage: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          profileImage: 'https://i.ibb.co/ds9tQGj8/34982531-1765409630209343-1025505230982217728-n.jpg',
           bio: 'Lifestyle and fashion content creator passionate about sustainable fashion and mindful living.',
           niche: ['fashion', 'lifestyle', 'sustainability'],
           location: 'Los Angeles, CA',

@@ -43,7 +43,7 @@ const InfluencerDashboard = () => {
             },
             influencer: {
               id: 2,
-              name: 'Jane Influencer',
+              name: 'Ezzoubair Hilal',
               email: 'influencer@example.com',
               role: 'influencer'
             },
@@ -60,7 +60,7 @@ const InfluencerDashboard = () => {
             },
             influencer: {
               id: 2,
-              name: 'Jane Influencer',
+              name: 'Ezzoubair Hilal',
               email: 'influencer@example.com',
               role: 'influencer'
             },
