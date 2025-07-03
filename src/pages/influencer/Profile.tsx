@@ -6,7 +6,7 @@ import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { InfluencerProfile, CampaignReference } from '../../types';
 
 const Profile = () => {
-  const { user } = useAuth();
+  useAuth();
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<InfluencerProfile | null>(null);
   const [previousWork, setPreviousWork] = useState<CampaignReference[]>([]);
@@ -173,7 +173,7 @@ const Profile = () => {
                 <span className="ml-2 text-sm font-medium text-gray-500">Total Followers</span>
               </div>
               <p className="mt-2 text-2xl font-semibold text-gray-900">
-                {Object.values(profile.followers || {}).reduce((a, b) => a + b, 0).toLocaleString()}
+                {Object.values(profile.followers || {}).reduce((a, b) => Number(a) + Number(b), 0).toLocaleString()}
               </p>
             </div>
             <div className="p-4 bg-green-50 rounded-lg">

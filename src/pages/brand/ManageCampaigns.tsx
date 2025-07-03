@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { Filter, Search, Edit, Trash2, CheckCircle, XCircle, AlertCircle, Sparkles, Target, BarChart3, Zap } from 'lucide-react';
+import { Filter, Search, Edit, Trash2, CheckCircle, XCircle, AlertCircle, Sparkles, Target, BarChart3 } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { Campaign } from '../../types';
 
 const ManageCampaigns = () => {
-  const { user } = useAuth();
+  useAuth();
   const [loading, setLoading] = useState(true);
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [searchTerm, setSearchTerm] = useState('');

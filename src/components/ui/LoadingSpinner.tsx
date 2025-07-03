@@ -10,11 +10,6 @@ const LoadingSpinner = ({ size = 'md', color = 'primary' }: LoadingSpinnerProps)
     lg: 'w-12 h-12',
   };
 
-  const colorClasses = {
-    primary: 'text-purple-600',
-    secondary: 'text-teal-500',
-    white: 'text-white',
-  };
 
   return (
     <div className="flex justify-center items-center">

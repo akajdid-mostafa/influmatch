@@ -70,7 +70,7 @@ export interface Campaign {
     endDate: string;
     submissionDeadline?: string;
   };
-  status: 'draft' | 'open' | 'in-progress' | 'completed' | 'cancelled' | 'pending-approval';
+  status: 'draft' | 'open' | 'in-progress' | 'completed' | 'cancelled' | 'pending-approval' | 'rejected';
   applications?: CampaignApplication[];
   collaborators?: InfluencerProfile[];
   content?: {

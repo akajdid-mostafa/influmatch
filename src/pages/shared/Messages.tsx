@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Search, MessageSquare, User, Sparkles } from 'lucide-react';
+import { Search, MessageSquare, User } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { Conversation } from '../../types';
 

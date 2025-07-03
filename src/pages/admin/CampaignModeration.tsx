@@ -5,7 +5,7 @@ import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { Campaign } from '../../types';
 
 const CampaignModeration = () => {
-  const { user } = useAuth();
+  useAuth();
   const [loading, setLoading] = useState(true);
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [searchTerm, setSearchTerm] = useState('');

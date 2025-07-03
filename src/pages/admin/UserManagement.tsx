@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { Search, Filter, User, ShoppingBag, Shield, MoreVertical, Ban } from 'lucide-react';
+import { Search, Filter, User, ShoppingBag, Shield, MoreVertical } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { User as UserType } from '../../types';
 
 const UserManagement = () => {
-  const { user } = useAuth();
+  useAuth();
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<UserType[]>([]);
   const [searchTerm, setSearchTerm] = useState('');

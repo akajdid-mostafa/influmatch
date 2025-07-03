@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { 
   Users, Briefcase, MessageSquare, DollarSign, 
-  TrendingUp, ArrowUp, ArrowDown, User, ShoppingBag,
+  TrendingUp, ArrowUp, User, ShoppingBag,
   Sparkles, Zap, Star, Award, Activity, BarChart3
 } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';

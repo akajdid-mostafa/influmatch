@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { PlusCircle, TrendingUp, Users, DollarSign, BarChart2, Star, ArrowUp, Zap, Target, Award } from 'lucide-react';
+import { PlusCircle, TrendingUp, Users, DollarSign, BarChart2, Star, ArrowUp, Target, Award } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { LineChart, BarChart, DonutChart } from '../../components/ui/Chart';
 import { BrandStats, Campaign, InfluencerProfile } from '../../types';
 
 const BrandDashboard = () => {
-  const { user } = useAuth();
+  useAuth();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<BrandStats | null>(null);
   const [activeCampaigns, setActiveCampaigns] = useState<Campaign[]>([]);
@@ -474,7 +474,7 @@ const BrandDashboard = () => {
                     <div className="flex items-center text-gray-500">
                       <Users className="h-4 w-4 mr-2" />
                       <span className="font-semibold">
-                        {Object.values(influencer.followers || {}).reduce((a, b) => a + b, 0).toLocaleString()} abonnés
+                        {Object.values(influencer.followers || {}).reduce((a, b) => Number(a) + Number(b), 0).toLocaleString()} abonnés
                       </span>
                     </div>
                     <div className="flex items-center text-gray-500">

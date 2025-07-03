@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Star, TrendingUp, DollarSign, Activity, Users, CheckCircle, XCircle, Sparkles, Zap, Award, Target, BarChart3 } from 'lucide-react';
+import { Star, TrendingUp, DollarSign, Activity, Users, CheckCircle, XCircle, Zap, Award, Target, BarChart3 } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { InfluencerStats, Campaign, CampaignApplication } from '../../types';
 
 const InfluencerDashboard = () => {
-  const { user } = useAuth();
+  useAuth();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<InfluencerStats | null>(null);
   const [pendingRequests, setPendingRequests] = useState<CampaignApplication[]>([]);

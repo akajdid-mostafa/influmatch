@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import {
   Search,
-  Filter,
   Star,
   Users,
   MessageSquare,
   Instagram,
   Youtube,
   GitBranch as BrandTiktok,
-  Sparkles,
   Target,
   Award,
 } from "lucide-react";
@@ -17,7 +15,7 @@ import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import { InfluencerProfile } from "../../types";
 
 const FindInfluencers = () => {
-  const { user } = useAuth();
+  useAuth();
   const [loading, setLoading] = useState(true);
   const [influencers, setInfluencers] = useState<InfluencerProfile[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -236,7 +234,7 @@ const FindInfluencers = () => {
     const matchesFollowers =
       !minFollowers ||
       Object.values(influencer.followers || {}).some(
-        (count) => count >= parseInt(minFollowers)
+        (count) => Number(count) >= parseInt(minFollowers)
       );
 
     return (
@@ -418,7 +416,7 @@ const FindInfluencers = () => {
                       <Users className="h-4 w-4 mr-2" />
                       <span className="font-bold">
                         {Object.values(influencer.followers || {})
-                          .reduce((a, b) => a + b, 0)
+                          .reduce((a, b) => Number(a) + Number(b), 0)
                           .toLocaleString()}{" "}
                         abonnés
                       </span>
@@ -438,9 +436,9 @@ const FindInfluencers = () => {
                           className="bg-gray-50 p-2 rounded-xl text-center"
                         >
                           <p className="font-bold text-gray-900">
-                            {count >= 1000000 
-                              ? `${(count / 1000000).toFixed(1)}M`
-                              : `${(count / 1000).toFixed(0)}K`}
+                            {Number(count) >= 1000000 
+                              ? `${(Number(count) / 1000000).toFixed(1)}M`
+                              : `${(Number(count) / 1000).toFixed(0)}K`}
                           </p>
                           <p className="text-gray-500 capitalize">{platform}</p>
                         </div>

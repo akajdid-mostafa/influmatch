@@ -124,7 +124,7 @@ interface BarChartProps {
   height?: number;
 }
 
-export const BarChart: React.FC<BarChartProps> = ({ data, title, subtitle, height = 200 }) => {
+export const BarChart: React.FC<BarChartProps> = ({ data, title, subtitle }) => {
   const maxValue = Math.max(...data.map(d => d.value));
 
   return (

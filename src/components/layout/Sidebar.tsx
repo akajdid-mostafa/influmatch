@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { 
-  Home, Users, BarChart3, MessageSquare, 
-  Settings, Search, PlusCircle, FileText,
-  Bell, LogOut, ChevronLeft, ChevronRight,
-  UserCircle, ShoppingBag, Briefcase, Sparkles,
-  Zap, TrendingUp
+  Home, Users, 
+  Search, PlusCircle, FileText,
+  LogOut, ChevronLeft, ChevronRight,
+  UserCircle, Briefcase, Sparkles, MessageSquare
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -35,7 +34,7 @@ const Sidebar = () => {
   ];
 
   // Determine which links to show based on user role
-  let navLinks;
+  let navLinks: { to: string; icon: JSX.Element; label: string; gradient: string }[];
   if (user.role === 'brand') {
     navLinks = brandLinks;
   } else if (user.role === 'influencer') {

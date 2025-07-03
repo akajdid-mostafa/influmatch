@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { ArrowLeft, Send, Image, Paperclip, User, Sparkles } from 'lucide-react';
+import { ArrowLeft, Send, Image, Paperclip, User } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { Conversation as ConversationType, Message } from '../../types';
 

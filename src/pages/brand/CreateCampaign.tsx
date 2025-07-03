@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Calendar, DollarSign, Users, Target, FileText, Globe, Instagram, Youtube, GitBranch as TikTok, Sparkles, Zap, Star, Award } from 'lucide-react';
+import { DollarSign, Users, Target, Instagram, Youtube, GitBranch as TikTok, Sparkles, Zap, Star, Award } from 'lucide-react';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
 const CreateCampaign = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState(1);
   

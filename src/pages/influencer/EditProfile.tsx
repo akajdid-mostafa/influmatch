@@ -8,7 +8,7 @@ import { InfluencerProfile } from '../../types';
 
 const EditProfile = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  useAuth();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [profile, setProfile] = useState<InfluencerProfile | null>(null);
