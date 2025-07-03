@@ -18,21 +18,21 @@ const Messages = () => {
         // In a real app, this would be an actual API call
         await new Promise((resolve) => setTimeout(resolve, 800)); // Simulate network delay
 
-        // Mock data for demo purposes
+        // Mock data for demo purposes - Updated for Moroccan market
         const mockConversations: Conversation[] = [
           {
             id: '1',
             participants: [
               {
                 id: 1,
-                name: 'Samsung Brand',
-                email: 'brand@example.com',
+                name: 'Marjane Market',
+                email: 'marque@example.com',
                 role: 'brand',
               },
               {
                 id: 2,
-                name: 'Ezzoubair Hilal',
-                email: 'influencer@example.com',
+                name: 'Saad Lamjarred',
+                email: 'influenceur@example.com',
                 role: 'influencer',
               },
             ],
@@ -41,7 +41,7 @@ const Messages = () => {
               conversationId: '1',
               senderId: 1,
               content:
-                'Hi Hilal, we would love to work with you on our summer campaign!',
+                'Bonjour Saad, nous aimerions collaborer avec vous pour notre campagne Ramadan !',
               timestamp: new Date(Date.now() - 3600000).toISOString(), // 1 hour ago
               read: false,
             },
@@ -53,14 +53,14 @@ const Messages = () => {
             participants: [
               {
                 id: 1,
-                name: 'Samsung Brand',
-                email: 'brand@example.com',
+                name: 'Argan d\'Or',
+                email: 'contact@argandor.ma',
                 role: 'brand',
               },
               {
                 id: 3,
-                name: 'John Creator',
-                email: 'john@example.com',
+                name: 'Dounia Batma',
+                email: 'dounia@example.com',
                 role: 'influencer',
               },
             ],
@@ -69,7 +69,7 @@ const Messages = () => {
               conversationId: '2',
               senderId: 3,
               content:
-                'Thanks for your offer, Ive reviewed the campaign details and Im interested.',
+                'Merci pour votre offre, j\'ai examiné les détails de la campagne et je suis intéressée.',
               timestamp: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
               read: true,
             },
@@ -81,14 +81,14 @@ const Messages = () => {
             participants: [
               {
                 id: 4,
-                name: 'Tech Brand',
-                email: 'tech@example.com',
+                name: 'Atlas Telecom',
+                email: 'marketing@atlastelecom.ma',
                 role: 'brand',
               },
               {
                 id: 2,
-                name: 'Ezzoubair Hilal',
-                email: 'influencer@example.com',
+                name: 'Saad Lamjarred',
+                email: 'influenceur@example.com',
                 role: 'influencer',
               },
             ],
@@ -97,7 +97,7 @@ const Messages = () => {
               conversationId: '3',
               senderId: 2,
               content:
-                "I've just posted the review of your product, here's the link to check it out.",
+                "Je viens de publier la review de votre nouveau service, voici le lien pour le consulter.",
               timestamp: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
               read: true,
             },
@@ -122,16 +122,16 @@ const Messages = () => {
     const now = new Date();
     const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / 60000);
 
-    if (diffInMinutes < 1) return 'Just now';
-    if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
+    if (diffInMinutes < 1) return 'À l\'instant';
+    if (diffInMinutes < 60) return `Il y a ${diffInMinutes}m`;
 
     const diffInHours = Math.floor(diffInMinutes / 60);
-    if (diffInHours < 24) return `${diffInHours}h ago`;
+    if (diffInHours < 24) return `Il y a ${diffInHours}h`;
 
     const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) return `${diffInDays}d ago`;
+    if (diffInDays < 7) return `Il y a ${diffInDays}j`;
 
-    return date.toLocaleDateString();
+    return date.toLocaleDateString('fr-FR');
   };
 
   // Filter conversations based on search term
@@ -175,7 +175,7 @@ const Messages = () => {
               <h1 className="text-4xl font-bold text-gray-900 text-shadow">
                 <span className="text-gradient">Messages</span>
               </h1>
-              <p className="text-gray-600 mt-2 text-lg">Connect and collaborate with your partners</p>
+              <p className="text-gray-600 mt-2 text-lg">Connectez-vous et collaborez avec vos partenaires</p>
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@ const Messages = () => {
             <input
               type="text"
               className="w-full pl-14 pr-4 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
-              placeholder="Search conversations..."
+              placeholder="Rechercher des conversations..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -205,11 +205,11 @@ const Messages = () => {
               </div>
               <p className="text-gray-500 text-xl font-semibold">
                 {searchTerm
-                  ? 'No conversations found matching your search.'
-                  : 'No conversations yet.'}
+                  ? 'Aucune conversation trouvée correspondant à votre recherche.'
+                  : 'Aucune conversation pour le moment.'}
               </p>
               <p className="text-gray-400 mt-2">
-                Start connecting with brands and influencers to begin collaborating!
+                Commencez à vous connecter avec des marques et des influenceurs pour commencer à collaborer !
               </p>
             </div>
           ) : (
@@ -269,7 +269,7 @@ const Messages = () => {
                               ? 'bg-gradient-to-r from-purple-100 to-indigo-100 text-purple-800'
                               : 'bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800'
                           }`}>
-                            {otherParticipant?.role === 'brand' ? '🏢 Brand' : '⭐ Creator'}
+                            {otherParticipant?.role === 'brand' ? '🏢 Marque' : '⭐ Créateur'}
                           </span>
                         </div>
                       </div>

@@ -14,6 +14,9 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   
+  // Form focus states
+  const [focusedFields, setFocusedFields] = useState<Record<string, boolean>>({});
+  
   // Common fields
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -38,19 +41,27 @@ const Register = () => {
     if (user.role === 'admin') return <Navigate to="/admin/dashboard" />;
   }
 
+  const handleFocus = (fieldName: string) => {
+    setFocusedFields(prev => ({ ...prev, [fieldName]: true }));
+  };
+
+  const handleBlur = (fieldName: string) => {
+    setFocusedFields(prev => ({ ...prev, [fieldName]: false }));
+  };
+
   const validateStep1 = () => {
     if (!name || !email || !password || !confirmPassword) {
-      toast.error('Please fill in all required fields');
+      toast.error('Veuillez remplir tous les champs obligatoires');
       return false;
     }
     
     if (password !== confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error('Les mots de passe ne correspondent pas');
       return false;
     }
     
     if (password.length < 6) {
-      toast.error('Password must be at least 6 characters');
+      toast.error('Le mot de passe doit contenir au moins 6 caractères');
       return false;
     }
     
@@ -77,12 +88,12 @@ const Register = () => {
     
     // Validate step 2 fields based on role
     if (activeRole === 'brand' && !industry) {
-      toast.error('Please select your industry');
+      toast.error('Veuillez sélectionner votre secteur d\'activité');
       return;
     }
     
     if (activeRole === 'influencer' && (!niche || !instagramHandle)) {
-      toast.error('Please fill in all required fields');
+      toast.error('Veuillez remplir tous les champs obligatoires');
       return;
     }
     
@@ -102,17 +113,50 @@ const Register = () => {
       const result = await register(userData);
       
       if (!result.success) {
-        toast.error(result.error || 'Registration failed');
+        toast.error(result.error || 'Échec de l\'inscription');
       } else {
-        toast.success('Registration successful!');
+        toast.success('Inscription réussie !');
       }
     } catch (error) {
-      toast.error('An unexpected error occurred');
+      toast.error('Une erreur inattendue s\'est produite');
       console.error(error);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const moroccanIndustries = [
+    'Mode et Textile',
+    'Beauté et Cosmétiques',
+    'Fitness et Santé',
+    'Alimentation et Boissons',
+    'Technologie',
+    'Voyage et Tourisme',
+    'Jeux et Divertissement',
+    'Artisanat Marocain',
+    'Immobilier',
+    'Automobile',
+    'Autre'
+  ];
+
+  const moroccanNiches = [
+    'Mode',
+    'Beauté',
+    'Lifestyle',
+    'Tech',
+    'Gaming',
+    'Cuisine Marocaine',
+    'Voyage',
+    'Fitness',
+    'Business',
+    'Art et Artisanat',
+    'Éducation',
+    'Divertissement',
+    'Santé',
+    'Parentalité',
+    'Culture Marocaine',
+    'Autre'
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -130,10 +174,10 @@ const Register = () => {
           </div>
         </div>
         <h2 className="text-center text-4xl font-extrabold text-gray-900 text-shadow">
-          Join <span className="text-gradient">InfluMatch</span>
+          Rejoignez <span className="text-gradient">InfluMaroc</span>
         </h2>
         <p className="mt-4 text-center text-lg text-gray-600">
-          Create your account and start collaborating
+          Créez votre compte et commencez à collaborer
         </p>
         <div className="mt-4 flex justify-center space-x-2">
           <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></div>
@@ -146,7 +190,7 @@ const Register = () => {
         <div className="form-modern">
           {/* Enhanced Role Selection */}
           <div className="mb-8">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 text-center">Choose your role</h3>
+            <h3 className="text-lg font-bold text-gray-900 mb-6 text-center">Choisissez votre rôle</h3>
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
@@ -167,9 +211,9 @@ const Register = () => {
                 <span className={`font-semibold transition-colors ${
                   activeRole === 'influencer' ? 'text-gradient' : 'text-gray-700 group-hover:text-gray-900'
                 }`}>
-                  I'm a Creator
+                  Je suis Créateur
                 </span>
-                <span className="text-xs text-gray-500 mt-1 text-center">Share content & earn money</span>
+                <span className="text-xs text-gray-500 mt-1 text-center">Partager du contenu & gagner de l'argent</span>
                 {activeRole === 'influencer' && (
                   <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center">
                     <Zap size={14} className="text-white" />
@@ -196,9 +240,9 @@ const Register = () => {
                 <span className={`font-semibold transition-colors ${
                   activeRole === 'brand' ? 'text-gradient' : 'text-gray-700 group-hover:text-gray-900'
                 }`}>
-                  I'm a Brand
+                  Je suis une Marque
                 </span>
-                <span className="text-xs text-gray-500 mt-1 text-center">Find creators & launch campaigns</span>
+                <span className="text-xs text-gray-500 mt-1 text-center">Trouver des créateurs & lancer des campagnes</span>
                 {activeRole === 'brand' && (
                   <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center">
                     <Zap size={14} className="text-white" />
@@ -212,7 +256,7 @@ const Register = () => {
           <form className="space-y-8" onSubmit={handleSubmit}>
             {step === 1 ? (
               <>
-                <div className="floating-label">
+                <div className="relative">
                   <input
                     id="name"
                     name="name"
@@ -220,15 +264,24 @@ const Register = () => {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="input-modern"
+                    onFocus={() => handleFocus('name')}
+                    onBlur={() => handleBlur('name')}
+                    className="input-modern peer"
                     placeholder=" "
                   />
-                  <label htmlFor="name">
-                    {activeRole === 'brand' ? 'Company Name' : 'Full Name'} <span className="text-red-500">*</span>
+                  <label 
+                    htmlFor="name"
+                    className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                      focusedFields.name || name 
+                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                        : 'top-4 text-gray-500'
+                    }`}
+                  >
+                    {activeRole === 'brand' ? 'Nom de l\'entreprise' : 'Nom complet'} <span className="text-red-500">*</span>
                   </label>
                 </div>
 
-                <div className="floating-label">
+                <div className="relative">
                   <input
                     id="email"
                     name="email"
@@ -237,13 +290,24 @@ const Register = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="input-modern"
+                    onFocus={() => handleFocus('email')}
+                    onBlur={() => handleBlur('email')}
+                    className="input-modern peer"
                     placeholder=" "
                   />
-                  <label htmlFor="email">Email address <span className="text-red-500">*</span></label>
+                  <label 
+                    htmlFor="email"
+                    className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                      focusedFields.email || email 
+                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                        : 'top-4 text-gray-500'
+                    }`}
+                  >
+                    Adresse email <span className="text-red-500">*</span>
+                  </label>
                 </div>
 
-                <div className="floating-label">
+                <div className="relative">
                   <div className="relative">
                     <input
                       id="password"
@@ -252,9 +316,21 @@ const Register = () => {
                       required
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="input-modern pr-14"
+                      onFocus={() => handleFocus('password')}
+                      onBlur={() => handleBlur('password')}
+                      className="input-modern pr-14 peer"
                       placeholder=" "
                     />
+                    <label 
+                      htmlFor="password"
+                      className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                        focusedFields.password || password 
+                          ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                          : 'top-4 text-gray-500'
+                      }`}
+                    >
+                      Mot de passe <span className="text-red-500">*</span>
+                    </label>
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
@@ -263,10 +339,9 @@ const Register = () => {
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
                   </div>
-                  <label htmlFor="password">Password <span className="text-red-500">*</span></label>
                 </div>
 
-                <div className="floating-label">
+                <div className="relative">
                   <div className="relative">
                     <input
                       id="confirmPassword"
@@ -275,9 +350,21 @@ const Register = () => {
                       required
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="input-modern pr-14"
+                      onFocus={() => handleFocus('confirmPassword')}
+                      onBlur={() => handleBlur('confirmPassword')}
+                      className="input-modern pr-14 peer"
                       placeholder=" "
                     />
+                    <label 
+                      htmlFor="confirmPassword"
+                      className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                        focusedFields.confirmPassword || confirmPassword 
+                          ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                          : 'top-4 text-gray-500'
+                      }`}
+                    >
+                      Confirmer le mot de passe <span className="text-red-500">*</span>
+                    </label>
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -286,7 +373,6 @@ const Register = () => {
                       {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
                   </div>
-                  <label htmlFor="confirmPassword">Confirm Password <span className="text-red-500">*</span></label>
                 </div>
 
                 <div>
@@ -295,7 +381,7 @@ const Register = () => {
                     onClick={handleNextStep}
                     className="btn-gradient w-full text-lg font-bold"
                   >
-                    Continue →
+                    Continuer →
                   </button>
                 </div>
               </>
@@ -304,39 +390,56 @@ const Register = () => {
                 {/* Brand-specific fields */}
                 {activeRole === 'brand' && (
                   <>
-                    <div className="floating-label">
+                    <div className="relative">
                       <input
                         id="companyWebsite"
                         name="companyWebsite"
                         type="url"
                         value={companyWebsite}
                         onChange={(e) => setCompanyWebsite(e.target.value)}
-                        className="input-modern"
+                        onFocus={() => handleFocus('companyWebsite')}
+                        onBlur={() => handleBlur('companyWebsite')}
+                        className="input-modern peer"
                         placeholder=" "
                       />
-                      <label htmlFor="companyWebsite">Company Website</label>
+                      <label 
+                        htmlFor="companyWebsite"
+                        className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                          focusedFields.companyWebsite || companyWebsite 
+                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                            : 'top-4 text-gray-500'
+                        }`}
+                      >
+                        Site web de l'entreprise
+                      </label>
                     </div>
 
-                    <div className="floating-label">
+                    <div className="relative">
                       <select
                         id="industry"
                         name="industry"
                         required
                         value={industry}
                         onChange={(e) => setIndustry(e.target.value)}
-                        className="input-modern"
+                        onFocus={() => handleFocus('industry')}
+                        onBlur={() => handleBlur('industry')}
+                        className="input-modern peer"
                       >
-                        <option value="">Select an industry</option>
-                        <option value="fashion">Fashion & Apparel</option>
-                        <option value="beauty">Beauty & Cosmetics</option>
-                        <option value="fitness">Fitness & Health</option>
-                        <option value="food">Food & Beverage</option>
-                        <option value="technology">Technology</option>
-                        <option value="travel">Travel & Lifestyle</option>
-                        <option value="gaming">Gaming & Entertainment</option>
-                        <option value="other">Other</option>
+                        <option value="">Sélectionner un secteur</option>
+                        {moroccanIndustries.map((ind) => (
+                          <option key={ind} value={ind}>{ind}</option>
+                        ))}
                       </select>
-                      <label htmlFor="industry">Industry <span className="text-red-500">*</span></label>
+                      <label 
+                        htmlFor="industry"
+                        className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                          focusedFields.industry || industry 
+                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                            : 'top-4 text-gray-500'
+                        }`}
+                      >
+                        Secteur d'activité <span className="text-red-500">*</span>
+                      </label>
                     </div>
                   </>
                 )}
@@ -344,32 +447,35 @@ const Register = () => {
                 {/* Influencer-specific fields */}
                 {activeRole === 'influencer' && (
                   <>
-                    <div className="floating-label">
+                    <div className="relative">
                       <select
                         id="niche"
                         name="niche"
                         required
                         value={niche}
                         onChange={(e) => setNiche(e.target.value)}
-                        className="input-modern"
+                        onFocus={() => handleFocus('niche')}
+                        onBlur={() => handleBlur('niche')}
+                        className="input-modern peer"
                       >
-                        <option value="">Select your niche</option>
-                        <option value="fashion">Fashion</option>
-                        <option value="beauty">Beauty</option>
-                        <option value="fitness">Fitness</option>
-                        <option value="food">Food</option>
-                        <option value="tech">Technology</option>
-                        <option value="travel">Travel</option>
-                        <option value="gaming">Gaming</option>
-                        <option value="lifestyle">Lifestyle</option>
-                        <option value="parenting">Parenting</option>
-                        <option value="business">Business</option>
-                        <option value="other">Other</option>
+                        <option value="">Sélectionner votre niche</option>
+                        {moroccanNiches.map((n) => (
+                          <option key={n} value={n}>{n}</option>
+                        ))}
                       </select>
-                      <label htmlFor="niche">Primary Niche <span className="text-red-500">*</span></label>
+                      <label 
+                        htmlFor="niche"
+                        className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                          focusedFields.niche || niche 
+                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                            : 'top-4 text-gray-500'
+                        }`}
+                      >
+                        Niche principale <span className="text-red-500">*</span>
+                      </label>
                     </div>
 
-                    <div className="floating-label">
+                    <div className="relative">
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                           <span className="text-gray-500 font-semibold">@</span>
@@ -381,14 +487,25 @@ const Register = () => {
                           required
                           value={instagramHandle}
                           onChange={(e) => setInstagramHandle(e.target.value)}
-                          className="input-modern pl-12"
+                          onFocus={() => handleFocus('instagramHandle')}
+                          onBlur={() => handleBlur('instagramHandle')}
+                          className="input-modern pl-12 peer"
                           placeholder=" "
                         />
                       </div>
-                      <label htmlFor="instagramHandle">Instagram Handle <span className="text-red-500">*</span></label>
+                      <label 
+                        htmlFor="instagramHandle"
+                        className={`absolute left-12 transition-all duration-300 pointer-events-none ${
+                          focusedFields.instagramHandle || instagramHandle 
+                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                            : 'top-4 text-gray-500'
+                        }`}
+                      >
+                        Nom d'utilisateur Instagram <span className="text-red-500">*</span>
+                      </label>
                     </div>
 
-                    <div className="floating-label">
+                    <div className="relative">
                       <input
                         id="followersCount"
                         name="followersCount"
@@ -396,10 +513,21 @@ const Register = () => {
                         min="0"
                         value={followersCount}
                         onChange={(e) => setFollowersCount(e.target.value)}
-                        className="input-modern"
+                        onFocus={() => handleFocus('followersCount')}
+                        onBlur={() => handleBlur('followersCount')}
+                        className="input-modern peer"
                         placeholder=" "
                       />
-                      <label htmlFor="followersCount">Followers Count</label>
+                      <label 
+                        htmlFor="followersCount"
+                        className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                          focusedFields.followersCount || followersCount 
+                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                            : 'top-4 text-gray-500'
+                        }`}
+                      >
+                        Nombre d'abonnés
+                      </label>
                     </div>
                   </>
                 )}
@@ -410,14 +538,14 @@ const Register = () => {
                     onClick={handleBackStep}
                     className="btn-secondary flex-1"
                   >
-                    ← Back
+                    ← Retour
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="btn-gradient flex-1 text-lg font-bold"
                   >
-                    {isSubmitting ? <LoadingSpinner size="sm" color="white" /> : '🚀 Create Account'}
+                    {isSubmitting ? <LoadingSpinner size="sm" color="white" /> : '🚀 Créer le compte'}
                   </button>
                 </div>
               </>
@@ -426,9 +554,9 @@ const Register = () => {
 
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
-              Already have an account?{' '}
+              Vous avez déjà un compte ?{' '}
               <Link to="/login" className="font-semibold text-gradient hover:opacity-80 transition-opacity">
-                Sign in
+                Se connecter
               </Link>
             </p>
           </div>

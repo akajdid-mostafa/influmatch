@@ -25,17 +25,21 @@ const FindInfluencers = () => {
   const [minFollowers, setMinFollowers] = useState("");
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
 
-  const niches = [
-    "Fashion",
-    "Beauty",
+  const moroccanNiches = [
+    "Mode",
+    "Beauté",
     "Lifestyle",
     "Tech",
     "Gaming",
-    "Food",
-    "Travel",
+    "Cuisine Marocaine",
+    "Voyage",
     "Fitness",
     "Business",
-    "Art",
+    "Art et Artisanat",
+    "Culture Marocaine",
+    "Musique",
+    "Comédie",
+    "Sport"
   ];
 
   const platforms = [
@@ -50,146 +54,137 @@ const FindInfluencers = () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 800));
 
-        // Mock data for demo purposes
+        // Mock data for Moroccan influencers
         const mockInfluencers: InfluencerProfile[] = [
           {
             id: 1,
-            name: "Ezzoubair Hilal",
-            email: "contact.ezzoubairhilal@example.com", // Placeholder (no public email)
+            name: "Saad Lamjarred",
+            email: "contact.saadlamjarred@example.com",
             role: "influencer",
-            profileImage:
-              "https://i.ibb.co/ds9tQGj8/34982531-1765409630209343-1025505230982217728-n.jpg", // Direct IG image URL
-            bio: "Moroccan actor and digital content creator. Officiel account 🎬",
-            niche: ["Gaming","Art","acting", "comedy", "drama"],
-            location: "Morocco",
+            profileImage: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            bio: "Artiste marocain international | Chanteur et compositeur 🎵",
+            niche: ["Musique", "Divertissement", "Culture Marocaine"],
+            location: "Rabat, Maroc",
             followers: {
-              instagram: 1100000, // 1.1M followers (numeric format)
-              youtube: 213, // Add if applicable
+              instagram: 8500000,
+              youtube: 12000000,
             },
-            engagementRate: 5.2,
+            engagementRate: 6.8,
             averageRating: 4.9,
           },
           {
             id: 2,
-            name: "Saber Chawni",
-            email: "contact.saberchawni@example.com", // Placeholder (no public email found)
+            name: "Dounia Batma",
+            email: "contact.douniabatma@example.com",
             role: "influencer",
-            profileImage:
-              "https://i.ibb.co/Q7bJFGR2/470901101-1784413859038738-4680390675010867916-n.jpg", // Replace with actual IG profile pic URL
-            bio: "Moroccan actor | Official Instagram account",
-            niche: ["Art","acting", "comedy", "drama"],
-            location: "Morocco",
+            profileImage: "https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            bio: "Chanteuse marocaine | Actrice | Ambassadrice de la mode 👗",
+            niche: ["Mode", "Beauté", "Musique", "Lifestyle"],
+            location: "Casablanca, Maroc",
             followers: {
-              instagram: 850000, // 850K followers (as of June 2024)
-              youtube: 100000,
+              instagram: 3200000,
+              youtube: 1800000,
             },
-            engagementRate: 4.5, // Estimated (adjust based on likes/comments)
-            averageRating: 4.7,
+            engagementRate: 5.4,
+            averageRating: 4.8,
           },
           {
             id: 3,
-            name: "Adil Taouil",
-            email: "contact.adiltaouil@example.com", // Placeholder (no public email found)
+            name: "Amine Aouni",
+            email: "contact.amineaouni@example.com",
             role: "influencer",
-            profileImage:
-              "https://i.ibb.co/tkXTxQL/338189820-1175613219783370-3522481196877458708-n.jpg", // Replace with actual IG profile pic URL
-            bio: "Actor | Moroccan cinema and TV", // Taken from his Instagram bio
-            niche: ["Gaming","Art","acting", "film", "television"],
-            location: "Morocco",
+            profileImage: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            bio: "Acteur et créateur de contenu marocain | Comédie et divertissement 😄",
+            niche: ["Comédie", "Divertissement", "Acting"],
+            location: "Casablanca, Maroc",
             followers: {
-              instagram: 620000, // 620K followers (as of June 2024)
-              youtube: 800000,
+              instagram: 870000,
+              tiktok: 1200000,
             },
-            engagementRate: 4.3, // Estimated based on typical engagement
-            averageRating: 4.6,
-          },
-          {
-            id: 4,
-            name: "Kawtar Ba-Mohamed",
-            email: "pro.kawtarbamohamed@example.com", // Professional placeholder
-            role: "influencer",
-            profileImage:
-              "https://i.ibb.co/fdjHzg1t/500451011-18507122731003234-7107786205563097504-n.jpg", // Current profile picture (June 2024)
-            bio: "Actrice & Mannequin | Ambassadrice @oramaoficial @beldilife",
-            niche: ["Art","acting", "modeling", "fashion", "television"],
-            location: "Casablanca, Morocco",
-            followers: {
-              instagram: 483000, // Exact count as of June 2024
-              youtube: 123000,
-              tiktok: 18500, // From her TikTok @kawtarbamo
-            },
-            engagementRate: 4.4, // Calculated from recent posts
+            engagementRate: 7.2,
             averageRating: 4.7,
           },
           {
-            id: 5,
-            name: "Ihsseane Benalluch",
-            email: "contact.ihssane@example.com", // Professional placeholder
+            id: 4,
+            name: "Lalla Hizia",
+            email: "contact.lallahizia@example.com",
             role: "influencer",
-            profileImage:
-              "https://i.ibb.co/q36VGH89/445441580-818255259769517-2515515582938972623-n.jpg", // Current profile picture (June 2024)
-            bio: "Actress | Model | Moroccan cinema & TV",
-            niche: ["Art","acting", "modeling", "fashion", "television"],
-            location: "Casablanca, Morocco",
+            profileImage: "https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            bio: "Chef cuisinière spécialisée en cuisine marocaine traditionnelle 🍽️",
+            niche: ["Cuisine Marocaine", "Lifestyle", "Culture Marocaine"],
+            location: "Fès, Maroc",
             followers: {
-              instagram: 1250000, // 1.25M followers (June 2024)
-              youtube: 1250000,
+              instagram: 450000,
+              youtube: 680000,
+              tiktok: 320000,
             },
-            engagementRate: 4.8, // Calculated from recent posts
+            engagementRate: 8.1,
             averageRating: 4.9,
           },
           {
-            id: 108,
-            name: "Farouk Life",
-            email: "contact.farouklife@example.com", // Professional placeholder
+            id: 5,
+            name: "Youssef Hajji",
+            email: "contact.youssefhajji@example.com",
             role: "influencer",
-            profileImage:
-              "https://i.ibb.co/fzC2B7Xx/317745171-640194321223626-2513296489928677233-n.jpg", // Replace with actual URL
-            bio: "Actor | Content Creator | Official Instagram",
-            niche: ["acting", "comedy", "sketches", "social media"],
-            location: "Morocco",
+            profileImage: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            bio: "Entrepreneur tech marocain | Fondateur de startups | Innovation 💡",
+            niche: ["Tech", "Business", "Innovation"],
+            location: "Rabat, Maroc",
             followers: {
-              instagram: 2300000, // 2.3M followers (June 2024)
-              youtube: 150000, // 150K subscribers (if applicable)
-              tiktok: 500000, // 500K followers (if applicable)
+              instagram: 280000,
+              youtube: 150000,
             },
-            engagementRate: 6.2, // High engagement typical for comedy creators
+            engagementRate: 4.8,
+            averageRating: 4.6,
+          },
+          {
+            id: 6,
+            name: "Aicha Tachinouite",
+            email: "contact.aichatachinouite@example.com",
+            role: "influencer",
+            profileImage: "https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            bio: "Chanteuse amazighe | Ambassadrice de la culture berbère 🎶",
+            niche: ["Musique", "Culture Marocaine", "Art et Artisanat"],
+            location: "Agadir, Maroc",
+            followers: {
+              instagram: 520000,
+              youtube: 890000,
+            },
+            engagementRate: 6.2,
             averageRating: 4.8,
           },
           {
             id: 7,
-            name: "Amine Aouni",
-            email: "pro.amineaouni@example.com", // Professional placeholder
+            name: "Mehdi K-Libre",
+            email: "contact.mehdiklibre@example.com",
             role: "influencer",
-            profileImage:
-              "https://i.ibb.co/KpBCBzZB/473895375-989593819696451-2344156024859096853-n.jpg", // Current profile picture
-            bio: "Acteur et créateur de contenu | Officiel 📩 pro.amineaouni@gmail.com",
-            niche: ["Gaming","acting", "comedy", "sketches", "television"],
-            location: "Casablanca, Morocco",
+            profileImage: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            bio: "Rappeur marocain | Producteur musical | Street culture 🎤",
+            niche: ["Musique", "Culture Urbaine", "Lifestyle"],
+            location: "Casablanca, Maroc",
             followers: {
-              instagram: 870000, // 870K followers (June 2024)
-              youtube: 25000, // From YouTube channel if exists
-              tiktok: 120000, // @amine_aouni TikTok
+              instagram: 1200000,
+              youtube: 2100000,
+              tiktok: 800000,
             },
-            engagementRate: 5.7, // Calculated from recent posts
-            averageRating: 4.6,
+            engagementRate: 7.5,
+            averageRating: 4.7,
           },
           {
             id: 8,
-            name: 'Mustapha Swinga',
-            email: 'contact.swinga@example.com', // Professional placeholder
-            role: 'influencer',
-            profileImage: 'https://i.ibb.co/rG8vPMNB/17818219-1918260275122897-5924830161320017920-a.jpg', // Replace with actual URL
-            bio: 'Acteur & Humoriste | Créateur de #SWINGATV',
-            niche: ['comedy', 'acting', 'sketches', 'social media'],
-            location: 'Casablanca, Morocco',
+            name: "Fatima Zahra Bennacer",
+            email: "contact.fatimazahra@example.com",
+            role: "influencer",
+            profileImage: "https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            bio: "Experte beauté et cosmétiques naturels | Produits du terroir marocain 💄",
+            niche: ["Beauté", "Produits Naturels", "Lifestyle"],
+            location: "Marrakech, Maroc",
             followers: {
-              instagram: 3100000, // 3.1M followers (June 2024)
-              youtube: 500000, // From his Swinga TV channel
-              tiktok: 800000 // @mustapha_swinga
+              instagram: 650000,
+              tiktok: 420000,
             },
-            engagementRate: 7.2, // Extremely high for comedy creators
-            averageRating: 4.9,
+            engagementRate: 5.9,
+            averageRating: 4.8,
           },
         ];
 
@@ -268,10 +263,10 @@ const FindInfluencers = () => {
             </div>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 text-shadow">
-                Find <span className="text-gradient">Influencers</span>
+                Trouver des <span className="text-gradient">Influenceurs</span>
               </h1>
               <p className="text-gray-600 mt-2 text-lg">
-                Discover the perfect creators for your brand
+                Découvrez les créateurs parfaits pour votre marque au Maroc
               </p>
             </div>
           </div>
@@ -289,7 +284,7 @@ const FindInfluencers = () => {
             <input
               type="text"
               className="w-full pl-14 pr-4 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
-              placeholder="Search influencers..."
+              placeholder="Rechercher des influenceurs..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -298,10 +293,10 @@ const FindInfluencers = () => {
           {/* Niches */}
           <div>
             <h3 className="text-lg font-bold text-gray-900 mb-4">
-              Content Niches
+              Niches de Contenu
             </h3>
             <div className="flex flex-wrap gap-3">
-              {niches.map((niche, index) => (
+              {moroccanNiches.map((niche, index) => (
                 <button
                   key={niche}
                   onClick={() => handleNicheToggle(niche)}
@@ -320,7 +315,7 @@ const FindInfluencers = () => {
 
           {/* Platforms */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Platforms</h3>
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Plateformes</h3>
             <div className="flex flex-wrap gap-4">
               {platforms.map((platform, index) => (
                 <button
@@ -346,13 +341,13 @@ const FindInfluencers = () => {
               htmlFor="minFollowers"
               className="block text-lg font-bold text-gray-900 mb-4"
             >
-              Minimum Followers
+              Nombre minimum d'abonnés
             </label>
             <input
               type="number"
               id="minFollowers"
               className="w-full px-6 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
-              placeholder="e.g., 10000"
+              placeholder="ex: 10000"
               value={minFollowers}
               onChange={(e) => setMinFollowers(e.target.value)}
             />
@@ -369,11 +364,12 @@ const FindInfluencers = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold text-gray-900">
-                Discover Creators
+                Découvrir les Créateurs
               </h3>
               <p className="mt-1 text-sm text-gray-500">
-                {filteredInfluencers.length} influencer
-                {filteredInfluencers.length !== 1 ? "s" : ""} found
+                {filteredInfluencers.length} influenceur
+                {filteredInfluencers.length !== 1 ? "s" : ""} trouvé
+                {filteredInfluencers.length !== 1 ? "s" : ""}
               </p>
             </div>
           </div>
@@ -424,7 +420,7 @@ const FindInfluencers = () => {
                         {Object.values(influencer.followers || {})
                           .reduce((a, b) => a + b, 0)
                           .toLocaleString()}{" "}
-                        followers
+                        abonnés
                       </span>
                     </div>
                     <div className="flex items-center text-green-600">
@@ -442,7 +438,9 @@ const FindInfluencers = () => {
                           className="bg-gray-50 p-2 rounded-xl text-center"
                         >
                           <p className="font-bold text-gray-900">
-                            {(count / 1000).toFixed(1)}K
+                            {count >= 1000000 
+                              ? `${(count / 1000000).toFixed(1)}M`
+                              : `${(count / 1000).toFixed(0)}K`}
                           </p>
                           <p className="text-gray-500 capitalize">{platform}</p>
                         </div>
@@ -464,7 +462,7 @@ const FindInfluencers = () => {
                   </div>
                   <button className="btn-primary text-sm px-6 py-3 group-hover:scale-105 transition-transform duration-300">
                     <MessageSquare className="h-4 w-4 mr-2" />
-                    Contact
+                    Contacter
                   </button>
                 </div>
               </div>

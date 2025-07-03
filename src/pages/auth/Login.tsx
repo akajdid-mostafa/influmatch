@@ -10,6 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
   const { user, login } = useAuth();
 
   // If already logged in, redirect to appropriate dashboard
@@ -23,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     
     if (!email || !password) {
-      toast.error('Please fill in all fields');
+      toast.error('Veuillez remplir tous les champs');
       return;
     }
     
@@ -33,10 +35,10 @@ const Login = () => {
       const result = await login(email, password);
       
       if (!result.success) {
-        toast.error(result.error || 'Login failed');
+        toast.error(result.error || 'Échec de la connexion');
       }
     } catch (error) {
-      toast.error('An unexpected error occurred');
+      toast.error('Une erreur inattendue s\'est produite');
       console.error(error);
     } finally {
       setIsSubmitting(false);
@@ -45,25 +47,25 @@ const Login = () => {
 
   const demoAccounts = [
     { 
-      email: 'brand@example.com', 
-      role: 'Brand', 
+      email: 'marque@example.com', 
+      role: 'Marque', 
       gradient: 'from-purple-600 to-blue-600',
       icon: <Zap size={20} />,
-      description: 'Create campaigns & find influencers'
+      description: 'Créer des campagnes & trouver des influenceurs'
     },
     { 
-      email: 'influencer@example.com', 
-      role: 'Influencer', 
+      email: 'influenceur@example.com', 
+      role: 'Influenceur', 
       gradient: 'from-pink-600 to-red-600',
       icon: <Star size={20} />,
-      description: 'Showcase content & earn money'
+      description: 'Présenter du contenu & gagner de l\'argent'
     },
     { 
       email: 'admin@example.com', 
       role: 'Admin', 
       gradient: 'from-indigo-600 to-purple-600',
       icon: <Heart size={20} />,
-      description: 'Manage platform & users'
+      description: 'Gérer la plateforme & les utilisateurs'
     }
   ];
 
@@ -83,10 +85,10 @@ const Login = () => {
           </div>
         </div>
         <h2 className="text-center text-4xl font-extrabold text-gray-900 text-shadow">
-          Welcome back to <span className="text-gradient">InfluMatch</span>
+          Bienvenue sur <span className="text-gradient">InfluMaroc</span>
         </h2>
         <p className="mt-4 text-center text-lg text-gray-600">
-          Connect with the perfect brands and influencers
+          Connectez-vous avec les meilleures marques et influenceurs du Maroc
         </p>
         <div className="mt-4 flex justify-center space-x-2">
           <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></div>
@@ -98,7 +100,7 @@ const Login = () => {
       <div className="mt-12 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <div className="form-modern">
           <form className="space-y-8" onSubmit={handleSubmit}>
-            <div className="floating-label">
+            <div className="relative">
               <input
                 id="email"
                 name="email"
@@ -107,13 +109,24 @@ const Login = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input-modern"
+                onFocus={() => setEmailFocused(true)}
+                onBlur={() => setEmailFocused(false)}
+                className="input-modern peer"
                 placeholder=" "
               />
-              <label htmlFor="email">Email address</label>
+              <label 
+                htmlFor="email"
+                className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                  emailFocused || email 
+                    ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                    : 'top-4 text-gray-500'
+                }`}
+              >
+                Adresse email
+              </label>
             </div>
 
-            <div className="floating-label">
+            <div className="relative">
               <div className="relative">
                 <input
                   id="password"
@@ -123,9 +136,21 @@ const Login = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="input-modern pr-14"
+                  onFocus={() => setPasswordFocused(true)}
+                  onBlur={() => setPasswordFocused(false)}
+                  className="input-modern pr-14 peer"
                   placeholder=" "
                 />
+                <label 
+                  htmlFor="password"
+                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                    passwordFocused || password 
+                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                      : 'top-4 text-gray-500'
+                  }`}
+                >
+                  Mot de passe
+                </label>
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -134,7 +159,6 @@ const Login = () => {
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
-              <label htmlFor="password">Password</label>
             </div>
 
             <div className="flex items-center justify-between">
@@ -146,13 +170,13 @@ const Login = () => {
                   className="h-5 w-5 text-purple-600 focus:ring-purple-500 border-gray-300 rounded-lg"
                 />
                 <label htmlFor="remember-me" className="ml-3 block text-sm text-gray-900 font-medium">
-                  Remember me
+                  Se souvenir de moi
                 </label>
               </div>
 
               <div className="text-sm">
                 <a href="#" className="font-semibold text-gradient hover:opacity-80 transition-opacity">
-                  Forgot your password?
+                  Mot de passe oublié ?
                 </a>
               </div>
             </div>
@@ -163,7 +187,7 @@ const Login = () => {
                 disabled={isSubmitting}
                 className="btn-gradient w-full text-lg font-bold"
               >
-                {isSubmitting ? <LoadingSpinner size="sm" color="white" /> : 'Sign in'}
+                {isSubmitting ? <LoadingSpinner size="sm" color="white" /> : 'Se connecter'}
               </button>
             </div>
           </form>
@@ -174,7 +198,7 @@ const Login = () => {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500 font-medium">Try demo accounts</span>
+                <span className="px-4 bg-white text-gray-500 font-medium">Essayer les comptes de démonstration</span>
               </div>
             </div>
 
@@ -195,7 +219,7 @@ const Login = () => {
                       {account.icon}
                     </div>
                     <div className="text-left">
-                      <span className="block text-lg font-bold">Login as {account.role}</span>
+                      <span className="block text-lg font-bold">Se connecter en tant que {account.role}</span>
                       <span className="block text-sm opacity-90">{account.description}</span>
                     </div>
                   </div>
@@ -207,9 +231,9 @@ const Login = () => {
 
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
+              Vous n'avez pas de compte ?{' '}
               <Link to="/register" className="font-semibold text-gradient hover:opacity-80 transition-opacity">
-                Register now
+                S'inscrire maintenant
               </Link>
             </p>
           </div>

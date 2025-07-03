@@ -33,15 +33,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       // Mock API call - replace with actual API call
       if (email && password) {
-        // Demo users for testing
+        // Demo users for testing - Updated for Moroccan market
         const users = {
-          'brand@example.com': { id: 1, name: 'SAmsung Brand', email, role: 'brand' },
-          'influencer@example.com': { id: 2, name: 'Ezzoubair Hilal', email, role: 'influencer' },
-          'admin@example.com': { id: 3, name: 'Admin User', email, role: 'admin' }
+          'marque@example.com': { id: 1, name: 'Marjane Market', email, role: 'brand' },
+          'influenceur@example.com': { id: 2, name: 'Saad Lamjarred', email, role: 'influencer' },
+          'admin@example.com': { id: 3, name: 'Admin Maroc', email, role: 'admin' }
         };
 
         const user = users[email as keyof typeof users];
-        if (!user) throw new Error('Invalid credentials');
+        if (!user) throw new Error('Identifiants invalides');
 
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
@@ -53,12 +53,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         
         return { success: true };
       } else {
-        throw new Error('Please provide email and password');
+        throw new Error('Veuillez fournir un email et un mot de passe');
       }
     } catch (error) {
       return { 
         success: false, 
-        error: error instanceof Error ? error.message : 'Login failed' 
+        error: error instanceof Error ? error.message : 'Échec de la connexion' 
       };
     } finally {
       setLoading(false);
@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       return { 
         success: false, 
-        error: error instanceof Error ? error.message : 'Registration failed' 
+        error: error instanceof Error ? error.message : 'Échec de l\'inscription' 
       };
     } finally {
       setLoading(false);

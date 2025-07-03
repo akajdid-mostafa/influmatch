@@ -19,19 +19,19 @@ const InfluencerDashboard = () => {
         // In a real app, these would be actual API calls
         await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
         
-        // Mock data for demo purposes
+        // Mock data for demo purposes - Updated for Moroccan market
         const mockStats: InfluencerStats = {
-          profileViews: 342,
-          campaignsCompleted: 12,
+          profileViews: 1250,
+          campaignsCompleted: 18,
           averageRating: 4.8,
-          totalEarnings: 8500,
-          engagementRate: 3.7,
+          totalEarnings: 45000,
+          engagementRate: 6.2,
           growth: {
-            followers: 12.5,
-            engagement: 0.8,
-            earnings: 15.3
+            followers: 18.5,
+            engagement: 2.1,
+            earnings: 22.8
           },
-          conversionRate: 2.4
+          conversionRate: 3.4
         };
         
         const mockPendingRequests: CampaignApplication[] = [
@@ -39,64 +39,64 @@ const InfluencerDashboard = () => {
             id: '101',
             campaign: {
               id: '1',
-              title: 'Summer Collection Launch'
+              title: 'Collection Ramadan 2025'
             },
             influencer: {
               id: 2,
-              name: 'Ezzoubair Hilal',
-              email: 'influencer@example.com',
+              name: 'Saad Lamjarred',
+              email: 'influenceur@example.com',
               role: 'influencer'
             },
-            proposal: 'I would love to promote your summer collection with a series of 3 posts showcasing different outfits.',
-            rate: 500,
+            proposal: 'Je serais ravi de promouvoir votre collection Ramadan avec une série de 3 posts mettant en valeur différentes tenues traditionnelles modernes.',
+            rate: 12000,
             status: 'pending',
-            submittedAt: '2025-05-14T09:30:00Z'
+            submittedAt: '2025-01-14T09:30:00Z'
           },
           {
             id: '102',
             campaign: {
               id: '2',
-              title: 'Fitness App Promotion'
+              title: 'Promotion App Fitness Maroc'
             },
             influencer: {
               id: 2,
-              name: 'Ezzoubair Hilal',
-              email: 'influencer@example.com',
+              name: 'Saad Lamjarred',
+              email: 'influenceur@example.com',
               role: 'influencer'
             },
-            proposal: 'I can create a video showing my workout routine using your app and highlighting its key features.',
-            rate: 350,
+            proposal: 'Je peux créer une vidéo montrant ma routine d\'entraînement en utilisant votre app et en soulignant ses fonctionnalités clés.',
+            rate: 8500,
             status: 'pending',
-            submittedAt: '2025-05-13T14:45:00Z'
+            submittedAt: '2025-01-13T14:45:00Z'
           }
         ];
         
         const mockActiveCampaigns: Campaign[] = [
           {
             id: '3',
-            title: 'Organic Skincare Review',
-            description: 'Create authentic content showcasing our natural skincare line',
+            title: 'Test Produits Argan Bio',
+            description: 'Créer du contenu authentique mettant en valeur notre gamme de produits à base d\'argan bio',
             brand: { 
               id: 3, 
-              name: 'Pure Organics', 
-              email: 'contact@pureorganics.example',
+              name: 'Argan d\'Or', 
+              email: 'contact@argandor.ma',
               role: 'brand',
               logo: 'https://images.pexels.com/photos/5412270/pexels-photo-5412270.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
             },
-            budget: { min: 400, max: 800, currency: 'USD' },
+            budget: { min: 8000, max: 15000, currency: 'MAD' },
             requirements: {
-              niches: ['beauty', 'skincare'],
-              minFollowers: 8000,
+              niches: ['beauté', 'produits naturels'],
+              minFollowers: 50000,
               platforms: ['instagram', 'tiktok']
             },
             timeline: {
-              startDate: '2025-05-10',
-              endDate: '2025-05-30',
-              submissionDeadline: '2025-05-25'
+              startDate: '2025-01-10',
+              endDate: '2025-02-10',
+              submissionDeadline: '2025-02-05'
             },
             status: 'in-progress',
-            createdAt: '2025-05-05T10:00:00Z',
-            updatedAt: '2025-05-05T10:00:00Z'
+            createdAt: '2025-01-05T10:00:00Z',
+            updatedAt: '2025-01-05T10:00:00Z'
           }
         ];
         
@@ -132,19 +132,19 @@ const InfluencerDashboard = () => {
             </div>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 text-shadow">
-                Creator <span className="text-gradient">Studio</span>
+                Studio <span className="text-gradient">Créateur</span>
               </h1>
-              <p className="text-gray-600 mt-2 text-lg">Track your performance and manage collaborations</p>
+              <p className="text-gray-600 mt-2 text-lg">Suivez vos performances et gérez vos collaborations</p>
             </div>
           </div>
           <div className="flex items-center space-x-4">
             <div className="flex items-center text-green-600">
               <div className="w-3 h-3 rounded-full bg-green-400 mr-2 animate-pulse"></div>
-              <span className="text-sm font-medium">Profile active</span>
+              <span className="text-sm font-medium">Profil actif</span>
             </div>
             <div className="text-gray-400">•</div>
             <span className="text-sm text-gray-500">
-              {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+              {new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </span>
           </div>
         </div>
@@ -152,7 +152,7 @@ const InfluencerDashboard = () => {
           to="/influencer/profile"
           className="btn-secondary"
         >
-          👁️ View Public Profile
+          👁️ Voir Profil Public
         </Link>
       </div>
       
@@ -167,13 +167,13 @@ const InfluencerDashboard = () => {
                 </div>
                 <div className="ml-6">
                   <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-                    Profile Views
+                    Vues du Profil
                   </p>
                   <div className="flex items-center mt-2">
                     <div className="text-3xl font-bold text-gray-900">{stats.profileViews}</div>
                     <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-3 py-1 rounded-full">
                       <TrendingUp className="h-4 w-4" />
-                      <span className="font-semibold">+8%</span>
+                      <span className="font-semibold">+12%</span>
                     </div>
                   </div>
                 </div>
@@ -189,7 +189,7 @@ const InfluencerDashboard = () => {
                 </div>
                 <div className="ml-6">
                   <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-                    Rating
+                    Note Moyenne
                   </p>
                   <div className="flex items-center mt-2">
                     <div className="text-3xl font-bold text-gray-900">{stats.averageRating}</div>
@@ -211,10 +211,10 @@ const InfluencerDashboard = () => {
                 </div>
                 <div className="ml-6">
                   <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-                    Total Earnings
+                    Gains Totaux
                   </p>
                   <div className="flex items-center mt-2">
-                    <div className="text-3xl font-bold text-gray-900">${stats.totalEarnings.toLocaleString()}</div>
+                    <div className="text-3xl font-bold text-gray-900">{stats.totalEarnings.toLocaleString()} MAD</div>
                     <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-3 py-1 rounded-full">
                       <TrendingUp className="h-4 w-4" />
                       <span className="font-semibold">+{stats.growth.earnings}%</span>
@@ -233,7 +233,7 @@ const InfluencerDashboard = () => {
                 </div>
                 <div className="ml-6">
                   <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-                    Engagement Rate
+                    Taux d'Engagement
                   </p>
                   <div className="flex items-center mt-2">
                     <div className="text-3xl font-bold text-gray-900">{stats.engagementRate}%</div>
@@ -259,10 +259,10 @@ const InfluencerDashboard = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900">
-                  Growth Metrics
+                  Métriques de Croissance
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">
-                  Your performance compared to last month
+                  Vos performances par rapport au mois dernier
                 </p>
               </div>
             </div>
@@ -274,7 +274,7 @@ const InfluencerDashboard = () => {
                   <Users className="h-10 w-10 text-white" />
                 </div>
                 <div className="flex items-center justify-center mb-2">
-                  <span className="text-sm font-medium text-gray-500 mr-2">Followers Growth</span>
+                  <span className="text-sm font-medium text-gray-500 mr-2">Croissance Abonnés</span>
                   <div className="flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                     <TrendingUp className="h-4 w-4 mr-1" />
                     +{stats.growth.followers}%
@@ -283,7 +283,7 @@ const InfluencerDashboard = () => {
                 <div className="relative pt-2">
                   <div className="overflow-hidden h-3 text-xs flex rounded-full bg-gray-200">
                     <div 
-                      style={{ width: `${Math.min(stats.growth.followers * 5, 100)}%` }} 
+                      style={{ width: `${Math.min(stats.growth.followers * 3, 100)}%` }} 
                       className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full transition-all duration-1000"
                     ></div>
                   </div>
@@ -295,7 +295,7 @@ const InfluencerDashboard = () => {
                   <Activity className="h-10 w-10 text-white" />
                 </div>
                 <div className="flex items-center justify-center mb-2">
-                  <span className="text-sm font-medium text-gray-500 mr-2">Engagement Growth</span>
+                  <span className="text-sm font-medium text-gray-500 mr-2">Croissance Engagement</span>
                   <div className="flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                     <TrendingUp className="h-4 w-4 mr-1" />
                     +{stats.growth.engagement}%
@@ -304,7 +304,7 @@ const InfluencerDashboard = () => {
                 <div className="relative pt-2">
                   <div className="overflow-hidden h-3 text-xs flex rounded-full bg-gray-200">
                     <div 
-                      style={{ width: `${Math.min(stats.growth.engagement * 10, 100)}%` }} 
+                      style={{ width: `${Math.min(stats.growth.engagement * 20, 100)}%` }} 
                       className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-purple-500 to-pink-600 rounded-full transition-all duration-1000"
                     ></div>
                   </div>
@@ -316,7 +316,7 @@ const InfluencerDashboard = () => {
                   <DollarSign className="h-10 w-10 text-white" />
                 </div>
                 <div className="flex items-center justify-center mb-2">
-                  <span className="text-sm font-medium text-gray-500 mr-2">Earnings Growth</span>
+                  <span className="text-sm font-medium text-gray-500 mr-2">Croissance Gains</span>
                   <div className="flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                     <TrendingUp className="h-4 w-4 mr-1" />
                     +{stats.growth.earnings}%
@@ -325,7 +325,7 @@ const InfluencerDashboard = () => {
                 <div className="relative pt-2">
                   <div className="overflow-hidden h-3 text-xs flex rounded-full bg-gray-200">
                     <div 
-                      style={{ width: `${Math.min(stats.growth.earnings * 4, 100)}%` }} 
+                      style={{ width: `${Math.min(stats.growth.earnings * 2, 100)}%` }} 
                       className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-green-500 to-emerald-600 rounded-full transition-all duration-1000"
                     ></div>
                   </div>
@@ -346,10 +346,10 @@ const InfluencerDashboard = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900">
-                  Pending Campaign Requests
+                  Demandes de Campagne en Attente
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">
-                  Review and respond to brand collaborations
+                  Examinez et répondez aux collaborations de marques
                 </p>
               </div>
             </div>
@@ -357,7 +357,7 @@ const InfluencerDashboard = () => {
               to="/influencer/requests"
               className="text-sm font-semibold text-gradient hover:opacity-80 transition-opacity px-4 py-2 rounded-xl hover:bg-purple-50"
             >
-              View all →
+              Voir tout →
             </Link>
           </div>
         </div>
@@ -368,7 +368,7 @@ const InfluencerDashboard = () => {
                 <Target className="h-8 w-8 text-white" />
               </div>
               <p className="text-gray-500 text-lg">
-                No pending requests at the moment.
+                Aucune demande en attente pour le moment.
               </p>
             </div>
           ) : (
@@ -381,21 +381,21 @@ const InfluencerDashboard = () => {
                     <div className="flex items-center mt-4 space-x-6">
                       <div className="flex items-center text-green-600">
                         <DollarSign className="h-5 w-5 mr-2" />
-                        <span className="font-bold text-lg">${request.rate}</span>
+                        <span className="font-bold text-lg">{request.rate} MAD</span>
                       </div>
                       <div className="flex items-center text-gray-500">
-                        <span className="text-sm font-medium">Proposed Rate</span>
+                        <span className="text-sm font-medium">Tarif Proposé</span>
                       </div>
                     </div>
                   </div>
                   <div className="flex space-x-4 ml-8">
                     <button className="btn-primary group-hover:scale-105 transition-transform duration-300">
                       <CheckCircle className="mr-2 h-5 w-5" />
-                      Accept
+                      Accepter
                     </button>
                     <button className="btn-secondary group-hover:scale-105 transition-transform duration-300">
                       <XCircle className="mr-2 h-5 w-5" />
-                      Decline
+                      Décliner
                     </button>
                   </div>
                 </div>
@@ -415,10 +415,10 @@ const InfluencerDashboard = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900">
-                  Active Campaigns
+                  Campagnes Actives
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">
-                  Your current ongoing collaborations
+                  Vos collaborations en cours
                 </p>
               </div>
             </div>
@@ -431,7 +431,7 @@ const InfluencerDashboard = () => {
                 <Award className="h-8 w-8 text-white" />
               </div>
               <p className="text-gray-500 text-lg">
-                No active campaigns at the moment.
+                Aucune campagne active pour le moment.
               </p>
             </div>
           ) : (
@@ -456,11 +456,11 @@ const InfluencerDashboard = () => {
                       <div className="mt-4 flex flex-wrap items-center gap-4">
                         <div className="flex items-center">
                           <span className="px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-r from-yellow-500 to-orange-600 text-white shadow-lg">
-                            ⏰ Deadline: {new Date(campaign.timeline.submissionDeadline || '').toLocaleDateString()}
+                            ⏰ Échéance: {new Date(campaign.timeline.submissionDeadline || '').toLocaleDateString('fr-FR')}
                           </span>
                         </div>
                         <div className="flex items-center text-gray-600">
-                          <span className="font-semibold">Brand: </span>
+                          <span className="font-semibold">Marque: </span>
                           <span className="ml-1 text-gradient font-bold">{campaign.brand.name}</span>
                         </div>
                       </div>
@@ -471,7 +471,7 @@ const InfluencerDashboard = () => {
                       to={`/influencer/requests#${campaign.id}`}
                       className="btn-primary group-hover:scale-105 transition-transform duration-300"
                     >
-                      📋 View Details
+                      📋 Voir Détails
                     </Link>
                   </div>
                 </div>

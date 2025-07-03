@@ -11,6 +11,9 @@ const CreateCampaign = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState(1);
   
+  // Form focus states
+  const [focusedFields, setFocusedFields] = useState<Record<string, boolean>>({});
+  
   // Campaign Details
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -35,15 +38,28 @@ const CreateCampaign = () => {
   const [dontsList, setDontsList] = useState<string[]>(['']);
   const [references, setReferences] = useState<string[]>(['']);
 
-  const niches = [
-    'Fashion', 'Beauty', 'Lifestyle', 'Tech', 'Gaming', 'Food',
-    'Travel', 'Fitness', 'Business', 'Education', 'Entertainment', 'Art'
+  const handleFocus = (fieldName: string) => {
+    setFocusedFields(prev => ({ ...prev, [fieldName]: true }));
+  };
+
+  const handleBlur = (fieldName: string) => {
+    setFocusedFields(prev => ({ ...prev, [fieldName]: false }));
+  };
+
+  const moroccanNiches = [
+    'Mode', 'Beauté', 'Lifestyle', 'Tech', 'Gaming', 'Cuisine Marocaine',
+    'Voyage', 'Fitness', 'Business', 'Art et Artisanat', 'Culture Marocaine', 'Musique'
   ];
 
   const platforms = [
     { id: 'instagram', name: 'Instagram', icon: Instagram },
     { id: 'youtube', name: 'YouTube', icon: Youtube },
     { id: 'tiktok', name: 'TikTok', icon: TikTok }
+  ];
+
+  const moroccanCities = [
+    'Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger', 'Agadir', 
+    'Meknès', 'Oujda', 'Kenitra', 'Tétouan', 'Safi', 'El Jadida'
   ];
 
   const handleObjectiveToggle = (objective: string) => {
@@ -102,7 +118,7 @@ const CreateCampaign = () => {
 
   const validateStep1 = () => {
     if (!title || !description || objectives.length === 0) {
-      toast.error('Please fill in all required fields');
+      toast.error('Veuillez remplir tous les champs obligatoires');
       return false;
     }
     return true;
@@ -110,12 +126,12 @@ const CreateCampaign = () => {
 
   const validateStep2 = () => {
     if (!budgetMin || !budgetMax || !startDate || !endDate) {
-      toast.error('Please fill in all required fields');
+      toast.error('Veuillez remplir tous les champs obligatoires');
       return false;
     }
     
     if (parseFloat(budgetMin) > parseFloat(budgetMax)) {
-      toast.error('Minimum budget cannot be greater than maximum budget');
+      toast.error('Le budget minimum ne peut pas être supérieur au budget maximum');
       return false;
     }
     
@@ -124,12 +140,12 @@ const CreateCampaign = () => {
     const deadline = submissionDeadline ? new Date(submissionDeadline) : null;
     
     if (end <= start) {
-      toast.error('End date must be after start date');
+      toast.error('La date de fin doit être postérieure à la date de début');
       return false;
     }
     
     if (deadline && (deadline <= start || deadline >= end)) {
-      toast.error('Submission deadline must be between start and end dates');
+      toast.error('La date limite de soumission doit être entre les dates de début et de fin');
       return false;
     }
     
@@ -138,7 +154,7 @@ const CreateCampaign = () => {
 
   const validateStep3 = () => {
     if (selectedNiches.length === 0 || !minFollowers || selectedPlatforms.length === 0) {
-      toast.error('Please fill in all required fields');
+      toast.error('Veuillez remplir tous les champs obligatoires');
       return false;
     }
     return true;
@@ -174,7 +190,7 @@ const CreateCampaign = () => {
     e.preventDefault();
     
     if (!contentGuidelines || dosList.some(item => !item) || dontsList.some(item => !item)) {
-      toast.error('Please fill in all required fields');
+      toast.error('Veuillez remplir tous les champs obligatoires');
       return;
     }
     
@@ -184,11 +200,11 @@ const CreateCampaign = () => {
       // In a real app, this would be an API call to create the campaign
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
       
-      toast.success('Campaign created successfully!');
+      toast.success('Campagne créée avec succès !');
       navigate('/brand/campaigns');
     } catch (error) {
       console.error('Error creating campaign:', error);
-      toast.error('Failed to create campaign');
+      toast.error('Échec de la création de la campagne');
     } finally {
       setIsSubmitting(false);
     }
@@ -211,10 +227,10 @@ const CreateCampaign = () => {
           </div>
         </div>
         <h1 className="text-4xl font-bold text-gray-900 text-shadow">
-          Create Your <span className="text-gradient">Campaign</span>
+          Créez Votre <span className="text-gradient">Campagne</span>
         </h1>
         <p className="mt-4 text-lg text-gray-600">
-          Set up your influencer marketing campaign in a few simple steps
+          Configurez votre campagne de marketing d'influence en quelques étapes simples
         </p>
         <div className="mt-4 flex justify-center space-x-2">
           <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></div>
@@ -249,17 +265,17 @@ const CreateCampaign = () => {
                 <span className={`mt-3 text-sm font-semibold transition-colors duration-300 ${
                   step >= number ? 'text-gradient' : 'text-gray-500'
                 }`}>
-                  Step {number}
+                  Étape {number}
                 </span>
               </div>
             );
           })}
         </div>
         <div className="flex justify-between mt-4 text-sm">
-          <span className={`font-medium transition-colors ${step >= 1 ? 'text-gradient' : 'text-gray-500'}`}>Campaign Details</span>
-          <span className={`font-medium transition-colors ${step >= 2 ? 'text-gradient' : 'text-gray-500'}`}>Budget & Timeline</span>
-          <span className={`font-medium transition-colors ${step >= 3 ? 'text-gradient' : 'text-gray-500'}`}>Requirements</span>
-          <span className={`font-medium transition-colors ${step >= 4 ? 'text-gradient' : 'text-gray-500'}`}>Guidelines</span>
+          <span className={`font-medium transition-colors ${step >= 1 ? 'text-gradient' : 'text-gray-500'}`}>Détails de la campagne</span>
+          <span className={`font-medium transition-colors ${step >= 2 ? 'text-gradient' : 'text-gray-500'}`}>Budget & Calendrier</span>
+          <span className={`font-medium transition-colors ${step >= 3 ? 'text-gradient' : 'text-gray-500'}`}>Exigences</span>
+          <span className={`font-medium transition-colors ${step >= 4 ? 'text-gradient' : 'text-gray-500'}`}>Directives</span>
         </div>
       </div>
       
@@ -269,46 +285,68 @@ const CreateCampaign = () => {
           {step === 1 && (
             <div className="space-y-8 page-transition">
               <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Campaign Details</h2>
-                <p className="text-gray-600">Tell us about your campaign vision and goals</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Détails de la Campagne</h2>
+                <p className="text-gray-600">Parlez-nous de votre vision et de vos objectifs de campagne</p>
               </div>
 
-              <div className="floating-label">
+              <div className="relative">
                 <input
                   type="text"
                   id="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="input-modern"
+                  onFocus={() => handleFocus('title')}
+                  onBlur={() => handleBlur('title')}
+                  className="input-modern peer"
                   placeholder=" "
                 />
-                <label htmlFor="title">Campaign Title <span className="text-red-500">*</span></label>
+                <label 
+                  htmlFor="title"
+                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                    focusedFields.title || title 
+                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                      : 'top-4 text-gray-500'
+                  }`}
+                >
+                  Titre de la campagne <span className="text-red-500">*</span>
+                </label>
               </div>
               
-              <div className="floating-label">
+              <div className="relative">
                 <textarea
                   id="description"
                   rows={4}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="input-modern resize-none"
+                  onFocus={() => handleFocus('description')}
+                  onBlur={() => handleBlur('description')}
+                  className="input-modern resize-none peer"
                   placeholder=" "
                 />
-                <label htmlFor="description">Campaign Description <span className="text-red-500">*</span></label>
+                <label 
+                  htmlFor="description"
+                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                    focusedFields.description || description 
+                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                      : 'top-4 text-gray-500'
+                  }`}
+                >
+                  Description de la campagne <span className="text-red-500">*</span>
+                </label>
               </div>
               
               <div>
                 <label className="block text-lg font-semibold text-gray-900 mb-6">
-                  Campaign Objectives <span className="text-red-500">*</span>
+                  Objectifs de la Campagne <span className="text-red-500">*</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
-                    { name: 'Brand Awareness', icon: '🎯', gradient: 'from-blue-500 to-purple-600' },
-                    { name: 'Product Launch', icon: '🚀', gradient: 'from-green-500 to-teal-600' },
-                    { name: 'Sales Generation', icon: '💰', gradient: 'from-yellow-500 to-orange-600' },
-                    { name: 'Community Engagement', icon: '❤️', gradient: 'from-pink-500 to-red-600' },
-                    { name: 'Content Creation', icon: '📸', gradient: 'from-purple-500 to-indigo-600' },
-                    { name: 'Lead Generation', icon: '📈', gradient: 'from-teal-500 to-cyan-600' }
+                    { name: 'Notoriété de la Marque', icon: '🎯', gradient: 'from-blue-500 to-purple-600' },
+                    { name: 'Lancement de Produit', icon: '🚀', gradient: 'from-green-500 to-teal-600' },
+                    { name: 'Génération de Ventes', icon: '💰', gradient: 'from-yellow-500 to-orange-600' },
+                    { name: 'Engagement Communautaire', icon: '❤️', gradient: 'from-pink-500 to-red-600' },
+                    { name: 'Création de Contenu', icon: '📸', gradient: 'from-purple-500 to-indigo-600' },
+                    { name: 'Génération de Leads', icon: '📈', gradient: 'from-teal-500 to-cyan-600' }
                   ].map((objective) => (
                     <label
                       key={objective.name}
@@ -352,86 +390,141 @@ const CreateCampaign = () => {
           {step === 2 && (
             <div className="space-y-8 page-transition">
               <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Budget & Timeline</h2>
-                <p className="text-gray-600">Set your investment and campaign duration</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Budget & Calendrier</h2>
+                <p className="text-gray-600">Définissez votre investissement et la durée de la campagne</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div className="floating-label">
+                <div className="relative">
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <DollarSign className="h-6 w-6 text-green-500" />
+                      <span className="text-green-500 font-semibold">MAD</span>
                     </div>
                     <input
                       type="number"
                       id="budgetMin"
                       value={budgetMin}
                       onChange={(e) => setBudgetMin(e.target.value)}
-                      className="input-modern pl-14"
+                      onFocus={() => handleFocus('budgetMin')}
+                      onBlur={() => handleBlur('budgetMin')}
+                      className="input-modern pl-16 peer"
                       placeholder=" "
                       min="0"
                     />
                   </div>
-                  <label htmlFor="budgetMin">Minimum Budget <span className="text-red-500">*</span></label>
+                  <label 
+                    htmlFor="budgetMin"
+                    className={`absolute left-16 transition-all duration-300 pointer-events-none ${
+                      focusedFields.budgetMin || budgetMin 
+                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                        : 'top-4 text-gray-500'
+                    }`}
+                  >
+                    Budget Minimum <span className="text-red-500">*</span>
+                  </label>
                 </div>
                 
-                <div className="floating-label">
+                <div className="relative">
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <DollarSign className="h-6 w-6 text-green-500" />
+                      <span className="text-green-500 font-semibold">MAD</span>
                     </div>
                     <input
                       type="number"
                       id="budgetMax"
                       value={budgetMax}
                       onChange={(e) => setBudgetMax(e.target.value)}
-                      className="input-modern pl-14"
+                      onFocus={() => handleFocus('budgetMax')}
+                      onBlur={() => handleBlur('budgetMax')}
+                      className="input-modern pl-16 peer"
                       placeholder=" "
                       min="0"
                     />
                   </div>
-                  <label htmlFor="budgetMax">Maximum Budget <span className="text-red-500">*</span></label>
+                  <label 
+                    htmlFor="budgetMax"
+                    className={`absolute left-16 transition-all duration-300 pointer-events-none ${
+                      focusedFields.budgetMax || budgetMax 
+                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                        : 'top-4 text-gray-500'
+                    }`}
+                  >
+                    Budget Maximum <span className="text-red-500">*</span>
+                  </label>
                 </div>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div className="floating-label">
+                <div className="relative">
                   <input
                     type="date"
                     id="startDate"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="input-modern"
+                    onFocus={() => handleFocus('startDate')}
+                    onBlur={() => handleBlur('startDate')}
+                    className="input-modern peer"
                     placeholder=" "
                   />
-                  <label htmlFor="startDate">Start Date <span className="text-red-500">*</span></label>
+                  <label 
+                    htmlFor="startDate"
+                    className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                      focusedFields.startDate || startDate 
+                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                        : 'top-4 text-gray-500'
+                    }`}
+                  >
+                    Date de Début <span className="text-red-500">*</span>
+                  </label>
                 </div>
                 
-                <div className="floating-label">
+                <div className="relative">
                   <input
                     type="date"
                     id="endDate"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="input-modern"
+                    onFocus={() => handleFocus('endDate')}
+                    onBlur={() => handleBlur('endDate')}
+                    className="input-modern peer"
                     placeholder=" "
                   />
-                  <label htmlFor="endDate">End Date <span className="text-red-500">*</span></label>
+                  <label 
+                    htmlFor="endDate"
+                    className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                      focusedFields.endDate || endDate 
+                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                        : 'top-4 text-gray-500'
+                    }`}
+                  >
+                    Date de Fin <span className="text-red-500">*</span>
+                  </label>
                 </div>
               </div>
               
-              <div className="floating-label">
+              <div className="relative">
                 <input
                   type="date"
                   id="submissionDeadline"
                   value={submissionDeadline}
                   onChange={(e) => setSubmissionDeadline(e.target.value)}
-                  className="input-modern"
+                  onFocus={() => handleFocus('submissionDeadline')}
+                  onBlur={() => handleBlur('submissionDeadline')}
+                  className="input-modern peer"
                   placeholder=" "
                 />
-                <label htmlFor="submissionDeadline">Content Submission Deadline</label>
+                <label 
+                  htmlFor="submissionDeadline"
+                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                    focusedFields.submissionDeadline || submissionDeadline 
+                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                      : 'top-4 text-gray-500'
+                  }`}
+                >
+                  Date Limite de Soumission du Contenu
+                </label>
                 <p className="mt-2 text-sm text-gray-500">
-                  Optional. If not specified, content will be due by the end date.
+                  Optionnel. Si non spécifié, le contenu sera dû à la date de fin.
                 </p>
               </div>
             </div>
@@ -441,16 +534,16 @@ const CreateCampaign = () => {
           {step === 3 && (
             <div className="space-y-8 page-transition">
               <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Requirements</h2>
-                <p className="text-gray-600">Define your ideal influencer criteria</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Exigences</h2>
+                <p className="text-gray-600">Définissez vos critères d'influenceur idéaux</p>
               </div>
 
               <div>
                 <label className="block text-lg font-semibold text-gray-900 mb-6">
-                  Content Niches <span className="text-red-500">*</span>
+                  Niches de Contenu <span className="text-red-500">*</span>
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                  {niches.map((niche, index) => (
+                  {moroccanNiches.map((niche, index) => (
                     <label
                       key={niche}
                       className={`group flex items-center p-4 border-2 rounded-2xl cursor-pointer transition-all duration-300 hover:scale-105 ${
@@ -481,7 +574,7 @@ const CreateCampaign = () => {
                 </div>
               </div>
               
-              <div className="floating-label">
+              <div className="relative">
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <Users className="h-6 w-6 text-purple-500" />
@@ -491,17 +584,28 @@ const CreateCampaign = () => {
                     id="minFollowers"
                     value={minFollowers}
                     onChange={(e) => setMinFollowers(e.target.value)}
-                    className="input-modern pl-14"
+                    onFocus={() => handleFocus('minFollowers')}
+                    onBlur={() => handleBlur('minFollowers')}
+                    className="input-modern pl-14 peer"
                     placeholder=" "
                     min="0"
                   />
                 </div>
-                <label htmlFor="minFollowers">Minimum Followers <span className="text-red-500">*</span></label>
+                <label 
+                  htmlFor="minFollowers"
+                  className={`absolute left-14 transition-all duration-300 pointer-events-none ${
+                    focusedFields.minFollowers || minFollowers 
+                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                      : 'top-4 text-gray-500'
+                  }`}
+                >
+                  Nombre Minimum d'Abonnés <span className="text-red-500">*</span>
+                </label>
               </div>
               
               <div>
                 <label className="block text-lg font-semibold text-gray-900 mb-6">
-                  Platforms <span className="text-red-500">*</span>
+                  Plateformes <span className="text-red-500">*</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {platforms.map((platform, index) => (
@@ -544,18 +648,29 @@ const CreateCampaign = () => {
                 </div>
               </div>
               
-              <div className="floating-label">
+              <div className="relative">
                 <input
                   type="text"
                   id="locations"
                   value={locations.join(', ')}
                   onChange={(e) => setLocations(e.target.value.split(',').map(l => l.trim()))}
-                  className="input-modern"
+                  onFocus={() => handleFocus('locations')}
+                  onBlur={() => handleBlur('locations')}
+                  className="input-modern peer"
                   placeholder=" "
                 />
-                <label htmlFor="locations">Target Locations</label>
+                <label 
+                  htmlFor="locations"
+                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                    focusedFields.locations || locations.length > 0 
+                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                      : 'top-4 text-gray-500'
+                  }`}
+                >
+                  Villes Cibles
+                </label>
                 <p className="mt-2 text-sm text-gray-500">
-                  Optional. Leave empty to target influencers worldwide.
+                  Optionnel. Exemples: {moroccanCities.slice(0, 4).join(', ')}...
                 </p>
               </div>
             </div>
@@ -565,25 +680,36 @@ const CreateCampaign = () => {
           {step === 4 && (
             <div className="space-y-8 page-transition">
               <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Content Guidelines</h2>
-                <p className="text-gray-600">Define your content expectations and brand guidelines</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Directives de Contenu</h2>
+                <p className="text-gray-600">Définissez vos attentes en matière de contenu et les directives de marque</p>
               </div>
 
-              <div className="floating-label">
+              <div className="relative">
                 <textarea
                   id="contentGuidelines"
                   rows={4}
                   value={contentGuidelines}
                   onChange={(e) => setContentGuidelines(e.target.value)}
-                  className="input-modern resize-none"
+                  onFocus={() => handleFocus('contentGuidelines')}
+                  onBlur={() => handleBlur('contentGuidelines')}
+                  className="input-modern resize-none peer"
                   placeholder=" "
                 />
-                <label htmlFor="contentGuidelines">Content Guidelines <span className="text-red-500">*</span></label>
+                <label 
+                  htmlFor="contentGuidelines"
+                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                    focusedFields.contentGuidelines || contentGuidelines 
+                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                      : 'top-4 text-gray-500'
+                  }`}
+                >
+                  Directives de Contenu <span className="text-red-500">*</span>
+                </label>
               </div>
               
               <div>
                 <label className="block text-lg font-semibold text-gray-900 mb-6">
-                  Do's <span className="text-red-500">*</span>
+                  À Faire <span className="text-red-500">*</span>
                 </label>
                 <div className="space-y-4">
                   {dosList.map((item, index) => (
@@ -596,7 +722,7 @@ const CreateCampaign = () => {
                         value={item}
                         onChange={(e) => handleDoListChange(index, e.target.value)}
                         className="flex-1 input-modern"
-                        placeholder={`Do #${index + 1}`}
+                        placeholder={`À faire #${index + 1}`}
                       />
                       {dosList.length > 1 && (
                         <button
@@ -604,7 +730,7 @@ const CreateCampaign = () => {
                           onClick={() => removeDoItem(index)}
                           className="px-4 py-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-xl transition-colors font-semibold"
                         >
-                          Remove
+                          Supprimer
                         </button>
                       )}
                     </div>
@@ -614,14 +740,14 @@ const CreateCampaign = () => {
                     onClick={addDoItem}
                     className="btn-secondary"
                   >
-                    + Add another do
+                    + Ajouter un autre à faire
                   </button>
                 </div>
               </div>
               
               <div>
                 <label className="block text-lg font-semibold text-gray-900 mb-6">
-                  Don'ts <span className="text-red-500">*</span>
+                  À Ne Pas Faire <span className="text-red-500">*</span>
                 </label>
                 <div className="space-y-4">
                   {dontsList.map((item, index) => (
@@ -634,7 +760,7 @@ const CreateCampaign = () => {
                         value={item}
                         onChange={(e) => handleDontListChange(index, e.target.value)}
                         className="flex-1 input-modern"
-                        placeholder={`Don't #${index + 1}`}
+                        placeholder={`À ne pas faire #${index + 1}`}
                       />
                       {dontsList.length > 1 && (
                         <button
@@ -642,7 +768,7 @@ const CreateCampaign = () => {
                           onClick={() => removeDontItem(index)}
                           className="px-4 py-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-xl transition-colors font-semibold"
                         >
-                          Remove
+                          Supprimer
                         </button>
                       )}
                     </div>
@@ -652,22 +778,33 @@ const CreateCampaign = () => {
                     onClick={addDontItem}
                     className="btn-secondary"
                   >
-                    + Add another don't
+                    + Ajouter un autre à ne pas faire
                   </button>
                 </div>
               </div>
               
-              <div className="floating-label">
+              <div className="relative">
                 <input
                   type="text"
                   value={references.join(', ')}
                   onChange={(e) => setReferences(e.target.value.split(',').map(r => r.trim()))}
-                  className="input-modern"
+                  onFocus={() => handleFocus('references')}
+                  onBlur={() => handleBlur('references')}
+                  className="input-modern peer"
                   placeholder=" "
                 />
-                <label htmlFor="references">Reference Content</label>
+                <label 
+                  htmlFor="references"
+                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
+                    focusedFields.references || references.length > 0 
+                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
+                      : 'top-4 text-gray-500'
+                  }`}
+                >
+                  Contenu de Référence
+                </label>
                 <p className="mt-2 text-sm text-gray-500">
-                  Optional. Add links to content that can serve as inspiration.
+                  Optionnel. Ajoutez des liens vers du contenu qui peut servir d'inspiration.
                 </p>
               </div>
             </div>
@@ -681,7 +818,7 @@ const CreateCampaign = () => {
                 onClick={handleBack}
                 className="btn-secondary"
               >
-                ← Back
+                ← Retour
               </button>
             )}
             
@@ -691,7 +828,7 @@ const CreateCampaign = () => {
                 onClick={handleNext}
                 className="btn-primary ml-auto"
               >
-                Next →
+                Suivant →
               </button>
             ) : (
               <button
@@ -699,7 +836,7 @@ const CreateCampaign = () => {
                 disabled={isSubmitting}
                 className="btn-primary ml-auto"
               >
-                {isSubmitting ? <LoadingSpinner size="sm" color="white" /> : '🚀 Create Campaign'}
+                {isSubmitting ? <LoadingSpinner size="sm" color="white" /> : '🚀 Créer la Campagne'}
               </button>
             )}
           </div>

@@ -1,205 +1,205 @@
-# InfluMatch - Influencer-Brand Collaboration Platform
+# InfluMaroc - Plateforme de Collaboration Influenceurs-Marques
 
-A comprehensive platform connecting brands with influencers for authentic marketing collaborations. Built with React, TypeScript, and Tailwind CSS.
+Une plateforme complète connectant les marques marocaines avec les influenceurs pour des collaborations marketing authentiques. Construite avec React, TypeScript, et Tailwind CSS.
 
-## 🌟 Overview
+## 🌟 Aperçu
 
-InfluMatch is a modern web application that facilitates seamless connections between brands and influencers. The platform provides role-based dashboards, campaign management, messaging systems, and comprehensive analytics to streamline influencer marketing workflows.
+InfluMaroc est une application web moderne qui facilite les connexions transparentes entre les marques et les influenceurs au Maroc. La plateforme fournit des tableaux de bord basés sur les rôles, la gestion de campagnes, des systèmes de messagerie, et des analyses complètes pour rationaliser les flux de travail du marketing d'influence.
 
-## 🚀 Features
+## 🚀 Fonctionnalités
 
-### Multi-Role Authentication System
-- **Brand Registration**: Company details, industry selection, website integration
-- **Influencer Registration**: Social media profiles, niche selection, follower metrics
-- **Admin Access**: Platform management and moderation capabilities
-- **Demo Login**: Pre-configured accounts for testing (brand@example.com, influencer@example.com, admin@example.com)
+### Système d'Authentification Multi-Rôles
+- **Inscription Marque**: Détails de l'entreprise, sélection d'industrie, intégration de site web
+- **Inscription Influenceur**: Profils de réseaux sociaux, sélection de niche, métriques d'abonnés
+- **Accès Admin**: Capacités de gestion et modération de plateforme
+- **Connexion Démo**: Comptes pré-configurés pour les tests (marque@example.com, influenceur@example.com, admin@example.com)
 
-### Brand Dashboard & Features
-- **Campaign Creation Wizard**: 4-step process for creating detailed campaigns
-  - Campaign details and objectives
-  - Budget and timeline configuration
-  - Influencer requirements (niches, followers, platforms)
-  - Content guidelines and brand standards
-- **Campaign Management**: View, edit, and track all campaigns
-- **Influencer Discovery**: Advanced search and filtering system
-- **Analytics Dashboard**: ROI tracking, engagement metrics, spending analysis
-- **Collaboration Tools**: Direct messaging with influencers
+### Tableau de Bord & Fonctionnalités Marque
+- **Assistant de Création de Campagne**: Processus en 4 étapes pour créer des campagnes détaillées
+  - Détails et objectifs de campagne
+  - Configuration budget et calendrier
+  - Exigences influenceurs (niches, abonnés, plateformes)
+  - Directives de contenu et standards de marque
+- **Gestion de Campagnes**: Voir, éditer, et suivre toutes les campagnes
+- **Découverte d'Influenceurs**: Système de recherche et filtrage avancé
+- **Tableau de Bord Analytics**: Suivi ROI, métriques d'engagement, analyse des dépenses
+- **Outils de Collaboration**: Messagerie directe avec les influenceurs
 
-### Influencer Dashboard & Features
-- **Profile Management**: Comprehensive profile editing with social media integration
-- **Campaign Requests**: Review and respond to brand collaboration offers
-- **Portfolio Showcase**: Display previous work with performance metrics
-- **Earnings Tracking**: Monitor income and growth statistics
-- **Public Profile**: Professional profile page for brand discovery
+### Tableau de Bord & Fonctionnalités Influenceur
+- **Gestion de Profil**: Édition de profil complète avec intégration réseaux sociaux
+- **Demandes de Campagne**: Examiner et répondre aux offres de collaboration de marques
+- **Vitrine Portfolio**: Afficher le travail précédent avec métriques de performance
+- **Suivi des Gains**: Surveiller les revenus et statistiques de croissance
+- **Profil Public**: Page de profil professionnelle pour la découverte par les marques
 
-### Admin Panel
-- **User Management**: Comprehensive user oversight and moderation
-- **Campaign Moderation**: Review and approve/reject campaigns
-- **System Analytics**: Platform-wide statistics and insights
-- **Content Oversight**: Monitor platform activity and ensure quality
+### Panneau Admin
+- **Gestion Utilisateurs**: Supervision et modération complètes des utilisateurs
+- **Modération Campagnes**: Examiner et approuver/rejeter les campagnes
+- **Analytics Système**: Statistiques et insights à l'échelle de la plateforme
+- **Supervision Contenu**: Surveiller l'activité de la plateforme et assurer la qualité
 
-### Communication System
-- **Real-time Messaging**: Direct communication between brands and influencers
-- **Conversation Management**: Organized message threads with search functionality
-- **Notification System**: Real-time alerts for important updates
-- **File Sharing**: Support for images and attachments in conversations
+### Système de Communication
+- **Messagerie Temps Réel**: Communication directe entre marques et influenceurs
+- **Gestion Conversations**: Fils de messages organisés avec fonctionnalité de recherche
+- **Système de Notifications**: Alertes temps réel pour les mises à jour importantes
+- **Partage de Fichiers**: Support pour images et pièces jointes dans les conversations
 
-## 📱 Pages & Components
+## 📱 Pages & Composants
 
-### Authentication Pages
-- **Login Page** (`/login`): Multi-role authentication with demo accounts
-- **Registration Page** (`/register`): Two-step registration process with role-specific fields
+### Pages d'Authentification
+- **Page de Connexion** (`/login`): Authentification multi-rôles avec comptes démo
+- **Page d'Inscription** (`/register`): Processus d'inscription en deux étapes avec champs spécifiques aux rôles
 
-### Brand Pages
-- **Brand Dashboard** (`/brand/dashboard`): Overview of campaigns, stats, and recommended influencers
-- **Create Campaign** (`/brand/create-campaign`): Multi-step campaign creation wizard
-- **Manage Campaigns** (`/brand/campaigns`): Campaign overview with filtering and management tools
-- **Find Influencers** (`/brand/find-influencers`): Advanced influencer search and discovery
+### Pages Marque
+- **Tableau de Bord Marque** (`/brand/dashboard`): Aperçu des campagnes, stats, et influenceurs recommandés
+- **Créer Campagne** (`/brand/create-campaign`): Assistant de création de campagne multi-étapes
+- **Gérer Campagnes** (`/brand/campaigns`): Aperçu campagne avec outils de filtrage et gestion
+- **Trouver Influenceurs** (`/brand/find-influencers`): Recherche et découverte d'influenceurs avancée
 
-### Influencer Pages
-- **Influencer Dashboard** (`/influencer/dashboard`): Performance metrics, pending requests, active campaigns
-- **Campaign Requests** (`/influencer/requests`): Review and manage brand collaboration offers
-- **Profile View** (`/influencer/profile`): Public-facing profile with portfolio and statistics
-- **Edit Profile** (`/influencer/edit-profile`): Comprehensive profile management interface
+### Pages Influenceur
+- **Tableau de Bord Influenceur** (`/influencer/dashboard`): Métriques de performance, demandes en attente, campagnes actives
+- **Demandes de Campagne** (`/influencer/requests`): Examiner et gérer les offres de collaboration de marques
+- **Vue Profil** (`/influencer/profile`): Profil public avec portfolio et statistiques
+- **Éditer Profil** (`/influencer/edit-profile`): Interface de gestion de profil complète
 
-### Admin Pages
-- **Admin Dashboard** (`/admin/dashboard`): System-wide analytics and recent activity
-- **User Management** (`/admin/users`): User oversight with search and filtering
-- **Campaign Moderation** (`/admin/campaigns`): Review and moderate platform campaigns
+### Pages Admin
+- **Tableau de Bord Admin** (`/admin/dashboard`): Analytics système et activité récente
+- **Gestion Utilisateurs** (`/admin/users`): Supervision utilisateurs avec recherche et filtrage
+- **Modération Campagnes** (`/admin/campaigns`): Examiner et modérer les campagnes de la plateforme
 
-### Shared Pages
-- **Messages** (`/messages`): Conversation overview with search functionality
-- **Conversation** (`/messages/:id`): Individual conversation interface with real-time messaging
-- **404 Page** (`/*`): Custom not found page with role-based navigation
+### Pages Partagées
+- **Messages** (`/messages`): Aperçu conversations avec fonctionnalité de recherche
+- **Conversation** (`/messages/:id`): Interface de conversation individuelle avec messagerie temps réel
+- **Page 404** (`/*`): Page personnalisée non trouvée avec navigation basée sur les rôles
 
-## 🛠 Technical Architecture
+## 🛠 Architecture Technique
 
-### Frontend Stack
-- **React 18**: Modern React with hooks and functional components
-- **TypeScript**: Full type safety and enhanced developer experience
-- **Tailwind CSS**: Utility-first CSS framework for responsive design
-- **React Router**: Client-side routing with protected routes
-- **Lucide React**: Beautiful, customizable icons
+### Stack Frontend
+- **React 18**: React moderne avec hooks et composants fonctionnels
+- **TypeScript**: Sécurité de type complète et expérience développeur améliorée
+- **Tailwind CSS**: Framework CSS utility-first pour design responsive
+- **React Router**: Routage côté client avec routes protégées
+- **Lucide React**: Icônes belles et personnalisables
 
-### State Management
-- **Context API**: User authentication and notification management
-- **Local Storage**: Persistent user sessions and notification history
-- **React Hooks**: Component-level state management
+### Gestion d'État
+- **Context API**: Gestion authentification utilisateur et notifications
+- **Local Storage**: Sessions utilisateur persistantes et historique notifications
+- **React Hooks**: Gestion d'état au niveau composant
 
-### Key Components
-- **Layout System**: Role-based layouts with responsive sidebars
-- **Protected Routes**: Route guards based on user roles and authentication
-- **Notification System**: Real-time notifications with persistence
-- **Loading States**: Consistent loading indicators throughout the app
-- **Form Validation**: Client-side validation with user feedback
+### Composants Clés
+- **Système de Layout**: Layouts basés sur les rôles avec barres latérales responsives
+- **Routes Protégées**: Gardes de route basés sur les rôles utilisateur et authentification
+- **Système de Notifications**: Notifications temps réel avec persistance
+- **États de Chargement**: Indicateurs de chargement cohérents dans toute l'app
+- **Validation de Formulaires**: Validation côté client avec retour utilisateur
 
-## 🎨 Design System
+## 🎨 Système de Design
 
-### Color Palette
-- **Primary**: Purple (#7C3AED) - Brand identity and primary actions
-- **Secondary**: Teal (#14B8A6) - Secondary actions and highlights
-- **Success**: Green (#10B981) - Success states and positive actions
-- **Warning**: Yellow (#F59E0B) - Warning states and pending items
-- **Error**: Red (#EF4444) - Error states and destructive actions
-- **Neutral**: Gray scale for text and backgrounds
+### Palette de Couleurs
+- **Primaire**: Violet (#7C3AED) - Identité de marque et actions primaires
+- **Secondaire**: Sarcelle (#14B8A6) - Actions secondaires et surlignages
+- **Succès**: Vert (#10B981) - États de succès et actions positives
+- **Avertissement**: Jaune (#F59E0B) - États d'avertissement et éléments en attente
+- **Erreur**: Rouge (#EF4444) - États d'erreur et actions destructives
+- **Neutre**: Échelle de gris pour texte et arrière-plans
 
-### Typography
-- **Headings**: Bold, clear hierarchy with consistent spacing
-- **Body Text**: Readable font sizes with proper line height
-- **Interactive Elements**: Clear visual feedback for all interactions
+### Typographie
+- **Titres**: Hiérarchie audacieuse et claire avec espacement cohérent
+- **Texte Corps**: Tailles de police lisibles avec hauteur de ligne appropriée
+- **Éléments Interactifs**: Retour visuel clair pour toutes les interactions
 
-### Layout Principles
-- **Responsive Design**: Mobile-first approach with breakpoints
-- **Consistent Spacing**: 8px grid system for uniform layouts
-- **Visual Hierarchy**: Clear information architecture
-- **Accessibility**: WCAG compliant color contrasts and navigation
+### Principes de Layout
+- **Design Responsive**: Approche mobile-first avec points de rupture
+- **Espacement Cohérent**: Système de grille 8px pour layouts uniformes
+- **Hiérarchie Visuelle**: Architecture d'information claire
+- **Accessibilité**: Contrastes de couleurs et navigation conformes WCAG
 
-## 📊 Data Models
+## 📊 Modèles de Données
 
-### User Types
-- **Brand**: Company profiles with industry and campaign data
-- **Influencer**: Creator profiles with social media metrics
-- **Admin**: Platform administrators with moderation capabilities
+### Types d'Utilisateurs
+- **Marque**: Profils d'entreprise avec données industrie et campagne
+- **Influenceur**: Profils créateurs avec métriques réseaux sociaux
+- **Admin**: Administrateurs plateforme avec capacités de modération
 
-### Campaign System
-- **Campaign Creation**: Multi-step wizard with comprehensive requirements
-- **Application Process**: Influencer proposals and brand responses
-- **Collaboration Tracking**: Progress monitoring and deliverable management
+### Système de Campagne
+- **Création Campagne**: Assistant multi-étapes avec exigences complètes
+- **Processus de Candidature**: Propositions influenceurs et réponses marques
+- **Suivi Collaboration**: Surveillance progrès et gestion livrables
 
-### Messaging System
-- **Conversations**: Thread-based messaging between users
-- **Real-time Updates**: Live message delivery and read receipts
-- **File Support**: Image and document sharing capabilities
+### Système de Messagerie
+- **Conversations**: Messagerie basée sur fils entre utilisateurs
+- **Mises à Jour Temps Réel**: Livraison de messages en direct et accusés de lecture
+- **Support Fichiers**: Partage d'images et documents
 
-## 🔐 Security Features
+## 🔐 Fonctionnalités de Sécurité
 
-### Authentication
-- **Role-based Access Control**: Strict route protection based on user roles
-- **Session Management**: Secure token handling and automatic logout
-- **Input Validation**: Client-side validation with server-side verification
+### Authentification
+- **Contrôle d'Accès Basé sur les Rôles**: Protection de route stricte basée sur les rôles utilisateur
+- **Gestion de Session**: Gestion de tokens sécurisée et déconnexion automatique
+- **Validation d'Entrée**: Validation côté client avec vérification côté serveur
 
-### Data Protection
-- **Type Safety**: TypeScript ensures data integrity
-- **Sanitization**: Input sanitization to prevent XSS attacks
-- **Privacy Controls**: User data protection and consent management
+### Protection des Données
+- **Sécurité de Type**: TypeScript assure l'intégrité des données
+- **Assainissement**: Assainissement d'entrée pour prévenir les attaques XSS
+- **Contrôles de Confidentialité**: Protection des données utilisateur et gestion du consentement
 
-## 🚀 Getting Started
+## 🚀 Démarrage
 
-### Prerequisites
+### Prérequis
 - Node.js 18+ 
-- npm or yarn package manager
+- Gestionnaire de paquets npm ou yarn
 
 ### Installation
 ```bash
-# Clone the repository
+# Cloner le dépôt
 git clone <repository-url>
 
-# Install dependencies
+# Installer les dépendances
 npm install
 
-# Start development server
+# Démarrer le serveur de développement
 npm run dev
 
-# Build for production
+# Construire pour la production
 npm run build
 ```
 
-### Demo Accounts
-- **Brand**: brand@example.com / password
-- **Influencer**: influencer@example.com / password  
+### Comptes Démo
+- **Marque**: marque@example.com / password
+- **Influenceur**: influenceur@example.com / password  
 - **Admin**: admin@example.com / password
 
-## 📈 Future Enhancements
+## 📈 Améliorations Futures
 
-### Planned Features
-- **Payment Integration**: Secure payment processing for campaigns
-- **Advanced Analytics**: Detailed performance metrics and reporting
-- **Content Calendar**: Campaign scheduling and content planning
-- **API Integration**: Social media platform integrations
-- **Mobile App**: Native mobile applications for iOS and Android
+### Fonctionnalités Planifiées
+- **Intégration Paiement**: Traitement de paiement sécurisé pour campagnes
+- **Analytics Avancées**: Métriques de performance détaillées et rapports
+- **Calendrier de Contenu**: Planification de campagnes et planification de contenu
+- **Intégration API**: Intégrations plateformes réseaux sociaux
+- **App Mobile**: Applications mobiles natives pour iOS et Android
 
-### Technical Improvements
-- **Database Integration**: Replace mock data with real database
-- **Real-time Features**: WebSocket integration for live updates
-- **Performance Optimization**: Code splitting and lazy loading
-- **Testing Suite**: Comprehensive unit and integration tests
-- **Deployment Pipeline**: Automated CI/CD with staging environments
+### Améliorations Techniques
+- **Intégration Base de Données**: Remplacer données fictives par vraie base de données
+- **Fonctionnalités Temps Réel**: Intégration WebSocket pour mises à jour en direct
+- **Optimisation Performance**: Division de code et chargement paresseux
+- **Suite de Tests**: Tests unitaires et d'intégration complets
+- **Pipeline de Déploiement**: CI/CD automatisé avec environnements de staging
 
-## 🤝 Contributing
+## 🤝 Contribution
 
-This project follows modern React development practices with TypeScript for type safety and Tailwind CSS for styling. The codebase is organized with clear separation of concerns and reusable components.
+Ce projet suit les pratiques modernes de développement React avec TypeScript pour la sécurité de type et Tailwind CSS pour le style. La base de code est organisée avec une séparation claire des préoccupations et des composants réutilisables.
 
-### Development Guidelines
-- **Component Structure**: Functional components with hooks
-- **Type Safety**: Full TypeScript coverage
-- **Responsive Design**: Mobile-first approach
-- **Code Organization**: Feature-based file structure
-- **Performance**: Optimized rendering and state management
+### Directives de Développement
+- **Structure de Composants**: Composants fonctionnels avec hooks
+- **Sécurité de Type**: Couverture TypeScript complète
+- **Design Responsive**: Approche mobile-first
+- **Organisation de Code**: Structure de fichiers basée sur les fonctionnalités
+- **Performance**: Rendu optimisé et gestion d'état
 
-## 📄 License
+## 📄 Licence
 
-This project is built as a demonstration of modern web development practices and full-stack application architecture.
+Ce projet est construit comme une démonstration des pratiques modernes de développement web et de l'architecture d'application full-stack.
 
 ---
 
-**InfluMatch** - Connecting Brands with Authentic Voices
+**InfluMaroc** - Connecter les Marques avec les Voix Authentiques du Maroc

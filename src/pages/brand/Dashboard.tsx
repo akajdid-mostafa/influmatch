@@ -20,109 +20,107 @@ const BrandDashboard = () => {
         // In a real app, these would be actual API calls
         await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
         
-        // Mock data for demo purposes
+        // Mock data for demo purposes - Updated for Moroccan market
         const mockStats: BrandStats = {
-          campaignsLaunched: 8,
-          influencersCollaborated: 15,
-          totalSpent: 12500,
-          averageEngagement: 3.2,
-          roi: 2.4,
-          reach: 350000,
-          conversionRate: 1.8
+          campaignsLaunched: 12,
+          influencersCollaborated: 28,
+          totalSpent: 85000,
+          averageEngagement: 4.2,
+          roi: 3.1,
+          reach: 850000,
+          conversionRate: 2.8
         };
         
         const mockCampaigns: Campaign[] = [
           {
             id: '1',
-            title: 'Summer Collection Launch',
-            description: 'Promote our new summer collection with creative posts',
-            brand: { id: 1, name: 'Samsung', email: 'brand@example.com', role: 'brand' },
-            budget: { min: 500, max: 1500, currency: 'USD' },
+            title: 'Collection Ramadan 2025',
+            description: 'Promouvoir notre nouvelle collection Ramadan avec des posts créatifs',
+            brand: { id: 1, name: 'Marjane Market', email: 'marque@example.com', role: 'brand' },
+            budget: { min: 8000, max: 15000, currency: 'MAD' },
             requirements: {
-              niches: ['fashion', 'lifestyle'],
-              minFollowers: 10000,
+              niches: ['mode', 'lifestyle', 'culture marocaine'],
+              minFollowers: 50000,
               platforms: ['instagram', 'tiktok']
             },
             timeline: {
-              startDate: '2025-06-01',
-              endDate: '2025-06-30',
+              startDate: '2025-02-15',
+              endDate: '2025-03-15',
             },
             status: 'open',
-            createdAt: '2025-05-15T10:30:00Z',
-            updatedAt: '2025-05-15T10:30:00Z'
+            createdAt: '2025-01-15T10:30:00Z',
+            updatedAt: '2025-01-15T10:30:00Z'
           },
           {
             id: '2',
-            title: 'Product Review Campaign',
-            description: 'Honest reviews of our new tech gadget',
-            brand: { id: 1, name: 'Samsung Brand', email: 'brand@example.com', role: 'brand' },
-            budget: { min: 300, max: 800, currency: 'USD' },
+            title: 'Test Produits Argan Bio',
+            description: 'Reviews authentiques de notre nouvelle gamme d\'huile d\'argan',
+            brand: { id: 1, name: 'Marjane Market', email: 'marque@example.com', role: 'brand' },
+            budget: { min: 5000, max: 12000, currency: 'MAD' },
             requirements: {
-              niches: ['tech', 'gadgets'],
-              minFollowers: 5000,
+              niches: ['beauté', 'produits naturels', 'lifestyle'],
+              minFollowers: 25000,
               platforms: ['youtube', 'instagram']
             },
             timeline: {
-              startDate: '2025-05-20',
-              endDate: '2025-06-15',
+              startDate: '2025-01-20',
+              endDate: '2025-02-20',
             },
             status: 'in-progress',
-            createdAt: '2025-05-10T14:15:00Z',
-            updatedAt: '2025-05-10T14:15:00Z'
+            createdAt: '2025-01-10T14:15:00Z',
+            updatedAt: '2025-01-10T14:15:00Z'
           }
         ];
         
         const mockInfluencers: InfluencerProfile[] = [
           {
-            id: 101, // Unique ID (adjust as needed)
-            name: 'Ezzoubair Hilal',
-            email: 'contact.ezzoubairhilal@example.com', // Placeholder (no public email)
+            id: 101,
+            name: 'Saad Lamjarred',
+            email: 'contact.saadlamjarred@example.com',
             role: 'influencer',
-            profileImage: 'https://i.ibb.co/ds9tQGj8/34982531-1765409630209343-1025505230982217728-n.jpg', // Direct IG image URL
-            bio: 'Moroccan actor and digital content creator. Officiel account 🎬',
-            niche: ['acting', 'comedy', 'drama'],
-            location: 'Morocco',
+            profileImage: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            bio: 'Artiste marocain international | Chanteur et compositeur 🎵',
+            niche: ['musique', 'divertissement', 'culture marocaine'],
+            location: 'Rabat, Maroc',
             followers: {
-              instagram: 1100000, // 1.1M followers (numeric format)
-              youtube: 213,    // Add if applicable
-            
+              instagram: 8500000,
+              youtube: 12000000,
             },
-            engagementRate: 5.2,
+            engagementRate: 6.8,
             averageRating: 4.9
           },
           {
             id: 102,
-            name: 'Saber Chawni',
-            email: 'contact.saberchawni@example.com', // Placeholder (no public email found)
+            name: 'Dounia Batma',
+            email: 'contact.douniabatma@example.com',
             role: 'influencer',
-            profileImage: 'https://i.ibb.co/Q7bJFGR2/470901101-1784413859038738-4680390675010867916-n.jpg', // Replace with actual IG profile pic URL
-            bio: 'Moroccan actor | Official Instagram account',
-            niche: ['acting', 'comedy', 'drama'],
-            location: 'Morocco',
+            profileImage: 'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            bio: 'Chanteuse marocaine | Actrice | Ambassadrice de la mode 👗',
+            niche: ['mode', 'beauté', 'musique', 'lifestyle'],
+            location: 'Casablanca, Maroc',
             followers: {
-              instagram: 850000, // 850K followers (as of June 2024)
-              youtube: 100000,
+              instagram: 3200000,
+              youtube: 1800000,
             },
-            engagementRate: 4.5, // Estimated (adjust based on likes/comments)
-            averageRating: 4.7
+            engagementRate: 5.4,
+            averageRating: 4.8
           },
           {
             id: 103,
-            name: 'Adil Taouil',
-            email: 'contact.adiltaouil@example.com', // Placeholder (no public email found)
+            name: 'Amine Aouni',
+            email: 'contact.amineaouni@example.com',
             role: 'influencer',
-            profileImage: 'https://i.ibb.co/tkXTxQL/338189820-1175613219783370-3522481196877458708-n.jpg', // Replace with actual IG profile pic URL
-            bio: 'Actor | Moroccan cinema and TV', // Taken from his Instagram bio
-            niche: ['acting', 'film', 'television'],
-            location: 'Morocco',
+            profileImage: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            bio: 'Acteur et créateur de contenu marocain | Comédie et divertissement 😄',
+            niche: ['comédie', 'divertissement', 'acting'],
+            location: 'Casablanca, Maroc',
             followers: {
-              instagram: 620000, // 620K followers (as of June 2024)
-              youtube: 800000,
+              instagram: 870000,
+              tiktok: 1200000,
             },
-            engagementRate: 4.3, // Estimated based on typical engagement
-            averageRating: 4.6
+            engagementRate: 7.2,
+            averageRating: 4.7
           },
-          
         ];
         
         setStats(mockStats);
@@ -146,34 +144,34 @@ const BrandDashboard = () => {
     );
   }
 
-  // Chart data
+  // Chart data - Updated for Moroccan market
   const campaignPerformanceData = [
-    { label: 'Jan', value: 2.1 },
-    { label: 'Feb', value: 2.3 },
-    { label: 'Mar', value: 2.0 },
-    { label: 'Apr', value: 2.6 },
-    { label: 'May', value: 2.4 },
+    { label: 'Jan', value: 2.8 },
+    { label: 'Fév', value: 3.1 },
+    { label: 'Mar', value: 2.9 },
+    { label: 'Avr', value: 3.4 },
+    { label: 'Mai', value: 3.1 },
   ];
 
   const spendingData = [
-    { label: 'Jan', value: 8500 },
-    { label: 'Feb', value: 9200 },
-    { label: 'Mar', value: 10800 },
-    { label: 'Apr', value: 11200 },
-    { label: 'May', value: 12500 },
+    { label: 'Jan', value: 65000 },
+    { label: 'Fév', value: 72000 },
+    { label: 'Mar', value: 78000 },
+    { label: 'Avr', value: 82000 },
+    { label: 'Mai', value: 85000 },
   ];
 
   const campaignsByNicheData = [
-    { label: 'Fashion', value: 3, color: 'bg-gradient-to-r from-pink-500 to-rose-600' },
-    { label: 'Tech', value: 2, color: 'bg-gradient-to-r from-blue-500 to-indigo-600' },
-    { label: 'Lifestyle', value: 2, color: 'bg-gradient-to-r from-purple-500 to-violet-600' },
-    { label: 'Beauty', value: 1, color: 'bg-gradient-to-r from-green-500 to-emerald-600' },
+    { label: 'Mode', value: 4, color: 'bg-gradient-to-r from-pink-500 to-rose-600' },
+    { label: 'Beauté', value: 3, color: 'bg-gradient-to-r from-purple-500 to-violet-600' },
+    { label: 'Lifestyle', value: 3, color: 'bg-gradient-to-r from-blue-500 to-indigo-600' },
+    { label: 'Culture Marocaine', value: 2, color: 'bg-gradient-to-r from-green-500 to-emerald-600' },
   ];
 
   const platformDistributionData = [
-    { label: 'Instagram', value: 45 },
+    { label: 'Instagram', value: 50 },
     { label: 'TikTok', value: 30 },
-    { label: 'YouTube', value: 25 },
+    { label: 'YouTube', value: 20 },
   ];
 
   return (
@@ -182,16 +180,16 @@ const BrandDashboard = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-4xl font-bold text-gray-900 text-shadow">
-            Dashboard <span className="text-gradient">Overview</span>
+            Tableau de bord <span className="text-gradient">Marque</span>
           </h1>
-          <p className="text-gray-600 mt-2 text-lg">Manage your campaigns and discover new influencers</p>
+          <p className="text-gray-600 mt-2 text-lg">Gérez vos campagnes et découvrez de nouveaux influenceurs</p>
           <div className="flex items-center mt-4 space-x-4">
             <div className="flex items-center text-green-600">
               <div className="w-3 h-3 rounded-full bg-green-400 mr-2 animate-pulse"></div>
-              <span className="text-sm font-medium">All systems operational</span>
+              <span className="text-sm font-medium">Tous les systèmes opérationnels</span>
             </div>
             <div className="text-gray-400">•</div>
-            <span className="text-sm text-gray-500">Last updated: {new Date().toLocaleTimeString()}</span>
+            <span className="text-sm text-gray-500">Dernière mise à jour: {new Date().toLocaleTimeString()}</span>
           </div>
         </div>
         <Link
@@ -199,7 +197,7 @@ const BrandDashboard = () => {
           className="btn-gradient inline-flex items-center shadow-lg hover:shadow-xl"
         >
           <PlusCircle className="mr-3 h-6 w-6" />
-          New Campaign
+          Nouvelle Campagne
         </Link>
       </div>
       
@@ -214,13 +212,13 @@ const BrandDashboard = () => {
                 </div>
                 <div className="ml-6">
                   <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-                    Campaigns Launched
+                    Campagnes Lancées
                   </p>
                   <div className="flex items-center mt-2">
                     <div className="text-3xl font-bold text-gray-900">{stats.campaignsLaunched}</div>
                     <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                       <ArrowUp className="h-4 w-4" />
-                      <span className="font-semibold">12%</span>
+                      <span className="font-semibold">15%</span>
                     </div>
                   </div>
                 </div>
@@ -242,7 +240,7 @@ const BrandDashboard = () => {
                     <div className="text-3xl font-bold text-gray-900">{stats.influencersCollaborated}</div>
                     <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                       <ArrowUp className="h-4 w-4" />
-                      <span className="font-semibold">8%</span>
+                      <span className="font-semibold">12%</span>
                     </div>
                   </div>
                 </div>
@@ -258,13 +256,13 @@ const BrandDashboard = () => {
                 </div>
                 <div className="ml-6">
                   <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-                    Total Spent
+                    Total Dépensé
                   </p>
                   <div className="flex items-center mt-2">
-                    <div className="text-3xl font-bold text-gray-900">${stats.totalSpent.toLocaleString()}</div>
+                    <div className="text-3xl font-bold text-gray-900">{stats.totalSpent.toLocaleString()} MAD</div>
                     <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                       <ArrowUp className="h-4 w-4" />
-                      <span className="font-semibold">15%</span>
+                      <span className="font-semibold">18%</span>
                     </div>
                   </div>
                 </div>
@@ -280,13 +278,13 @@ const BrandDashboard = () => {
                 </div>
                 <div className="ml-6">
                   <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-                    ROI Multiplier
+                    ROI Multiplicateur
                   </p>
                   <div className="flex items-center mt-2">
                     <div className="text-3xl font-bold text-gray-900">{stats.roi}x</div>
                     <div className="ml-3 flex items-center text-sm text-green-600 bg-green-100 px-2 py-1 rounded-full">
                       <ArrowUp className="h-4 w-4" />
-                      <span className="font-semibold">5%</span>
+                      <span className="font-semibold">8%</span>
                     </div>
                   </div>
                 </div>
@@ -300,32 +298,32 @@ const BrandDashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <LineChart
           data={campaignPerformanceData}
-          title="Campaign ROI Performance"
-          subtitle="Return on investment over time"
+          title="Performance ROI des Campagnes"
+          subtitle="Retour sur investissement dans le temps"
           showTrend={true}
-          trendValue={5.2}
+          trendValue={8.2}
         />
         
         <LineChart
           data={spendingData}
-          title="Monthly Spending"
-          subtitle="Campaign budget allocation"
+          title="Dépenses Mensuelles"
+          subtitle="Allocation du budget des campagnes (MAD)"
           showTrend={true}
-          trendValue={15.3}
+          trendValue={18.3}
         />
         
         <BarChart
           data={campaignsByNicheData}
-          title="Campaigns by Niche"
-          subtitle="Distribution across content categories"
+          title="Campagnes par Niche"
+          subtitle="Distribution par catégories de contenu"
         />
         
         <DonutChart
           data={platformDistributionData}
-          title="Platform Distribution"
-          subtitle="Campaign reach by platform"
+          title="Distribution par Plateforme"
+          subtitle="Portée des campagnes par plateforme"
           centerValue="100%"
-          centerLabel="Coverage"
+          centerLabel="Couverture"
         />
       </div>
       
@@ -339,10 +337,10 @@ const BrandDashboard = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900">
-                  Active Campaigns
+                  Campagnes Actives
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">
-                  Your current running campaigns
+                  Vos campagnes en cours d'exécution
                 </p>
               </div>
             </div>
@@ -350,7 +348,7 @@ const BrandDashboard = () => {
               to="/brand/campaigns"
               className="text-sm font-semibold text-gradient hover:opacity-80 transition-opacity px-4 py-2 rounded-xl hover:bg-purple-50"
             >
-              View all →
+              Voir tout →
             </Link>
           </div>
         </div>
@@ -361,7 +359,7 @@ const BrandDashboard = () => {
                 <Target className="h-8 w-8 text-white" />
               </div>
               <p className="text-gray-500 text-lg">
-                No active campaigns. <Link to="/brand/create-campaign" className="text-gradient hover:opacity-80 font-semibold">Create one now</Link>
+                Aucune campagne active. <Link to="/brand/create-campaign" className="text-gradient hover:opacity-80 font-semibold">Créez-en une maintenant</Link>
               </p>
             </div>
           ) : (
@@ -377,7 +375,7 @@ const BrandDashboard = () => {
                             ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white' 
                             : 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white'
                         }`}>
-                          {campaign.status === 'open' ? '🚀 Open for Applications' : '⚡ In Progress'}
+                          {campaign.status === 'open' ? '🚀 Ouvert aux candidatures' : '⚡ En cours'}
                         </span>
                       </div>
                     </div>
@@ -385,7 +383,7 @@ const BrandDashboard = () => {
                     <div className="flex flex-wrap items-center gap-6">
                       <div className="flex items-center text-gray-500">
                         <DollarSign className="h-5 w-5 mr-2 text-green-500" />
-                        <span className="font-semibold">${campaign.budget.min} - ${campaign.budget.max}</span>
+                        <span className="font-semibold">{campaign.budget.min} - {campaign.budget.max} {campaign.budget.currency}</span>
                       </div>
                       <div className="flex items-center text-gray-500">
                         <Users className="h-5 w-5 mr-2 text-purple-500" />
@@ -408,7 +406,7 @@ const BrandDashboard = () => {
                       to={`/brand/campaigns#${campaign.id}`}
                       className="btn-secondary group-hover:scale-105 transition-transform duration-300"
                     >
-                      View Details
+                      Voir Détails
                     </Link>
                   </div>
                 </div>
@@ -428,10 +426,10 @@ const BrandDashboard = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900">
-                  Recommended Influencers
+                  Influenceurs Recommandés
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">
-                  Influencers that match your brand's niche and audience
+                  Influenceurs qui correspondent à votre niche et audience
                 </p>
               </div>
             </div>
@@ -439,7 +437,7 @@ const BrandDashboard = () => {
               to="/brand/find-influencers"
               className="text-sm font-semibold text-gradient hover:opacity-80 transition-opacity px-4 py-2 rounded-xl hover:bg-purple-50"
             >
-              Discover more →
+              Découvrir plus →
             </Link>
           </div>
         </div>
@@ -476,7 +474,7 @@ const BrandDashboard = () => {
                     <div className="flex items-center text-gray-500">
                       <Users className="h-4 w-4 mr-2" />
                       <span className="font-semibold">
-                        {Object.values(influencer.followers || {}).reduce((a, b) => a + b, 0).toLocaleString()} followers
+                        {Object.values(influencer.followers || {}).reduce((a, b) => a + b, 0).toLocaleString()} abonnés
                       </span>
                     </div>
                     <div className="flex items-center text-gray-500">
@@ -498,7 +496,7 @@ const BrandDashboard = () => {
                     ))}
                   </div>
                   <button className="btn-primary text-sm px-6 py-3 group-hover:scale-105 transition-transform duration-300">
-                    Contact
+                    Contacter
                   </button>
                 </div>
               </div>

@@ -31,24 +31,24 @@ const Conversation = () => {
         // In a real app, these would be actual API calls
         await new Promise(resolve => setTimeout(resolve, 800)); // Simulate network delay
         
-        // Mock conversation data
+        // Mock conversation data - Updated for Moroccan market
         const mockConversation: ConversationType = {
           id: conversationId || '1',
           participants: [
-            { id: 1, name: 'Samsung Brand', email: 'brand@example.com', role: 'brand' },
-            { id: 2, name: 'Ezzoubair Hilal', email: 'influencer@example.com', role: 'influencer' }
+            { id: 1, name: 'Marjane Market', email: 'marque@example.com', role: 'brand' },
+            { id: 2, name: 'Saad Lamjarred', email: 'influenceur@example.com', role: 'influencer' }
           ],
           unreadCount: 0,
           updatedAt: new Date().toISOString()
         };
         
-        // Mock messages data
+        // Mock messages data - Updated for Moroccan market
         const mockMessages: Message[] = [
           {
             id: '1',
             conversationId: conversationId || '1',
             senderId: 1,
-            content: 'Hi Hilal, we would love to work with you on our summer campaign!',
+            content: 'Bonjour Saad, nous aimerions collaborer avec vous pour notre campagne Ramadan !',
             timestamp: new Date(Date.now() - 3600000 * 24).toISOString(), // 1 day ago
             read: true
           },
@@ -56,7 +56,7 @@ const Conversation = () => {
             id: '2',
             conversationId: conversationId || '1',
             senderId: 2,
-            content: "Hi there! I'm interested to hear more about your campaign. What kind of content are you looking for? " ,
+            content: "Bonjour ! Je suis intéressé d'en savoir plus sur votre campagne. Quel type de contenu recherchez-vous ?",
             timestamp: new Date(Date.now() - 3600000 * 23).toISOString(), // 23 hours ago
             read: true
           },
@@ -64,7 +64,7 @@ const Conversation = () => {
             id: '3',
             conversationId: conversationId || '1',
             senderId: 1,
-            content: "We're looking for lifestyle content featuring our new summer collection. We'd need 3 Instagram posts and 2 stories over the course of the next month.",
+            content: "Nous recherchons du contenu lifestyle mettant en valeur notre nouvelle collection Ramadan. Nous aurions besoin de 3 posts Instagram et 2 stories sur le mois prochain.",
             timestamp: new Date(Date.now() - 3600000 * 22).toISOString(), // 22 hours ago
             read: true
           },
@@ -72,7 +72,7 @@ const Conversation = () => {
             id: '4',
             conversationId: conversationId || '1',
             senderId: 2,
-            content: "That sounds perfect for my content style. What's your budget range for this campaign?",
+            content: "Cela correspond parfaitement à mon style de contenu. Quelle est votre fourchette budgétaire pour cette campagne ?",
             timestamp: new Date(Date.now() - 3600000 * 12).toISOString(), // 12 hours ago
             read: true
           },
@@ -80,7 +80,7 @@ const Conversation = () => {
             id: '5',
             conversationId: conversationId || '1',
             senderId: 1,
-            content: 'Our budget is $1,500-2,000 for all deliverables. Does that work for you?',
+            content: 'Notre budget est de 15 000-25 000 MAD pour tous les livrables. Est-ce que cela vous convient ?',
             timestamp: new Date(Date.now() - 3600000 * 6).toISOString(), // 6 hours ago
             read: true
           },
@@ -88,7 +88,7 @@ const Conversation = () => {
             id: '6',
             conversationId: conversationId || '1',
             senderId: 2,
-            content: "Yes, that budget works for me! I'd be happy to discuss the specific details and timeline further.",
+            content: "Oui, ce budget me convient ! Je serais ravi de discuter des détails spécifiques et du calendrier plus en détail.",
             timestamp: new Date(Date.now() - 3600000 * 5).toISOString(), // 5 hours ago
             read: true
           }
@@ -144,7 +144,7 @@ const Conversation = () => {
 
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
   };
 
   // Get the other participant (not the current user)
@@ -184,11 +184,11 @@ const Conversation = () => {
                   ? 'bg-gradient-to-r from-purple-100 to-indigo-100 text-purple-800'
                   : 'bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-800'
               }`}>
-                {otherParticipant?.role === 'brand' ? '🏢 Brand' : '⭐ Creator'}
+                {otherParticipant?.role === 'brand' ? '🏢 Marque' : '⭐ Créateur'}
               </span>
               <div className="ml-3 flex items-center text-green-600">
                 <div className="w-2 h-2 rounded-full bg-green-400 mr-2 animate-pulse"></div>
-                <span className="text-xs font-medium">Online</span>
+                <span className="text-xs font-medium">En ligne</span>
               </div>
             </div>
           </div>
@@ -241,7 +241,7 @@ const Conversation = () => {
           </div>
           <input
             type="text"
-            placeholder="Type a message..."
+            placeholder="Tapez un message..."
             className="flex-1 input-modern"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
