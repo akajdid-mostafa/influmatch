@@ -104,19 +104,110 @@
     transform: translateY(-2px);
   }
   
-  /* Enhanced input styles with floating labels */
+  /* IMPROVED INPUT STYLES - Much cleaner and modern */
   .input-modern {
-    @apply w-full px-6 py-4 bg-white/95 border-2 border-gray-200 rounded-2xl;
-    @apply focus:outline-none focus:ring-0 focus:border-transparent;
-    @apply transition-all duration-300 placeholder-gray-400;
-    backdrop-filter: blur(10px);
-    position: relative;
+    @apply w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500;
+    @apply focus:outline-none focus:ring-0 focus:border-purple-500 focus:bg-white;
+    @apply transition-all duration-300 ease-in-out;
+    font-size: 16px;
+    line-height: 1.5;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   }
   
   .input-modern:focus {
-    background: linear-gradient(135deg, rgba(131, 58, 180, 0.05) 0%, rgba(253, 29, 29, 0.05) 100%);
-    border-image: var(--primary-gradient) 1;
-    box-shadow: 0 0 0 3px rgba(131, 58, 180, 0.1);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+    transform: translateY(-1px);
+  }
+  
+  .input-modern::placeholder {
+    color: #9CA3AF;
+    font-weight: 400;
+  }
+  
+  /* Input group styling for better organization */
+  .input-group {
+    @apply relative mb-6;
+  }
+  
+  .input-label {
+    @apply block text-sm font-semibold text-gray-700 mb-3;
+  }
+  
+  .input-label .required {
+    @apply text-red-500 ml-1;
+  }
+  
+  /* Enhanced input with icons */
+  .input-with-icon {
+    @apply relative;
+  }
+  
+  .input-with-icon .input-icon {
+    @apply absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400;
+    transition: color 0.3s ease;
+  }
+  
+  .input-with-icon .input-modern {
+    @apply pl-12;
+  }
+  
+  .input-with-icon .input-modern:focus + .input-icon {
+    @apply text-purple-500;
+  }
+  
+  /* Select styling */
+  .select-modern {
+    @apply w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900;
+    @apply focus:outline-none focus:ring-0 focus:border-purple-500 focus:bg-white;
+    @apply transition-all duration-300 ease-in-out appearance-none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 1rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    font-size: 16px;
+    line-height: 1.5;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .select-modern:focus {
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+    transform: translateY(-1px);
+  }
+  
+  /* Textarea styling */
+  .textarea-modern {
+    @apply w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500;
+    @apply focus:outline-none focus:ring-0 focus:border-purple-500 focus:bg-white;
+    @apply transition-all duration-300 ease-in-out resize-none;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    min-height: 120px;
+  }
+  
+  .textarea-modern:focus {
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+    transform: translateY(-1px);
+  }
+  
+  /* Error state */
+  .input-error {
+    @apply border-red-400 bg-red-50;
+  }
+  
+  .input-error:focus {
+    @apply border-red-500;
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.15);
+  }
+  
+  /* Success state */
+  .input-success {
+    @apply border-green-400 bg-green-50;
+  }
+  
+  .input-success:focus {
+    @apply border-green-500;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.15);
   }
   
   /* Gradient text with animation */
@@ -429,50 +520,6 @@
     box-shadow: var(--shadow-strong);
   }
   
-  /* Enhanced floating labels */
-  .floating-label {
-    @apply relative;
-  }
-  
-  .floating-label input:focus + label,
-  .floating-label input:not(:placeholder-shown) + label {
-    @apply text-xs;
-    color: #833ab4;
-    transform: translateY(-2rem) scale(0.9);
-  }
-  
-  .floating-label label {
-    @apply absolute left-6 top-4 text-gray-500 transition-all duration-300 pointer-events-none;
-    transform-origin: left top;
-  }
-  
-  /* Page transition animations */
-  .page-transition {
-    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Enhanced header with backdrop blur */
-  .header-modern {
-    @apply bg-white/90 backdrop-blur-xl border-b border-gray-100/50;
-    box-shadow: var(--shadow-soft);
-  }
-  
-  /* Gradient backgrounds for sections */
-  .section-gradient {
-    background: linear-gradient(135deg, #fafafa 0%, #ffffff 50%, #f8f9fa 100%);
-  }
-  
   /* Enhanced search bars */
   .search-modern {
     @apply relative;
@@ -480,14 +527,16 @@
   
   .search-modern input {
     @apply w-full pl-12 pr-4 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl;
-    @apply focus:outline-none focus:border-transparent;
+    @apply focus:outline-none focus:border-purple-500;
     backdrop-filter: blur(10px);
     transition: var(--transition-smooth);
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   }
   
   .search-modern input:focus {
-    background: linear-gradient(135deg, rgba(131, 58, 180, 0.05) 0%, rgba(253, 29, 29, 0.05) 100%);
-    box-shadow: 0 0 0 3px rgba(131, 58, 180, 0.1);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+    transform: translateY(-1px);
   }
   
   /* Enhanced grid layouts */
@@ -508,6 +557,10 @@
     
     .nav-item {
       @apply px-4 py-3 mx-2;
+    }
+    
+    .input-modern, .select-modern, .textarea-modern {
+      font-size: 16px; /* Prevents zoom on iOS */
     }
   }
 }
@@ -544,4 +597,31 @@
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* Page transition animations */
+.page-transition {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced header with backdrop blur */
+.header-modern {
+  @apply bg-white/90 backdrop-blur-xl border-b border-gray-100/50;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Gradient backgrounds for sections */
+.section-gradient {
+  background: linear-gradient(135deg, #fafafa 0%, #ffffff 50%, #f8f9fa 100%);
 }

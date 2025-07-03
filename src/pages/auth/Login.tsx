@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Sparkles, Eye, EyeOff, Zap, Star, Heart } from 'lucide-react';
+import { Sparkles, Eye, EyeOff, Zap, Star, Heart, Mail, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
@@ -10,8 +10,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [emailFocused, setEmailFocused] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
   const { user, login } = useAuth();
 
   // If already logged in, redirect to appropriate dashboard
@@ -100,34 +98,33 @@ const Login = () => {
       <div className="mt-12 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <div className="form-modern">
           <form className="space-y-8" onSubmit={handleSubmit}>
-            <div className="relative">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onFocus={() => setEmailFocused(true)}
-                onBlur={() => setEmailFocused(false)}
-                className="input-modern peer"
-                placeholder=" "
-              />
-              <label 
-                htmlFor="email"
-                className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                  emailFocused || email 
-                    ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                    : 'top-4 text-gray-500'
-                }`}
-              >
-                Adresse email
+            {/* Email Input */}
+            <div className="input-group">
+              <label htmlFor="email" className="input-label">
+                Adresse email <span className="required">*</span>
               </label>
+              <div className="input-with-icon">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="input-modern"
+                  placeholder="votre@email.com"
+                />
+                <Mail className="input-icon h-5 w-5" />
+              </div>
             </div>
 
-            <div className="relative">
-              <div className="relative">
+            {/* Password Input */}
+            <div className="input-group">
+              <label htmlFor="password" className="input-label">
+                Mot de passe <span className="required">*</span>
+              </label>
+              <div className="input-with-icon">
                 <input
                   id="password"
                   name="password"
@@ -136,21 +133,10 @@ const Login = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  onFocus={() => setPasswordFocused(true)}
-                  onBlur={() => setPasswordFocused(false)}
-                  className="input-modern pr-14 peer"
-                  placeholder=" "
+                  className="input-modern pr-12"
+                  placeholder="Votre mot de passe"
                 />
-                <label 
-                  htmlFor="password"
-                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                    passwordFocused || password 
-                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                      : 'top-4 text-gray-500'
-                  }`}
-                >
-                  Mot de passe
-                </label>
+                <Lock className="input-icon h-5 w-5" />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}

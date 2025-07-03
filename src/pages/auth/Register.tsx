@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Sparkles, Eye, EyeOff, Zap, Star, Heart, ShoppingBag, User } from 'lucide-react';
+import { Sparkles, Eye, EyeOff, Zap, Star, ShoppingBag, User, Mail, Lock, Building, Globe } from 'lucide-react';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
@@ -13,9 +13,6 @@ const Register = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  
-  // Form focus states
-  const [focusedFields, setFocusedFields] = useState<Record<string, boolean>>({});
   
   // Common fields
   const [name, setName] = useState('');
@@ -40,14 +37,6 @@ const Register = () => {
     if (user.role === 'influencer') return <Navigate to="/influencer/dashboard" />;
     if (user.role === 'admin') return <Navigate to="/admin/dashboard" />;
   }
-
-  const handleFocus = (fieldName: string) => {
-    setFocusedFields(prev => ({ ...prev, [fieldName]: true }));
-  };
-
-  const handleBlur = (fieldName: string) => {
-    setFocusedFields(prev => ({ ...prev, [fieldName]: false }));
-  };
 
   const validateStep1 = () => {
     if (!name || !email || !password || !confirmPassword) {
@@ -256,59 +245,57 @@ const Register = () => {
           <form className="space-y-8" onSubmit={handleSubmit}>
             {step === 1 ? (
               <>
-                <div className="relative">
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    onFocus={() => handleFocus('name')}
-                    onBlur={() => handleBlur('name')}
-                    className="input-modern peer"
-                    placeholder=" "
-                  />
-                  <label 
-                    htmlFor="name"
-                    className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                      focusedFields.name || name 
-                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                        : 'top-4 text-gray-500'
-                    }`}
-                  >
-                    {activeRole === 'brand' ? 'Nom de l\'entreprise' : 'Nom complet'} <span className="text-red-500">*</span>
+                {/* Name Input */}
+                <div className="input-group">
+                  <label htmlFor="name" className="input-label">
+                    {activeRole === 'brand' ? 'Nom de l\'entreprise' : 'Nom complet'} <span className="required">*</span>
                   </label>
+                  <div className="input-with-icon">
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="input-modern"
+                      placeholder={activeRole === 'brand' ? 'Nom de votre entreprise' : 'Votre nom complet'}
+                    />
+                    {activeRole === 'brand' ? (
+                      <Building className="input-icon h-5 w-5" />
+                    ) : (
+                      <User className="input-icon h-5 w-5" />
+                    )}
+                  </div>
                 </div>
 
-                <div className="relative">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onFocus={() => handleFocus('email')}
-                    onBlur={() => handleBlur('email')}
-                    className="input-modern peer"
-                    placeholder=" "
-                  />
-                  <label 
-                    htmlFor="email"
-                    className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                      focusedFields.email || email 
-                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                        : 'top-4 text-gray-500'
-                    }`}
-                  >
-                    Adresse email <span className="text-red-500">*</span>
+                {/* Email Input */}
+                <div className="input-group">
+                  <label htmlFor="email" className="input-label">
+                    Adresse email <span className="required">*</span>
                   </label>
+                  <div className="input-with-icon">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="input-modern"
+                      placeholder="votre@email.com"
+                    />
+                    <Mail className="input-icon h-5 w-5" />
+                  </div>
                 </div>
 
-                <div className="relative">
-                  <div className="relative">
+                {/* Password Input */}
+                <div className="input-group">
+                  <label htmlFor="password" className="input-label">
+                    Mot de passe <span className="required">*</span>
+                  </label>
+                  <div className="input-with-icon">
                     <input
                       id="password"
                       name="password"
@@ -316,21 +303,10 @@ const Register = () => {
                       required
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      onFocus={() => handleFocus('password')}
-                      onBlur={() => handleBlur('password')}
-                      className="input-modern pr-14 peer"
-                      placeholder=" "
+                      className="input-modern pr-12"
+                      placeholder="Minimum 6 caractères"
                     />
-                    <label 
-                      htmlFor="password"
-                      className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                        focusedFields.password || password 
-                          ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                          : 'top-4 text-gray-500'
-                      }`}
-                    >
-                      Mot de passe <span className="text-red-500">*</span>
-                    </label>
+                    <Lock className="input-icon h-5 w-5" />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
@@ -341,8 +317,12 @@ const Register = () => {
                   </div>
                 </div>
 
-                <div className="relative">
-                  <div className="relative">
+                {/* Confirm Password Input */}
+                <div className="input-group">
+                  <label htmlFor="confirmPassword" className="input-label">
+                    Confirmer le mot de passe <span className="required">*</span>
+                  </label>
+                  <div className="input-with-icon">
                     <input
                       id="confirmPassword"
                       name="confirmPassword"
@@ -350,21 +330,10 @@ const Register = () => {
                       required
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      onFocus={() => handleFocus('confirmPassword')}
-                      onBlur={() => handleBlur('confirmPassword')}
-                      className="input-modern pr-14 peer"
-                      placeholder=" "
+                      className="input-modern pr-12"
+                      placeholder="Répétez votre mot de passe"
                     />
-                    <label 
-                      htmlFor="confirmPassword"
-                      className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                        focusedFields.confirmPassword || confirmPassword 
-                          ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                          : 'top-4 text-gray-500'
-                      }`}
-                    >
-                      Confirmer le mot de passe <span className="text-red-500">*</span>
-                    </label>
+                    <Lock className="input-icon h-5 w-5" />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -390,56 +359,41 @@ const Register = () => {
                 {/* Brand-specific fields */}
                 {activeRole === 'brand' && (
                   <>
-                    <div className="relative">
-                      <input
-                        id="companyWebsite"
-                        name="companyWebsite"
-                        type="url"
-                        value={companyWebsite}
-                        onChange={(e) => setCompanyWebsite(e.target.value)}
-                        onFocus={() => handleFocus('companyWebsite')}
-                        onBlur={() => handleBlur('companyWebsite')}
-                        className="input-modern peer"
-                        placeholder=" "
-                      />
-                      <label 
-                        htmlFor="companyWebsite"
-                        className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                          focusedFields.companyWebsite || companyWebsite 
-                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                            : 'top-4 text-gray-500'
-                        }`}
-                      >
+                    <div className="input-group">
+                      <label htmlFor="companyWebsite" className="input-label">
                         Site web de l'entreprise
                       </label>
+                      <div className="input-with-icon">
+                        <input
+                          id="companyWebsite"
+                          name="companyWebsite"
+                          type="url"
+                          value={companyWebsite}
+                          onChange={(e) => setCompanyWebsite(e.target.value)}
+                          className="input-modern"
+                          placeholder="https://votre-site.com"
+                        />
+                        <Globe className="input-icon h-5 w-5" />
+                      </div>
                     </div>
 
-                    <div className="relative">
+                    <div className="input-group">
+                      <label htmlFor="industry" className="input-label">
+                        Secteur d'activité <span className="required">*</span>
+                      </label>
                       <select
                         id="industry"
                         name="industry"
                         required
                         value={industry}
                         onChange={(e) => setIndustry(e.target.value)}
-                        onFocus={() => handleFocus('industry')}
-                        onBlur={() => handleBlur('industry')}
-                        className="input-modern peer"
+                        className="select-modern"
                       >
                         <option value="">Sélectionner un secteur</option>
                         {moroccanIndustries.map((ind) => (
                           <option key={ind} value={ind}>{ind}</option>
                         ))}
                       </select>
-                      <label 
-                        htmlFor="industry"
-                        className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                          focusedFields.industry || industry 
-                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                            : 'top-4 text-gray-500'
-                        }`}
-                      >
-                        Secteur d'activité <span className="text-red-500">*</span>
-                      </label>
                     </div>
                   </>
                 )}
@@ -447,35 +401,29 @@ const Register = () => {
                 {/* Influencer-specific fields */}
                 {activeRole === 'influencer' && (
                   <>
-                    <div className="relative">
+                    <div className="input-group">
+                      <label htmlFor="niche" className="input-label">
+                        Niche principale <span className="required">*</span>
+                      </label>
                       <select
                         id="niche"
                         name="niche"
                         required
                         value={niche}
                         onChange={(e) => setNiche(e.target.value)}
-                        onFocus={() => handleFocus('niche')}
-                        onBlur={() => handleBlur('niche')}
-                        className="input-modern peer"
+                        className="select-modern"
                       >
                         <option value="">Sélectionner votre niche</option>
                         {moroccanNiches.map((n) => (
                           <option key={n} value={n}>{n}</option>
                         ))}
                       </select>
-                      <label 
-                        htmlFor="niche"
-                        className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                          focusedFields.niche || niche 
-                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                            : 'top-4 text-gray-500'
-                        }`}
-                      >
-                        Niche principale <span className="text-red-500">*</span>
-                      </label>
                     </div>
 
-                    <div className="relative">
+                    <div className="input-group">
+                      <label htmlFor="instagramHandle" className="input-label">
+                        Nom d'utilisateur Instagram <span className="required">*</span>
+                      </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                           <span className="text-gray-500 font-semibold">@</span>
@@ -487,25 +435,16 @@ const Register = () => {
                           required
                           value={instagramHandle}
                           onChange={(e) => setInstagramHandle(e.target.value)}
-                          onFocus={() => handleFocus('instagramHandle')}
-                          onBlur={() => handleBlur('instagramHandle')}
-                          className="input-modern pl-12 peer"
-                          placeholder=" "
+                          className="input-modern pl-12"
+                          placeholder="votre_nom_utilisateur"
                         />
                       </div>
-                      <label 
-                        htmlFor="instagramHandle"
-                        className={`absolute left-12 transition-all duration-300 pointer-events-none ${
-                          focusedFields.instagramHandle || instagramHandle 
-                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                            : 'top-4 text-gray-500'
-                        }`}
-                      >
-                        Nom d'utilisateur Instagram <span className="text-red-500">*</span>
-                      </label>
                     </div>
 
-                    <div className="relative">
+                    <div className="input-group">
+                      <label htmlFor="followersCount" className="input-label">
+                        Nombre d'abonnés
+                      </label>
                       <input
                         id="followersCount"
                         name="followersCount"
@@ -513,21 +452,9 @@ const Register = () => {
                         min="0"
                         value={followersCount}
                         onChange={(e) => setFollowersCount(e.target.value)}
-                        onFocus={() => handleFocus('followersCount')}
-                        onBlur={() => handleBlur('followersCount')}
-                        className="input-modern peer"
-                        placeholder=" "
+                        className="input-modern"
+                        placeholder="ex: 10000"
                       />
-                      <label 
-                        htmlFor="followersCount"
-                        className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                          focusedFields.followersCount || followersCount 
-                            ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                            : 'top-4 text-gray-500'
-                        }`}
-                      >
-                        Nombre d'abonnés
-                      </label>
                     </div>
                   </>
                 )}
