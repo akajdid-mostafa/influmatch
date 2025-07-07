@@ -183,17 +183,23 @@ const Messages = () => {
 
       <div className="card-modern">
         <div className="px-8 py-6 border-b border-gray-100/50">
-          <div className="search-modern">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Search className="h-6 w-6 text-gray-400" />
+          <div className="input-group">
+            <label htmlFor="search" className="input-label">
+              Rechercher des conversations
+            </label>
+            <div className="search-modern">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Search className="h-6 w-6 text-gray-400" />
+              </div>
+              <input
+                type="text"
+                id="search"
+                className="w-full pl-14 pr-4 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
+                placeholder="Rechercher des conversations..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
-            <input
-              type="text"
-              className="w-full pl-14 pr-4 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
-              placeholder="Rechercher des conversations..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
           </div>
         </div>
 

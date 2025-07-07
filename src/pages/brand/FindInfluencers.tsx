@@ -275,17 +275,23 @@ const FindInfluencers = () => {
       <div className="card-modern p-8">
         <div className="space-y-8">
           {/* Search */}
-          <div className="search-modern">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Search className="h-6 w-6 text-gray-400" />
+          <div className="input-group">
+            <label htmlFor="search" className="input-label">
+              Rechercher des influenceurs
+            </label>
+            <div className="search-modern">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Search className="h-6 w-6 text-gray-400" />
+              </div>
+              <input
+                type="text"
+                id="search"
+                className="w-full pl-14 pr-4 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
+                placeholder="Rechercher par nom ou bio..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
-            <input
-              type="text"
-              className="w-full pl-14 pr-4 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
-              placeholder="Rechercher des influenceurs..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
           </div>
 
           {/* Niches */}
@@ -334,17 +340,14 @@ const FindInfluencers = () => {
           </div>
 
           {/* Minimum Followers */}
-          <div>
-            <label
-              htmlFor="minFollowers"
-              className="block text-lg font-bold text-gray-900 mb-4"
-            >
+          <div className="input-group">
+            <label htmlFor="minFollowers" className="input-label">
               Nombre minimum d'abonnés
             </label>
             <input
               type="number"
               id="minFollowers"
-              className="w-full px-6 py-4 bg-white/90 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-transparent backdrop-blur-10px transition-all duration-300"
+              className="input-modern"
               placeholder="ex: 10000"
               value={minFollowers}
               onChange={(e) => setMinFollowers(e.target.value)}

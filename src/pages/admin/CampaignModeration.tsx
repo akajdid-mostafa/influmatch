@@ -21,90 +21,90 @@ const CampaignModeration = () => {
         const mockCampaigns: Campaign[] = [
           {
             id: '1',
-            title: 'Summer Fashion Collection Launch',
-            description: 'Looking for fashion influencers to promote our new sustainable summer collection',
+            title: 'Collection Ramadan 2025',
+            description: 'Recherche d\'influenceurs mode pour promouvoir notre nouvelle collection Ramadan durable',
             brand: {
               id: 1,
-              name: 'Eco Fashion Co',
-              email: 'brand@example.com',
+              name: 'Marjane Market',
+              email: 'marque@example.com',
               role: 'brand',
               logo: 'https://images.pexels.com/photos/5412270/pexels-photo-5412270.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
             },
             budget: {
-              min: 500,
-              max: 1500,
-              currency: 'USD'
+              min: 8000,
+              max: 15000,
+              currency: 'MAD'
             },
             requirements: {
-              niches: ['fashion', 'sustainability'],
-              minFollowers: 10000,
+              niches: ['mode', 'durabilité'],
+              minFollowers: 50000,
               platforms: ['instagram', 'tiktok']
             },
             timeline: {
-              startDate: '2025-06-01',
-              endDate: '2025-06-30'
+              startDate: '2025-02-01',
+              endDate: '2025-03-01'
             },
             status: 'pending-approval',
-            createdAt: '2025-05-15T10:30:00Z',
-            updatedAt: '2025-05-15T10:30:00Z'
+            createdAt: '2025-01-15T10:30:00Z',
+            updatedAt: '2025-01-15T10:30:00Z'
           },
           {
             id: '2',
-            title: 'Tech Product Review Campaign',
-            description: 'Seeking tech reviewers for our new smart home device',
+            title: 'Review Produits Tech Maroc',
+            description: 'Recherche de reviewers tech pour notre nouveau dispositif maison intelligente',
             brand: {
               id: 2,
-              name: 'TechCo',
-              email: 'tech@example.com',
+              name: 'Atlas Telecom',
+              email: 'tech@atlastelecom.ma',
               role: 'brand',
               logo: 'https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
             },
             budget: {
-              min: 1000,
-              max: 3000,
-              currency: 'USD'
+              min: 12000,
+              max: 25000,
+              currency: 'MAD'
             },
             requirements: {
               niches: ['tech', 'gadgets'],
-              minFollowers: 50000,
+              minFollowers: 100000,
               platforms: ['youtube']
             },
             timeline: {
-              startDate: '2025-07-01',
-              endDate: '2025-07-31'
+              startDate: '2025-02-15',
+              endDate: '2025-03-15'
             },
             status: 'pending-approval',
-            createdAt: '2025-05-14T15:45:00Z',
-            updatedAt: '2025-05-14T15:45:00Z'
+            createdAt: '2025-01-14T15:45:00Z',
+            updatedAt: '2025-01-14T15:45:00Z'
           },
           {
             id: '3',
-            title: 'Fitness App Promotion',
-            description: 'Looking for fitness influencers to showcase our workout tracking app',
+            title: 'Promotion App Fitness Maroc',
+            description: 'Recherche d\'influenceurs fitness pour présenter notre app de suivi d\'entraînement',
             brand: {
               id: 3,
-              name: 'FitTech',
-              email: 'fit@example.com',
+              name: 'FitMaroc',
+              email: 'contact@fitmaroc.ma',
               role: 'brand',
               logo: 'https://images.pexels.com/photos/5709659/pexels-photo-5709659.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
             },
             budget: {
-              min: 300,
-              max: 1000,
-              currency: 'USD'
+              min: 5000,
+              max: 12000,
+              currency: 'MAD'
             },
             requirements: {
-              niches: ['fitness', 'health'],
-              minFollowers: 5000,
+              niches: ['fitness', 'santé'],
+              minFollowers: 25000,
               platforms: ['instagram', 'tiktok']
             },
             timeline: {
-              startDate: '2025-06-15',
-              endDate: '2025-07-15'
+              startDate: '2025-02-01',
+              endDate: '2025-03-01'
             },
             status: 'open',
-            createdAt: '2025-05-13T09:20:00Z',
-            updatedAt: '2025-05-13T09:20:00Z'
+            createdAt: '2025-01-13T09:20:00Z',
+            updatedAt: '2025-01-13T09:20:00Z'
           }
         ];
         
@@ -198,14 +198,14 @@ const CampaignModeration = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Campaign Moderation</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Modération des Campagnes</h1>
       </div>
 
       {/* Filters */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="search" className="sr-only">Search campaigns</label>
+      <div className="card-modern p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="input-group">
+            <label htmlFor="search" className="input-label">Rechercher des campagnes</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
@@ -213,30 +213,30 @@ const CampaignModeration = () => {
               <input
                 type="text"
                 id="search"
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                placeholder="Search campaigns..."
+                className="input-modern pl-10"
+                placeholder="Rechercher des campagnes..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </div>
           
-          <div>
-            <label htmlFor="status" className="sr-only">Filter by status</label>
+          <div className="input-group">
+            <label htmlFor="status" className="input-label">Filtrer par statut</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Filter className="h-5 w-5 text-gray-400" />
               </div>
               <select
                 id="status"
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+                className="select-modern pl-10"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
-                <option value="all">All Statuses</option>
-                <option value="pending-approval">Pending Approval</option>
-                <option value="open">Approved</option>
-                <option value="rejected">Rejected</option>
+                <option value="all">Tous les Statuts</option>
+                <option value="pending-approval">En Attente d'Approbation</option>
+                <option value="open">Approuvé</option>
+                <option value="rejected">Rejeté</option>
               </select>
             </div>
           </div>
@@ -244,11 +244,11 @@ const CampaignModeration = () => {
       </div>
 
       {/* Campaigns List */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="card-modern overflow-hidden">
         <ul className="divide-y divide-gray-200">
           {filteredCampaigns.length === 0 ? (
             <li className="px-4 py-6 text-center text-gray-500">
-              No campaigns found matching your criteria.
+              Aucune campagne trouvée correspondant à vos critères.
             </li>
           ) : (
             filteredCampaigns.map((campaign) => (
@@ -272,18 +272,20 @@ const CampaignModeration = () => {
                           {getStatusIcon(campaign.status)}
                           <span className="ml-1">
                             {campaign.status === 'pending-approval'
-                              ? 'Pending Approval'
+                              ? 'En Attente d\'Approbation'
+                              : campaign.status === 'open'
+                              ? 'Approuvé'
                               : campaign.status.charAt(0).toUpperCase() + campaign.status.slice(1)}
                           </span>
                         </div>
                         <span className="text-sm text-gray-500">
-                          Brand: {campaign.brand.name}
+                          Marque: {campaign.brand.name}
                         </span>
                         <span className="text-sm text-gray-500">
-                          Budget: ${campaign.budget.min} - ${campaign.budget.max}
+                          Budget: {campaign.budget.min} - {campaign.budget.max} {campaign.budget.currency}
                         </span>
                         <span className="text-sm text-gray-500">
-                          Platforms: {campaign.requirements.platforms.join(', ')}
+                          Plateformes: {campaign.requirements.platforms.join(', ')}
                         </span>
                       </div>
                     </div>
@@ -291,13 +293,13 @@ const CampaignModeration = () => {
                   <div className="flex items-center space-x-2">
                     <button
                       className="p-2 text-gray-400 hover:text-purple-600"
-                      title="View Details"
+                      title="Voir Détails"
                     >
                       <Eye className="h-5 w-5" />
                     </button>
                     <button
                       className="p-2 text-gray-400 hover:text-purple-600"
-                      title="Message Brand"
+                      title="Message Marque"
                     >
                       <MessageSquare className="h-5 w-5" />
                     </button>
@@ -305,17 +307,17 @@ const CampaignModeration = () => {
                       <>
                         <button
                           onClick={() => handleApprove(campaign.id)}
-                          className="inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                          className="btn-primary text-sm px-4 py-2"
                         >
                           <CheckCircle className="h-4 w-4 mr-1" />
-                          Approve
+                          Approuver
                         </button>
                         <button
                           onClick={() => handleReject(campaign.id)}
-                          className="inline-flex items-center px-3 py-1 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                          className="btn-secondary text-sm px-4 py-2"
                         >
                           <XCircle className="h-4 w-4 mr-1" />
-                          Reject
+                          Rejeter
                         </button>
                       </>
                     )}

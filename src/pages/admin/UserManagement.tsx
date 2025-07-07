@@ -21,36 +21,36 @@ const UserManagement = () => {
         const mockUsers: UserType[] = [
           {
             id: 1,
-            name: 'Samsung Brand',
-            email: 'brand@example.com',
+            name: 'Marjane Market',
+            email: 'marque@example.com',
             role: 'brand',
             profileImage: 'https://images.pexels.com/photos/5412270/pexels-photo-5412270.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
           },
           {
             id: 2,
-            name: 'Ezzoubair Hilal',
-            email: 'influencer@example.com',
+            name: 'Saad Lamjarred',
+            email: 'influenceur@example.com',
             role: 'influencer',
-            profileImage: 'https://i.ibb.co/ds9tQGj8/34982531-1765409630209343-1025505230982217728-n.jpg'
+            profileImage: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
           },
           {
             id: 3,
-            name: 'Admin User',
+            name: 'Admin Maroc',
             email: 'admin@example.com',
             role: 'admin',
             profileImage: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
           },
           {
             id: 4,
-            name: 'Tech Brand Co',
-            email: 'tech@example.com',
+            name: 'Argan d\'Or',
+            email: 'contact@argandor.ma',
             role: 'brand',
             profileImage: 'https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
           },
           {
             id: 5,
-            name: 'Alex Creator',
-            email: 'alex@example.com',
+            name: 'Dounia Batma',
+            email: 'dounia@example.com',
             role: 'influencer',
             profileImage: 'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
           }
@@ -111,14 +111,14 @@ const UserManagement = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Gestion des Utilisateurs</h1>
       </div>
 
       {/* Filters */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="search" className="sr-only">Search users</label>
+      <div className="card-modern p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="input-group">
+            <label htmlFor="search" className="input-label">Rechercher des utilisateurs</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
@@ -126,29 +126,29 @@ const UserManagement = () => {
               <input
                 type="text"
                 id="search"
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                placeholder="Search users..."
+                className="input-modern pl-10"
+                placeholder="Rechercher des utilisateurs..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
           </div>
           
-          <div>
-            <label htmlFor="role" className="sr-only">Filter by role</label>
+          <div className="input-group">
+            <label htmlFor="role" className="input-label">Filtrer par rôle</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Filter className="h-5 w-5 text-gray-400" />
               </div>
               <select
                 id="role"
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+                className="select-modern pl-10"
                 value={roleFilter}
                 onChange={(e) => setRoleFilter(e.target.value)}
               >
-                <option value="all">All Roles</option>
-                <option value="brand">Brands</option>
-                <option value="influencer">Influencers</option>
+                <option value="all">Tous les Rôles</option>
+                <option value="brand">Marques</option>
+                <option value="influencer">Influenceurs</option>
                 <option value="admin">Admins</option>
               </select>
             </div>
@@ -157,22 +157,22 @@ const UserManagement = () => {
       </div>
 
       {/* Users Table */}
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="table-modern">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  User
+                  Utilisateur
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Role
+                  Rôle
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Email
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                  Statut
                 </th>
                 <th scope="col" className="relative px-6 py-3">
                   <span className="sr-only">Actions</span>
@@ -216,7 +216,7 @@ const UserManagement = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      Active
+                      Actif
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

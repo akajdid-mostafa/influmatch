@@ -27,9 +27,9 @@ const EditProfile = () => {
   const [website, setWebsite] = useState('');
 
   const availableNiches = [
-    'Fashion', 'Beauty', 'Lifestyle', 'Tech', 'Gaming',
-    'Food', 'Travel', 'Fitness', 'Business', 'Art',
-    'Education', 'Entertainment', 'Health', 'Parenting', 'Pets'
+    'Mode', 'Beauté', 'Lifestyle', 'Tech', 'Gaming',
+    'Cuisine Marocaine', 'Voyage', 'Fitness', 'Business', 'Art et Artisanat',
+    'Éducation', 'Divertissement', 'Santé', 'Parentalité', 'Culture Marocaine'
   ];
 
   useEffect(() => {
@@ -41,26 +41,26 @@ const EditProfile = () => {
         // Mock profile data
         const mockProfile: InfluencerProfile = {
           id: 2,
-          name: 'Ezzoubair Hilal',
-          email: 'influencer@example.com',
+          name: 'Saad Lamjarred',
+          email: 'influenceur@example.com',
           role: 'influencer',
-          profileImage: 'https://i.ibb.co/ds9tQGj8/34982531-1765409630209343-1025505230982217728-n.jpg',
-          bio: 'Lifestyle and fashion content creator passionate about sustainable fashion and mindful living.',
-          niche: ['fashion', 'lifestyle', 'sustainability'],
-          location: 'Los Angeles, CA',
+          profileImage: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          bio: 'Artiste marocain international | Chanteur et compositeur passionné par la musique et la culture marocaine.',
+          niche: ['Musique', 'Divertissement', 'Culture Marocaine'],
+          location: 'Rabat, Maroc',
           followers: {
-            instagram: 85000,
-            tiktok: 120000,
-            youtube: 45000
+            instagram: 8500000,
+            tiktok: 1200000,
+            youtube: 12000000
           },
           socialLinks: {
-            instagram: 'https://instagram.com/janeinfluencer',
-            tiktok: 'https://tiktok.com/@janeinfluencer',
-            youtube: 'https://youtube.com/c/janeinfluencer',
-            website: 'https://janeinfluencer.com'
+            instagram: 'https://instagram.com/saadlamjarred',
+            tiktok: 'https://tiktok.com/@saadlamjarred',
+            youtube: 'https://youtube.com/c/saadlamjarred',
+            website: 'https://saadlamjarred.com'
           },
-          engagementRate: 3.8,
-          averageRating: 4.7
+          engagementRate: 6.8,
+          averageRating: 4.9
         };
         
         setProfile(mockProfile);
@@ -113,7 +113,7 @@ const EditProfile = () => {
     e.preventDefault();
     
     if (!name || !bio || niches.length === 0) {
-      toast.error('Please fill in all required fields');
+      toast.error('Veuillez remplir tous les champs obligatoires');
       return;
     }
     
@@ -123,11 +123,11 @@ const EditProfile = () => {
       // Simulate API call to update profile
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      toast.success('Profile updated successfully');
+      toast.success('Profil mis à jour avec succès');
       navigate('/influencer/profile');
     } catch (error) {
       console.error('Error updating profile:', error);
-      toast.error('Failed to update profile');
+      toast.error('Échec de la mise à jour du profil');
     } finally {
       setSaving(false);
     }
@@ -144,16 +144,16 @@ const EditProfile = () => {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Edit Profile</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Modifier le Profil</h1>
         <p className="mt-2 text-sm text-gray-600">
-          Update your profile information and social media links
+          Mettez à jour vos informations de profil et liens de réseaux sociaux
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Profile Image */}
-        <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Profile Image</h2>
+        <div className="card-modern p-6">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Photo de Profil</h2>
           <div className="flex items-center">
             <div className="relative">
               <img
@@ -177,72 +177,73 @@ const EditProfile = () => {
             </div>
             <div className="ml-6">
               <p className="text-sm text-gray-500">
-                Recommended: Square image, at least 400x400 pixels
+                Recommandé: Image carrée, au moins 400x400 pixels
               </p>
               <button
                 type="button"
                 className="mt-2 inline-flex items-center text-sm text-red-600 hover:text-red-800"
               >
                 <Trash2 className="h-4 w-4 mr-1" />
-                Remove photo
+                Supprimer la photo
               </button>
             </div>
           </div>
         </div>
 
         {/* Basic Information */}
-        <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Basic Information</h2>
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Name <span className="text-red-500">*</span>
+        <div className="card-modern p-6">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Informations de Base</h2>
+          <div className="space-y-6">
+            <div className="input-group">
+              <label htmlFor="name" className="input-label">
+                Nom <span className="required">*</span>
               </label>
               <input
                 type="text"
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+                className="input-modern"
+                placeholder="Votre nom complet"
               />
             </div>
 
-            <div>
-              <label htmlFor="bio" className="block text-sm font-medium text-gray-700">
-                Bio <span className="text-red-500">*</span>
+            <div className="input-group">
+              <label htmlFor="bio" className="input-label">
+                Bio <span className="required">*</span>
               </label>
               <textarea
                 id="bio"
                 rows={4}
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                placeholder="Tell brands about yourself and your content..."
+                className="textarea-modern"
+                placeholder="Parlez aux marques de vous et de votre contenu..."
               />
             </div>
 
-            <div>
-              <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-                Location
+            <div className="input-group">
+              <label htmlFor="location" className="input-label">
+                Localisation
               </label>
               <input
                 type="text"
                 id="location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                placeholder="City, Country"
+                className="input-modern"
+                placeholder="Ville, Pays"
               />
             </div>
           </div>
         </div>
 
         {/* Content Niches */}
-        <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Content Niches</h2>
+        <div className="card-modern p-6">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Niches de Contenu</h2>
           <div className="space-y-4">
             <p className="text-sm text-gray-500">
-              Select the categories that best describe your content <span className="text-red-500">*</span>
+              Sélectionnez les catégories qui décrivent le mieux votre contenu <span className="text-red-500">*</span>
             </p>
             <div className="flex flex-wrap gap-2">
               {availableNiches.map((niche) => (
@@ -250,7 +251,7 @@ const EditProfile = () => {
                   key={niche}
                   type="button"
                   onClick={() => handleNicheToggle(niche)}
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-300 ${
                     niches.includes(niche)
                       ? 'bg-purple-100 text-purple-800'
                       : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
@@ -264,106 +265,143 @@ const EditProfile = () => {
         </div>
 
         {/* Social Media */}
-        <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Social Media</h2>
-          <div className="space-y-4">
+        <div className="card-modern p-6">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Réseaux Sociaux</h2>
+          <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
                 <div className="flex items-center">
                   <Instagram className="h-5 w-5 text-pink-600 mr-2" />
                   Instagram
                 </div>
               </label>
-              <div className="mt-1 grid grid-cols-2 gap-4">
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500">@</span>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="input-group">
+                  <label htmlFor="instagramHandle" className="input-label">
+                    Nom d'utilisateur
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <span className="text-gray-500">@</span>
+                    </div>
+                    <input
+                      type="text"
+                      id="instagramHandle"
+                      value={instagramHandle}
+                      onChange={(e) => setInstagramHandle(e.target.value)}
+                      className="input-modern pl-8"
+                      placeholder="nom_utilisateur"
+                    />
                   </div>
+                </div>
+                <div className="input-group">
+                  <label htmlFor="instagramFollowers" className="input-label">
+                    Nombre d'abonnés
+                  </label>
                   <input
-                    type="text"
-                    value={instagramHandle}
-                    onChange={(e) => setInstagramHandle(e.target.value)}
-                    className="block w-full pl-8 border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                    placeholder="username"
+                    type="number"
+                    id="instagramFollowers"
+                    value={instagramFollowers}
+                    onChange={(e) => setInstagramFollowers(e.target.value)}
+                    className="input-modern"
+                    placeholder="10000"
                   />
                 </div>
-                <input
-                  type="number"
-                  value={instagramFollowers}
-                  onChange={(e) => setInstagramFollowers(e.target.value)}
-                  className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                  placeholder="Followers count"
-                />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
                 <div className="flex items-center">
                   <BrandTiktok className="h-5 w-5 text-gray-900 mr-2" />
                   TikTok
                 </div>
               </label>
-              <div className="mt-1 grid grid-cols-2 gap-4">
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500">@</span>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="input-group">
+                  <label htmlFor="tiktokHandle" className="input-label">
+                    Nom d'utilisateur
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <span className="text-gray-500">@</span>
+                    </div>
+                    <input
+                      type="text"
+                      id="tiktokHandle"
+                      value={tiktokHandle}
+                      onChange={(e) => setTiktokHandle(e.target.value)}
+                      className="input-modern pl-8"
+                      placeholder="nom_utilisateur"
+                    />
                   </div>
+                </div>
+                <div className="input-group">
+                  <label htmlFor="tiktokFollowers" className="input-label">
+                    Nombre d'abonnés
+                  </label>
                   <input
-                    type="text"
-                    value={tiktokHandle}
-                    onChange={(e) => setTiktokHandle(e.target.value)}
-                    className="block w-full pl-8 border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                    placeholder="username"
+                    type="number"
+                    id="tiktokFollowers"
+                    value={tiktokFollowers}
+                    onChange={(e) => setTiktokFollowers(e.target.value)}
+                    className="input-modern"
+                    placeholder="10000"
                   />
                 </div>
-                <input
-                  type="number"
-                  value={tiktokFollowers}
-                  onChange={(e) => setTiktokFollowers(e.target.value)}
-                  className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                  placeholder="Followers count"
-                />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
                 <div className="flex items-center">
                   <Youtube className="h-5 w-5 text-red-600 mr-2" />
                   YouTube
                 </div>
               </label>
-              <div className="mt-1 grid grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  value={youtubeHandle}
-                  onChange={(e) => setYoutubeHandle(e.target.value)}
-                  className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                  placeholder="Channel name"
-                />
-                <input
-                  type="number"
-                  value={youtubeFollowers}
-                  onChange={(e) => setYoutubeFollowers(e.target.value)}
-                  className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-                  placeholder="Subscribers count"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="input-group">
+                  <label htmlFor="youtubeHandle" className="input-label">
+                    Nom de la chaîne
+                  </label>
+                  <input
+                    type="text"
+                    id="youtubeHandle"
+                    value={youtubeHandle}
+                    onChange={(e) => setYoutubeHandle(e.target.value)}
+                    className="input-modern"
+                    placeholder="Nom de la chaîne"
+                  />
+                </div>
+                <div className="input-group">
+                  <label htmlFor="youtubeFollowers" className="input-label">
+                    Nombre d'abonnés
+                  </label>
+                  <input
+                    type="number"
+                    id="youtubeFollowers"
+                    value={youtubeFollowers}
+                    onChange={(e) => setYoutubeFollowers(e.target.value)}
+                    className="input-modern"
+                    placeholder="10000"
+                  />
+                </div>
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
+            <div className="input-group">
+              <label htmlFor="website" className="input-label">
                 <div className="flex items-center">
                   <Globe className="h-5 w-5 text-blue-600 mr-2" />
-                  Website
+                  Site Web
                 </div>
               </label>
               <input
                 type="url"
+                id="website"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+                className="input-modern"
                 placeholder="https://example.com"
               />
             </div>
@@ -375,16 +413,16 @@ const EditProfile = () => {
           <button
             type="button"
             onClick={() => navigate('/influencer/profile')}
-            className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            className="btn-secondary"
           >
-            Cancel
+            Annuler
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:bg-purple-400 disabled:cursor-not-allowed"
+            className="btn-primary"
           >
-            {saving ? <LoadingSpinner size="sm" color="white" /> : 'Save Changes'}
+            {saving ? <LoadingSpinner size="sm" color="white" /> : 'Sauvegarder les Modifications'}
           </button>
         </div>
       </form>

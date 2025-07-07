@@ -11,9 +11,6 @@ const CreateCampaign = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState(1);
   
-  // Form focus states
-  const [focusedFields, setFocusedFields] = useState<Record<string, boolean>>({});
-  
   // Campaign Details
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -37,14 +34,6 @@ const CreateCampaign = () => {
   const [dosList, setDosList] = useState<string[]>(['']);
   const [dontsList, setDontsList] = useState<string[]>(['']);
   const [references, setReferences] = useState<string[]>(['']);
-
-  const handleFocus = (fieldName: string) => {
-    setFocusedFields(prev => ({ ...prev, [fieldName]: true }));
-  };
-
-  const handleBlur = (fieldName: string) => {
-    setFocusedFields(prev => ({ ...prev, [fieldName]: false }));
-  };
 
   const moroccanNiches = [
     'Mode', 'Beauté', 'Lifestyle', 'Tech', 'Gaming', 'Cuisine Marocaine',
@@ -289,50 +278,32 @@ const CreateCampaign = () => {
                 <p className="text-gray-600">Parlez-nous de votre vision et de vos objectifs de campagne</p>
               </div>
 
-              <div className="relative">
+              <div className="input-group">
+                <label htmlFor="title" className="input-label">
+                  Titre de la campagne <span className="required">*</span>
+                </label>
                 <input
                   type="text"
                   id="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  onFocus={() => handleFocus('title')}
-                  onBlur={() => handleBlur('title')}
-                  className="input-modern peer"
-                  placeholder=" "
+                  className="input-modern"
+                  placeholder="Ex: Collection Ramadan 2025"
                 />
-                <label 
-                  htmlFor="title"
-                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                    focusedFields.title || title 
-                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                      : 'top-4 text-gray-500'
-                  }`}
-                >
-                  Titre de la campagne <span className="text-red-500">*</span>
-                </label>
               </div>
               
-              <div className="relative">
+              <div className="input-group">
+                <label htmlFor="description" className="input-label">
+                  Description de la campagne <span className="required">*</span>
+                </label>
                 <textarea
                   id="description"
                   rows={4}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  onFocus={() => handleFocus('description')}
-                  onBlur={() => handleBlur('description')}
-                  className="input-modern resize-none peer"
-                  placeholder=" "
+                  className="textarea-modern"
+                  placeholder="Décrivez votre campagne, vos objectifs et ce que vous attendez des influenceurs..."
                 />
-                <label 
-                  htmlFor="description"
-                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                    focusedFields.description || description 
-                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                      : 'top-4 text-gray-500'
-                  }`}
-                >
-                  Description de la campagne <span className="text-red-500">*</span>
-                </label>
               </div>
               
               <div>
@@ -395,134 +366,76 @@ const CreateCampaign = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div className="relative">
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <span className="text-green-500 font-semibold">MAD</span>
-                    </div>
-                    <input
-                      type="number"
-                      id="budgetMin"
-                      value={budgetMin}
-                      onChange={(e) => setBudgetMin(e.target.value)}
-                      onFocus={() => handleFocus('budgetMin')}
-                      onBlur={() => handleBlur('budgetMin')}
-                      className="input-modern pl-16 peer"
-                      placeholder=" "
-                      min="0"
-                    />
-                  </div>
-                  <label 
-                    htmlFor="budgetMin"
-                    className={`absolute left-16 transition-all duration-300 pointer-events-none ${
-                      focusedFields.budgetMin || budgetMin 
-                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                        : 'top-4 text-gray-500'
-                    }`}
-                  >
-                    Budget Minimum <span className="text-red-500">*</span>
+                <div className="input-group">
+                  <label htmlFor="budgetMin" className="input-label">
+                    Budget Minimum (MAD) <span className="required">*</span>
                   </label>
+                  <input
+                    type="number"
+                    id="budgetMin"
+                    value={budgetMin}
+                    onChange={(e) => setBudgetMin(e.target.value)}
+                    className="input-modern"
+                    placeholder="5000"
+                    min="0"
+                  />
                 </div>
                 
-                <div className="relative">
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <span className="text-green-500 font-semibold">MAD</span>
-                    </div>
-                    <input
-                      type="number"
-                      id="budgetMax"
-                      value={budgetMax}
-                      onChange={(e) => setBudgetMax(e.target.value)}
-                      onFocus={() => handleFocus('budgetMax')}
-                      onBlur={() => handleBlur('budgetMax')}
-                      className="input-modern pl-16 peer"
-                      placeholder=" "
-                      min="0"
-                    />
-                  </div>
-                  <label 
-                    htmlFor="budgetMax"
-                    className={`absolute left-16 transition-all duration-300 pointer-events-none ${
-                      focusedFields.budgetMax || budgetMax 
-                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                        : 'top-4 text-gray-500'
-                    }`}
-                  >
-                    Budget Maximum <span className="text-red-500">*</span>
+                <div className="input-group">
+                  <label htmlFor="budgetMax" className="input-label">
+                    Budget Maximum (MAD) <span className="required">*</span>
                   </label>
+                  <input
+                    type="number"
+                    id="budgetMax"
+                    value={budgetMax}
+                    onChange={(e) => setBudgetMax(e.target.value)}
+                    className="input-modern"
+                    placeholder="15000"
+                    min="0"
+                  />
                 </div>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div className="relative">
+                <div className="input-group">
+                  <label htmlFor="startDate" className="input-label">
+                    Date de Début <span className="required">*</span>
+                  </label>
                   <input
                     type="date"
                     id="startDate"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    onFocus={() => handleFocus('startDate')}
-                    onBlur={() => handleBlur('startDate')}
-                    className="input-modern peer"
-                    placeholder=" "
+                    className="input-modern"
                   />
-                  <label 
-                    htmlFor="startDate"
-                    className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                      focusedFields.startDate || startDate 
-                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                        : 'top-4 text-gray-500'
-                    }`}
-                  >
-                    Date de Début <span className="text-red-500">*</span>
-                  </label>
                 </div>
                 
-                <div className="relative">
+                <div className="input-group">
+                  <label htmlFor="endDate" className="input-label">
+                    Date de Fin <span className="required">*</span>
+                  </label>
                   <input
                     type="date"
                     id="endDate"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    onFocus={() => handleFocus('endDate')}
-                    onBlur={() => handleBlur('endDate')}
-                    className="input-modern peer"
-                    placeholder=" "
+                    className="input-modern"
                   />
-                  <label 
-                    htmlFor="endDate"
-                    className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                      focusedFields.endDate || endDate 
-                        ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                        : 'top-4 text-gray-500'
-                    }`}
-                  >
-                    Date de Fin <span className="text-red-500">*</span>
-                  </label>
                 </div>
               </div>
               
-              <div className="relative">
+              <div className="input-group">
+                <label htmlFor="submissionDeadline" className="input-label">
+                  Date Limite de Soumission du Contenu
+                </label>
                 <input
                   type="date"
                   id="submissionDeadline"
                   value={submissionDeadline}
                   onChange={(e) => setSubmissionDeadline(e.target.value)}
-                  onFocus={() => handleFocus('submissionDeadline')}
-                  onBlur={() => handleBlur('submissionDeadline')}
-                  className="input-modern peer"
-                  placeholder=" "
+                  className="input-modern"
                 />
-                <label 
-                  htmlFor="submissionDeadline"
-                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                    focusedFields.submissionDeadline || submissionDeadline 
-                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                      : 'top-4 text-gray-500'
-                  }`}
-                >
-                  Date Limite de Soumission du Contenu
-                </label>
                 <p className="mt-2 text-sm text-gray-500">
                   Optionnel. Si non spécifié, le contenu sera dû à la date de fin.
                 </p>
@@ -574,33 +487,19 @@ const CreateCampaign = () => {
                 </div>
               </div>
               
-              <div className="relative">
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Users className="h-6 w-6 text-purple-500" />
-                  </div>
-                  <input
-                    type="number"
-                    id="minFollowers"
-                    value={minFollowers}
-                    onChange={(e) => setMinFollowers(e.target.value)}
-                    onFocus={() => handleFocus('minFollowers')}
-                    onBlur={() => handleBlur('minFollowers')}
-                    className="input-modern pl-14 peer"
-                    placeholder=" "
-                    min="0"
-                  />
-                </div>
-                <label 
-                  htmlFor="minFollowers"
-                  className={`absolute left-14 transition-all duration-300 pointer-events-none ${
-                    focusedFields.minFollowers || minFollowers 
-                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                      : 'top-4 text-gray-500'
-                  }`}
-                >
-                  Nombre Minimum d'Abonnés <span className="text-red-500">*</span>
+              <div className="input-group">
+                <label htmlFor="minFollowers" className="input-label">
+                  Nombre Minimum d'Abonnés <span className="required">*</span>
                 </label>
+                <input
+                  type="number"
+                  id="minFollowers"
+                  value={minFollowers}
+                  onChange={(e) => setMinFollowers(e.target.value)}
+                  className="input-modern"
+                  placeholder="10000"
+                  min="0"
+                />
               </div>
               
               <div>
@@ -648,27 +547,18 @@ const CreateCampaign = () => {
                 </div>
               </div>
               
-              <div className="relative">
+              <div className="input-group">
+                <label htmlFor="locations" className="input-label">
+                  Villes Cibles
+                </label>
                 <input
                   type="text"
                   id="locations"
                   value={locations.join(', ')}
                   onChange={(e) => setLocations(e.target.value.split(',').map(l => l.trim()))}
-                  onFocus={() => handleFocus('locations')}
-                  onBlur={() => handleBlur('locations')}
-                  className="input-modern peer"
-                  placeholder=" "
+                  className="input-modern"
+                  placeholder="Casablanca, Rabat, Marrakech..."
                 />
-                <label 
-                  htmlFor="locations"
-                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                    focusedFields.locations || locations.length > 0 
-                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                      : 'top-4 text-gray-500'
-                  }`}
-                >
-                  Villes Cibles
-                </label>
                 <p className="mt-2 text-sm text-gray-500">
                   Optionnel. Exemples: {moroccanCities.slice(0, 4).join(', ')}...
                 </p>
@@ -684,27 +574,18 @@ const CreateCampaign = () => {
                 <p className="text-gray-600">Définissez vos attentes en matière de contenu et les directives de marque</p>
               </div>
 
-              <div className="relative">
+              <div className="input-group">
+                <label htmlFor="contentGuidelines" className="input-label">
+                  Directives de Contenu <span className="required">*</span>
+                </label>
                 <textarea
                   id="contentGuidelines"
                   rows={4}
                   value={contentGuidelines}
                   onChange={(e) => setContentGuidelines(e.target.value)}
-                  onFocus={() => handleFocus('contentGuidelines')}
-                  onBlur={() => handleBlur('contentGuidelines')}
-                  className="input-modern resize-none peer"
-                  placeholder=" "
+                  className="textarea-modern"
+                  placeholder="Décrivez le style de contenu souhaité, le ton, les messages clés à transmettre..."
                 />
-                <label 
-                  htmlFor="contentGuidelines"
-                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                    focusedFields.contentGuidelines || contentGuidelines 
-                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                      : 'top-4 text-gray-500'
-                  }`}
-                >
-                  Directives de Contenu <span className="text-red-500">*</span>
-                </label>
               </div>
               
               <div>
@@ -783,26 +664,18 @@ const CreateCampaign = () => {
                 </div>
               </div>
               
-              <div className="relative">
-                <input
-                  type="text"
-                  value={references.join(', ')}
-                  onChange={(e) => setReferences(e.target.value.split(',').map(r => r.trim()))}
-                  onFocus={() => handleFocus('references')}
-                  onBlur={() => handleBlur('references')}
-                  className="input-modern peer"
-                  placeholder=" "
-                />
-                <label 
-                  htmlFor="references"
-                  className={`absolute left-6 transition-all duration-300 pointer-events-none ${
-                    focusedFields.references || references.length > 0 
-                      ? 'top-2 text-xs text-purple-600 transform scale-90' 
-                      : 'top-4 text-gray-500'
-                  }`}
-                >
+              <div className="input-group">
+                <label htmlFor="references" className="input-label">
                   Contenu de Référence
                 </label>
+                <input
+                  type="text"
+                  id="references"
+                  value={references.join(', ')}
+                  onChange={(e) => setReferences(e.target.value.split(',').map(r => r.trim()))}
+                  className="input-modern"
+                  placeholder="Liens vers du contenu d'inspiration..."
+                />
                 <p className="mt-2 text-sm text-gray-500">
                   Optionnel. Ajoutez des liens vers du contenu qui peut servir d'inspiration.
                 </p>
