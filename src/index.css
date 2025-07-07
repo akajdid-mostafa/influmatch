@@ -5,13 +5,13 @@
 /* Enhanced Instagram-inspired design system */
 @layer base {
   :root {
-     /* Instagram-inspired color palette */
-     --primary-gradient: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
-     --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-     --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-     --pink-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-     --blue-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-     --sunset-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+   /* Instagram-inspired color palette */
+   --primary-gradient: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+   --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   --pink-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+   --blue-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+   --sunset-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     
     /* Enhanced shadows with depth */
     --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -19,10 +19,10 @@
     --shadow-strong: 0 15px 40px rgba(0, 0, 0, 0.16);
     --shadow-glow: 0 0 30px rgba(131, 58, 180, 0.3);
     
-   /* Smooth transitions */
-   --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-   --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-   --transition-spring: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Smooth transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-spring: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   
   body {
@@ -81,6 +81,7 @@
     transform: translateY(-3px) scale(1.02);
     box-shadow: var(--shadow-strong);
   }
+  
   .btn-gradient:hover::before {
     left: 100%;
   }
@@ -88,8 +89,6 @@
   .btn-gradient:active {
     transform: translateY(-1px) scale(1.01);
   }
-
-
   
   /* Glass morphism cards with enhanced effects */
   .card-glass {
@@ -105,7 +104,7 @@
     transform: translateY(-2px);
   }
   
-/* IMPROVED INPUT STYLES - Much cleaner and modern */
+    /* IMPROVED INPUT STYLES - Much cleaner and modern */
   .input-modern {
     @apply w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500;
     @apply focus:outline-none focus:ring-0 focus:border-purple-500 focus:bg-white;
@@ -119,6 +118,7 @@
     box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
     transform: translateY(-1px);
   }
+  
   .input-modern::placeholder {
     color: #9CA3AF;
     font-weight: 400;
@@ -137,25 +137,25 @@
     @apply text-red-500 ml-1;
   }
   
-/* Enhanced input with icons */
-.input-with-icon {
-  @apply relative;
-}
 
-.input-with-icon .input-icon {
-  @apply absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400;
-  transition: color 0.3s ease;
-}
-
-.input-with-icon .input-modern {
-  @apply pl-12;
-}
-
-.input-with-icon .input-modern:focus + .input-icon {
-  @apply text-purple-500;
-}
-
-/* Select styling */
+  .input-with-icon {
+    @apply relative;
+  }
+  
+  .input-with-icon .input-icon {
+    @apply absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400;
+    transition: color 0.3s ease;
+  }
+  
+  .input-with-icon .input-modern {
+    @apply pl-12;
+  }
+  
+  .input-with-icon .input-modern:focus + .input-icon {
+    @apply text-purple-500;
+  }
+  
+  /* Select styling */
   .select-modern {
     @apply w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900;
     @apply focus:outline-none focus:ring-0 focus:border-purple-500 focus:bg-white;
@@ -174,7 +174,7 @@
     transform: translateY(-1px);
   }
   
-   /* Textarea styling */
+  /* Textarea Styling */
   .textarea-modern {
     @apply w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500;
     @apply focus:outline-none focus:ring-0 focus:border-purple-500 focus:bg-white;
@@ -190,27 +190,27 @@
     transform: translateY(-1px);
   }
   
-/* Error state */
-.input-error {
-  @apply border-red-400 bg-red-50;
-}
-
-.input-error:focus {
-  @apply border-red-500;
-  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.15);
-}
-
-/* Success state */
-.input-success {
-  @apply border-green-400 bg-green-50;
-}
-
-.input-success:focus {
-  @apply border-green-500;
-  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.15);
-}
-
-/* Gradient text with animation */
+  /* Error state */
+  .input-error {
+    @apply border-red-400 bg-red-50;
+  }
+  
+  .input-error:focus {
+    @apply border-red-500;
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.15);
+  }
+  
+  /* Success state */
+  .input-success {
+    @apply border-green-400 bg-green-50;
+  }
+  
+  .input-success:focus {
+    @apply border-green-500;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.15);
+  }
+  
+  /* Gradient text with animation */
   .text-gradient {
     background: var(--primary-gradient);
     -webkit-background-clip: text;
@@ -278,12 +278,10 @@
   
   /* Enhanced navigation with smooth animations */
   .nav-item {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    @apply relative flex items-center px-6 py-4 mx-3 rounded-2xl;
+    @apply transition-all duration-300;
+    position: relative;
+    overflow: hidden;
   }
   
   .nav-item::before {
@@ -393,7 +391,6 @@
   /* Enhanced notification styles */
   .notification-modern {
     @apply bg-white/95 rounded-2xl border border-gray-100/50 p-6;
-
     box-shadow: var(--shadow-medium);
     backdrop-filter: blur(20px);
     transition: var(--transition-smooth);
@@ -404,8 +401,8 @@
     box-shadow: var(--shadow-strong);
   }
   
- /* Enhanced form styles */
- .form-modern {
+/* Enhanced form styles */
+.form-modern {
   @apply space-y-8 bg-white/95 backdrop-blur-xl rounded-3xl p-10;
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -450,15 +447,15 @@
     box-shadow: var(--shadow-medium);
   }
   
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-strong);
+  }
+  
   .btn-secondary {
     @apply btn-modern bg-gray-100/80 text-gray-700 hover:bg-gray-200/80;
     @apply focus:ring-gray-500/30;
     backdrop-filter: blur(10px);
-  }
-  
-  .nav-item.active {
-    background: rgba(99, 102, 241, 0.15);
-    color: var(--primary);
   }
   
   .btn-secondary:hover {
@@ -523,7 +520,7 @@
     box-shadow: var(--shadow-strong);
   }
   
- /* Enhanced search bars */
+  /* Enhanced search bars */
   .search-modern {
     @apply relative;
   }
@@ -548,84 +545,84 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
   
-   /* Responsive enhancements */
-   @media (max-width: 768px) {
-    .btn-gradient {
-      @apply px-6 py-3 text-sm;
+ /* Responsive enhancements */
+ @media (max-width: 768px) {
+  .btn-gradient {
+    @apply px-6 py-3 text-sm;
+  }
+  
+  .stats-card {
+    @apply p-6;
+  }
+  
+  .nav-item {
+    @apply px-4 py-3 mx-2;
     }
-    
-    .stats-card {
-      padding: 1.5rem;
-    }
-    
-    .nav-item {
-      @apply px-4 py-3 mx-2;
-    }
-    
     .input-modern, .select-modern, .textarea-modern {
       font-size: 16px; /* Prevents zoom on iOS */
     }
   }
+  
+  
 }
 
 /* Additional utility classes */
 .text-shadow {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);}
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .backdrop-blur-strong {
-    backdrop-filter: blur(20px);
+.backdrop-blur-strong {
+  backdrop-filter: blur(20px);
+}
+
+.border-gradient {
+  border-image: var(--primary-gradient) 1;
+}
+
+/* Enhanced animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Page transition animations */
+.page-transition {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  
-  .border-gradient {
-    border-image: var(--primary-gradient) 1;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Enhanced animations */
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-  
-  .float-animation {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-  
-  .shimmer {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-  
-  /* Page transition animations */
-  .page-transition {
-    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Enhanced header with backdrop blur */
-  .header-modern {
-    background-color: rgba(255,255,255,0.9);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(243,244,246,0.5); /* Adjust color as needed */
-    box-shadow: var(--shadow-soft);
-  }
-  
-  /* Gradient backgrounds for sections */
-  .section-gradient {
-    background: linear-gradient(135deg, #fafafa 0%, #ffffff 50%, #f8f9fa 100%);
-  }
+}
+
+/* Enhanced header with backdrop blur */
+.header-modern {
+  @apply bg-white/90 backdrop-blur-xl border-b border-gray-100/50;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Gradient backgrounds for sections */
+.section-gradient {
+  background: linear-gradient(135deg, #fafafa 0%, #ffffff 50%, #f8f9fa 100%);
+}
