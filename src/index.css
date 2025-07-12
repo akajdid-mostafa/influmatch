@@ -107,7 +107,7 @@
     /* IMPROVED INPUT STYLES - Much cleaner and modern */
   .input-modern {
     @apply w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500;
-    @apply focus:outline-none focus:ring-0 focus:border-purple-500 focus:bg-white;
+    @apply focus:outline-none focus:ring-0 focus:border-purple-500 focus:bg-transparent;
     @apply transition-all duration-300 ease-in-out;
     font-size: 16px;
     line-height: 1.5;
@@ -143,12 +143,21 @@
   }
   
   .input-with-icon .input-icon {
-    @apply absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400;
+    @apply absolute left-4  top-1/2 transform -translate-y-1/2 text-gray-400 z-20;
     transition: color 0.3s ease;
   }
   
   .input-with-icon .input-modern {
-    @apply pl-12;
+    @apply pl-11;
+  }
+  
+  .input-with-icon .input-icon-right {
+    @apply absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 z-20;
+    transition: color 0.3s ease;
+  }
+  
+  .input-with-icon .input-modern-with-right-icon {
+    @apply pr-16;
   }
   
   .input-with-icon .input-modern:focus + .input-icon {
