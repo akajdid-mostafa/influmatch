@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { User, Mail, Lock, Building, Globe, Tag, Plus, X } from 'lucide-react';
-import { TagInput } from '../../components/ui/TagInput';
+import TagInput from '../../components/ui/TagInput';
 import SocialMediaInput from '../../components/ui/SocialMediaInput';
 
 interface SocialPlatform {
