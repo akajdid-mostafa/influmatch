@@ -9,7 +9,7 @@ interface SocialPlatform {
   id: string;
   platform: string;
   followers: number;
-  profileUrl: string;
+  profileLink: string;
 }
 
 export default function Register() {
