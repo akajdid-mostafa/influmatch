@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // Mock API call - replace with actual API call
       if (email && password) {
         // Demo users for testing - Updated for Moroccan market
-        const users = {
+        const users: Record<string, User> = {
           'marque@example.com': { id: 1, name: 'Marjane Market', email, role: 'brand' },
           'influenceur@example.com': { id: 2, name: 'Saad Lamjarred', email, role: 'influencer' },
           'admin@example.com': { id: 3, name: 'Admin Maroc', email, role: 'admin' }
@@ -46,12 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
 
-        // Redirect based on role
-        if (user.role === 'brand') navigate('/brand/dashboard');
-        else if (user.role === 'influencer') navigate('/influencer/dashboard');
-        else if (user.role === 'admin') navigate('/admin/dashboard');
-        
-        return { success: true };
+        return { success: true, user };
       } else {
         throw new Error('Veuillez fournir un email et un mot de passe');
       }

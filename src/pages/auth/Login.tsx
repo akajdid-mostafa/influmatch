@@ -1,9 +1,13 @@
+
+
 "use client"
 
 import type React from "react"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../../contexts/AuthContext"
 import { Mail, Lock, Sparkles, Eye, EyeOff } from "lucide-react"
+import { useEffect } from "react"
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
@@ -13,7 +17,28 @@ export default function Login() {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [rememberMe, setRememberMe] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const { login, loading, user } = useAuth()
+  const [loginError, setLoginError] = useState("")
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user) {
+      switch (user.role) {
+        case "admin":
+          navigate("/admin/dashboard")
+          break
+        case "influencer":
+          navigate("/influencer/dashboard")
+          break
+        case "brand":
+          navigate("/brand/dashboard")
+          break
+        default:
+          // Optionally handle unknown roles or redirect to a default dashboard
+          navigate("/login")
+      }
+    }
+  }, [user, navigate])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -43,17 +68,14 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     if (validateForm()) {
-      setIsLoading(true)
-      // Simulate API call
-      setTimeout(() => {
-        console.log("Login submitted:", formData)
-        setIsLoading(false)
-      }, 2000)
+      setLoginError("")
+      const result = await login(formData.email, formData.password)
+      if (result && !result.success) {
+        setLoginError(result.error || "An unknown error occurred")
+      }
     }
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-6xl h-[80vh] min-h-[700px] bg-white rounded-3xl shadow-2xl overflow-hidden">
@@ -92,6 +114,12 @@ export default function Login() {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Se connecter</h2>
               <p className="text-gray-600 text-sm sm:text-base">Accédez à votre compte InfluMaroc</p>
             </div>
+
+            {loginError && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl relative mb-6" role="alert">
+                <span className="block sm:inline">{loginError}</span>
+              </div>
+            )}
 
             {/* Login Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -177,10 +205,10 @@ export default function Login() {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={loading}
                 className="btn-gradient w-full py-4 px-6 rounded-2xl font-semibold focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {isLoading ? (
+                {loading ? (
                   <>
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
                     Connexion en cours...
